@@ -6,7 +6,7 @@
   <link href="https://saiable.github.io/atom.xml" rel="self"/>
   
   <link href="https://saiable.github.io/"/>
-  <updated>2022-06-29T13:46:30.768Z</updated>
+  <updated>2022-06-29T22:34:07.093Z</updated>
   <id>https://saiable.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>images</title>
+    <link href="https://saiable.github.io/2022/06/30/images/"/>
+    <id>https://saiable.github.io/2022/06/30/images/</id>
+    <published>2022-06-29T22:11:08.000Z</published>
+    <updated>2022-06-29T22:34:07.093Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/2022/06/30/images/image-20220630061738487.png&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
