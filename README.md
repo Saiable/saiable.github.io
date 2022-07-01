@@ -7,6 +7,7 @@ https://saiable.github.io
   - 后续会整理教程，目前参照
     - https://www.bilibili.com/read/cv12633102
     - https://blog.csdn.net/qq_41356250/article/details/125148095
+    - https://butterfly.js.org/posts/21cfbf15/
 
 专栏学习笔记网站
 

@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
+title: Saiの博客
+subtitle: 'Butterfly'
 description: ''
 keywords:
-author: John Doe
-language: en
+author: Sai
+language: zh-CN # en(default) | zh-CN(简体中文) | zh-TW(繁体中文)
 timezone: ''
 
 # URL
