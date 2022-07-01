@@ -101,5 +101,8 @@ theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
+
 deploy:
-  type: ''
+  type: git
+  repository: git@github.com:Saiable/saiable.github.io.git
+  branch: pages
