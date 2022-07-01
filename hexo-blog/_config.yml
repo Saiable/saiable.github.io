@@ -97,12 +97,18 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 
+# ssh-keygen -t rsa -C "邮箱名"
+# 三次空格
+# 复制/root/.ssh/id_rsa.pub内容
+# https://github.com/settings/keys 粘贴复制的内容，title可以不填  more: http://www.javashuo.com/article/p-gczkaclj-bc.html
+# npm i hexo-deployer-git -D，hexo-blog目录下，重新 npm run deploy 或 npx hexo deploy，即可自动推送，本地的pages分支，不需要动，只要git pull拉取就好
+# 复制CNAME文件到public文件夹下，不然每次deploy会覆盖线上的文件，就要重新配
 deploy:
   type: git
   repository: git@github.com:Saiable/saiable.github.io.git
-  branch: pages
+  branch: pages # 选择仓库的其他分支，github.io选择该分支
