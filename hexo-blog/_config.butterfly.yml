@@ -1,24 +1,23 @@
 # Main menu navigation (導航目錄)
 # see https://butterfly.js.org/posts/4aa8abbe/#導航菜單
 # --------------------------------------
-
 menu:
   搜索: /search/ || fas fa-search
   首页: / || fas fa-home
-  文章|| fas fa-search:
+  文章|| fas fa-search||hide:
     分类: /categories/ || fas fa-folder-open
     标签: /tags/ || fas fa-tags
     归档: /archives/ || fas fa-archive
-  娱乐||fas fa-list:
+  娱乐||fas fa-list||hide:
     音乐: /music/ || fas fa-music
     电影: /movies/ || fas fa-video
     番剧: /comics/ || fas fa-video
-  互动||fas fa-list:
+  互动||fas fa-list||hide:
     赞助墙: /sponsorWall/ || fas fa-money-check-alt
     留言板: /comments/ || fas fa-comments
   友链: /link/ || fas fa-link
   关于: /about/ || fas fa-heart
-  其他|| fas fa-coffee:
+  其他|| fas fa-coffee||hide:
     搭建教程: /course/ || fas fa-book
 
 # Code Blocks (代碼相關)
@@ -28,8 +27,8 @@ highlight_theme: light #  darker / pale night / light / ocean / mac / mac light 
 highlight_copy: true # copy button
 highlight_lang: true # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
-highlight_height_limit: false # unit: px
-code_word_wrap: false
+highlight_height_limit: 350 # unit: px | false
+code_word_wrap: false # true | false
 
 # copy settings
 # copyright: Add the copyright information after copied content (複製的內容後面加上版權信息)
@@ -42,9 +41,13 @@ copy:
 # social settings (社交圖標設置)
 # formal:
 #   icon: link || the description
+# search https://fontawesome.com/icons
 social:
- fab fa-github: https://github.com/xxxxx || Github
+ fa-brands fa-qq: https://github.com/xxxxx || QQ
+ fa-brands fa-weixin: https://github.com/xxxxx || WeChat
+ fab fa-github: https://github.com/Saiable || Github
  fas fa-envelope: mailto:xxxxxx@gmail.com || Email
+ fa-solid fa-rss: mailto:xxxxxx@gmail.com || Email
 
 # search (搜索)
 # see https://butterfly.js.org/posts/ceeb73f/#搜索系統
@@ -88,7 +91,7 @@ favicon: /img/favicon.png
 
 # Avatar (頭像)
 avatar:
-  img: https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png
+  img: https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png
   effect: false
 
 # Disable all banner image
@@ -98,14 +101,16 @@ disable_top_img: false
 index_img:
 
 # If the banner of page not setting, it will show the top_img
-default_top_img:
+# 它是先渲染的default_top_img，然后再渲染了index_img，只设置index_img，而不设置default_top_img时可以看出来
+# 利用它的处理方式，只设置default_top_img，避免页面重复渲染
+default_top_img: https://s2.loli.net/2022/07/02/LUfbSm2HQzOIVvM.jpg
 
 # The banner image of archive page
-archive_img:
+archive_img: https://s2.loli.net/2022/07/02/LUfbSm2HQzOIVvM.jpg
 
 # If the banner of tag page not setting, it will show the top_img
 # note: tag page, not tags page (子標籤頁面的 top_img)
-tag_img:
+tag_img: https://s2.loli.net/2022/07/02/LUfbSm2HQzOIVvM.jpg
 
 # The banner image of tag page
 # format:
@@ -114,7 +119,7 @@ tag_per_img:
 
 # If the banner of category page not setting, it will show the top_img
 # note: category page, not categories page (子分類頁面的 top_img)
-category_img:
+category_img: https://s2.loli.net/2022/07/02/LUfbSm2HQzOIVvM.jpg
 
 # The banner image of category page
 # format:
@@ -131,7 +136,7 @@ cover:
   position: both
   # When cover is not set, the default cover is displayed (當沒有設置cover時，默認的封面顯示)
   default_cover:
-  # - https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg
+   - https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
@@ -192,21 +197,21 @@ toc:
 
 post_copyright:
   enable: true
-  decode: false
-  author_href:
+  decode: true # 文章链接显示为中文
+  author_href: https://github.com/Saiable
   license: CC BY-NC-SA 4.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 # Sponsor/reward
 reward:
-  enable: false
+  enable: true
   QR_code:
-  # - img: /img/wechat.jpg
-  #   link:
-  #   text: wechat
-  # - img: /img/alipay.jpg
-  #   link:
-  #   text: alipay
+   - img: https://s2.loli.net/2022/07/02/ZYspTWmDdytfLXa.png
+     link:
+     text: wechat
+   - img: https://s2.loli.net/2022/07/02/3zcRHPK5m6C8sE2.png
+     link:
+     text: alipay
 
 # Post edit
 # Easily browse and edit blog source code online.

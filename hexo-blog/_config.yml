@@ -4,12 +4,12 @@
 
 # Site
 title: 吕小布の博客
-subtitle: 'Butterfly'
-description: ''
-keywords:
+subtitle: ''
+description: '无来无去,不悔不怨'
+keywords: '吕小布的博客'
 author: Sai
 language: zh-CN # en(default) | zh-CN(简体中文) | zh-TW(繁体中文)
-timezone: ''
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
