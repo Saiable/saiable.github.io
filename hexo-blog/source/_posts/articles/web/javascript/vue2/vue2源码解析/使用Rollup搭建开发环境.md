@@ -3,7 +3,7 @@ title: 使用Rollup搭建开发环境
 date: 2022-7-1 17:24:41
 cover: false
 tags:
-  - Vue
+  - Vue2
   - 源码
   - 环境搭建
 ---

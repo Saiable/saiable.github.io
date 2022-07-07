@@ -102,6 +102,7 @@ theme: butterfly
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 
+# 如果是linux环境，使用ssh
 # ssh-keygen -t rsa -C "邮箱名"
 # 三次空格
 # 复制/root/.ssh/id_rsa.pub内容
@@ -110,5 +111,6 @@ theme: butterfly
 # 复制CNAME文件到public文件夹下，不然每次deploy会覆盖线上的文件，就要重新配
 deploy:
   type: git
-  repository: git@github.com:Saiable/saiable.github.io.git
+  # repository: git@github.com:Saiable/saiable.github.io.git
+  repository: https://github.com/Saiable/saiable.github.io.git
   branch: pages # 选择仓库的其他分支，github.io选择该分支
