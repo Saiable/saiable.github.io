@@ -6,7 +6,9 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server -p 8081"
+    "server": "hexo server -p 8081",
+    "copy": "copy D:\\workspace\\github\\code\\saiable.github.io\\hexo-blog\\CNAME D:\\workspace\\github\\code\\saiable.github.io\\hexo-blog\\public",
+    "auto": "hexo clean & hexo generate & npm run copy & npm run deploy"
   },
   "hexo": {
     "version": "6.2.0"
