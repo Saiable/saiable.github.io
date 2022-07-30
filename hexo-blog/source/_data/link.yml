@@ -1,23 +1,28 @@
-- class_name: 友情链接
-  class_desc: 那些人，那些事
+- class_name: 思维启蒙
+  class_desc: 那些人、那些事
   link_list:
-    - name: Hexo
-      link: https://hexo.io/zh-tw/
-      avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
-      descr: 快速、简单且强大的网誌框架
+    - name: 吕小布
+      link: https://mindcons.cn/
+      avatar: https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png
+      descr: 有意识的存在
+    - name: 刘未鹏
+      link: http://mindhacks.cn/
+      avatar: https://s2.loli.net/2022/07/26/cFoRLZe6EfYKGOX.png
+      descr: 思维改变生活
+
+- class_name: 友情链接
+  class_desc: 博客等友情链接
+  link_list:
+    - name: 唐志远の博客
+      link: https://tzy1997.com/
+      avatar: https://bu.dusays.com/2022/01/14/cd5ffd485f867.jpg
+      descr: 古今之成大事者，不惟有超世之才，亦必有坚忍不拔之志。
 
 - class_name: 网站
   class_desc: 值得推荐的网站
   link_list:
-    - name: Youtube
-      link: https://www.youtube.com/
-      avatar: https://i.loli.net/2020/05/14/9ZkGg8v3azHJfM1.png
-      descr: 视频网站
-    - name: Weibo
-      link: https://www.weibo.com/
-      avatar: https://i.loli.net/2020/05/14/TLJBum386vcnI1P.png
-      descr: 中国最大社交分享平台
-    - name: Twitter
-      link: https://twitter.com/
-      avatar: https://i.loli.net/2020/05/14/5VyHPQqR6LWF39a.png
-      descr: 社交分享平台
+    - name: ECMA-262
+      link: https://www.ecma-international.org/publications-and-standards/standards/ecma-262/
+      avatar: https://s2.loli.net/2022/07/26/Qg59lrdFU74Ek1K.jpg
+      descr: This Standard defines the ECMAScript 2022 general-purpose programming language.
+ 
