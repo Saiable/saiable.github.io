@@ -1,0 +1,1909 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>koa入门_接口文档 v1.0.0 | 吕小布の博客</title><meta name="keywords" content="Koa"><meta name="author" content="Sai"><meta name="copyright" content="Sai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="koa入门 v1.0.0  用户模块POST 用户注册接口POST &#x2F;user&#x2F;register  Body 请求参数  1234&amp;#123;  &quot;user_name&quot;: &quot;string&quot;,  &quot;password&quot;: &quot;string&quot;&amp;#125;  请求参数   名称 位置 类型 必选 中文名 说明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="koa入门_接口文档 v1.0.0">
+<meta property="og:url" content="http://mindcons.cn/2022/08/09/web/%E8%BF%9B%E9%98%B6/Node.js/Koa/koa%E5%85%A5%E9%97%A8_%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="吕小布の博客">
+<meta property="og:description" content="koa入门 v1.0.0  用户模块POST 用户注册接口POST &#x2F;user&#x2F;register  Body 请求参数  1234&amp;#123;  &quot;user_name&quot;: &quot;string&quot;,  &quot;password&quot;: &quot;string&quot;&amp;#125;  请求参数   名称 位置 类型 必选 中文名 说明">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png">
+<meta property="article:published_time" content="2022-08-08T22:52:13.000Z">
+<meta property="article:modified_time" content="2022-08-08T23:08:42.487Z">
+<meta property="article:author" content="Sai">
+<meta property="article:tag" content="Koa">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://mindcons.cn/2022/08/09/web/%E8%BF%9B%E9%98%B6/Node.js/Koa/koa%E5%85%A5%E9%97%A8_%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":350},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'koa入门_接口文档 v1.0.0',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-09 07:08:42'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">98</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/search/"><i class="fa-fw fas fa-search"></i><span> 搜索</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-search"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/comics/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 互动</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></li><li><a class="site-page child" href="/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-coffee"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/course/"><i class="fa-fw fas fa-book"></i><span> 搭建教程</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">吕小布の博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/search/"><i class="fa-fw fas fa-search"></i><span> 搜索</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-search"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/comics/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 互动</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></li><li><a class="site-page child" href="/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-coffee"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/course/"><i class="fa-fw fas fa-book"></i><span> 搭建教程</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">koa入门_接口文档 v1.0.0</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-08T22:52:13.000Z" title="发表于 2022-08-09 06:52:13">2022-08-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-08T23:08:42.487Z" title="更新于 2022-08-09 07:08:42">2022-08-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Koa/">Koa</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="koa入门_接口文档 v1.0.0"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="koa入门"><a href="#koa入门" class="headerlink" title="koa入门"></a>koa入门</h1><blockquote>
+<p>v1.0.0</p>
+</blockquote>
+<h1 id="用户模块"><a href="#用户模块" class="headerlink" title="用户模块"></a>用户模块</h1><h2 id="POST-用户注册接口"><a href="#POST-用户注册接口" class="headerlink" title="POST 用户注册接口"></a>POST 用户注册接口</h2><p>POST &#x2F;user&#x2F;register</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;user_name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;password&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数"><a href="#请求参数" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» user_name</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td>用户名</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>» password</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td>密码</td>
+<td>密码</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果"><a href="#返回结果" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构"><a href="#返回数据结构" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="POST-用户登录接口"><a href="#POST-用户登录接口" class="headerlink" title="POST 用户登录接口"></a>POST 用户登录接口</h2><p>POST &#x2F;user&#x2F;login</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;user_name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;高芳&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;password&quot;</span><span class="punctuation">:</span> <span class="string">&quot;in&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-1"><a href="#请求参数-1" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» user_name</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» password</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;result&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;token&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-1"><a href="#返回结果-1" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-1"><a href="#返回数据结构-1" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><p>状态码 <strong>200</strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>必选</th>
+<th>约束</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>» code</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» result</td>
+<td>object</td>
+<td>true</td>
+<td>none</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» token</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h2 id="PATCH-用户修改密码接口"><a href="#PATCH-用户修改密码接口" class="headerlink" title="PATCH 用户修改密码接口"></a>PATCH 用户修改密码接口</h2><p>PATCH &#x2F;user&#x2F;modifyPassword</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;password&quot;</span><span class="punctuation">:</span> <span class="string">&quot;dolore culpa pariatur&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-2"><a href="#请求参数-2" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» password</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-2"><a href="#返回结果-2" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-2"><a href="#返回数据结构-2" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h1 id="商品模块"><a href="#商品模块" class="headerlink" title="商品模块"></a>商品模块</h1><h2 id="POST-上传图片"><a href="#POST-上传图片" class="headerlink" title="POST 上传图片"></a>POST 上传图片</h2><p>POST &#x2F;goods&#x2F;upload</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">file:</span> <span class="string">file://F:\Pictures\blog.png</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-3"><a href="#请求参数-3" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» file</td>
+<td>body</td>
+<td>string(binary)</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-3"><a href="#返回结果-3" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-3"><a href="#返回数据结构-3" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="POST-发布商品"><a href="#POST-发布商品" class="headerlink" title="POST 发布商品"></a>POST 发布商品</h2><p>POST &#x2F;goods&#x2F;release</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;goods_name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;里而热集便象&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;goods_price&quot;</span><span class="punctuation">:</span> <span class="number">53</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;goods_num&quot;</span><span class="punctuation">:</span> <span class="number">61</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;goods_img&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4602f8abfd1abe5046e15e300.png&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-4"><a href="#请求参数-4" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» goods_name</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>商品名称</td>
+</tr>
+<tr>
+<td>» goods_price</td>
+<td>body</td>
+<td>number</td>
+<td>是</td>
+<td></td>
+<td>商品价格</td>
+</tr>
+<tr>
+<td>» goods_num</td>
+<td>body</td>
+<td>number</td>
+<td>是</td>
+<td></td>
+<td>商品数量</td>
+</tr>
+<tr>
+<td>» goods_img</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>商品图片名称</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-4"><a href="#返回结果-4" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-4"><a href="#返回数据结构-4" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="PUT-修改商品"><a href="#PUT-修改商品" class="headerlink" title="PUT 修改商品"></a>PUT 修改商品</h2><p>PUT &#x2F;goods&#x2F;update&#x2F;{id}</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;goods_name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;goods_price&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;goods_num&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;goods_img&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-5"><a href="#请求参数-5" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>path</td>
+<td>number</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» goods_name</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» goods_price</td>
+<td>body</td>
+<td>number</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» goods_num</td>
+<td>body</td>
+<td>number</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» goods_img</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-5"><a href="#返回结果-5" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-5"><a href="#返回数据结构-5" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="DELETE-硬删除商品"><a href="#DELETE-硬删除商品" class="headerlink" title="DELETE 硬删除商品"></a>DELETE 硬删除商品</h2><p>DELETE &#x2F;goods&#x2F;remove&#x2F;{id}</p>
+<h3 id="请求参数-6"><a href="#请求参数-6" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>path</td>
+<td>number</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-6"><a href="#返回结果-6" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-6"><a href="#返回数据结构-6" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="POST-下架商品"><a href="#POST-下架商品" class="headerlink" title="POST 下架商品"></a>POST 下架商品</h2><p>POST &#x2F;goods&#x2F;remove&#x2F;{id}&#x2F;off</p>
+<h3 id="请求参数-7"><a href="#请求参数-7" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>path</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-7"><a href="#返回结果-7" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-7"><a href="#返回数据结构-7" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="POST-上架商品"><a href="#POST-上架商品" class="headerlink" title="POST 上架商品"></a>POST 上架商品</h2><p>POST &#x2F;goods&#x2F;remove&#x2F;{id}&#x2F;on</p>
+<h3 id="请求参数-8"><a href="#请求参数-8" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>path</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-8"><a href="#返回结果-8" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-8"><a href="#返回数据结构-8" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="GET-获取商品列表"><a href="#GET-获取商品列表" class="headerlink" title="GET 获取商品列表"></a>GET 获取商品列表</h2><p>GET &#x2F;goods&#x2F;lists&#x2F;</p>
+<h3 id="请求参数-9"><a href="#请求参数-9" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pageNum</td>
+<td>query</td>
+<td>number</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>query</td>
+<td>number</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>成功</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;获取商品列表成功&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;result&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;pageNum&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;pageSize&quot;</span><span class="punctuation">:</span> <span class="string">&quot;10&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;total&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;list&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">2</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;goods_name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;酸这争取&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;goods_price&quot;</span><span class="punctuation">:</span> <span class="string">&quot;13.00&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;goods_num&quot;</span><span class="punctuation">:</span> <span class="number">14</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;goods_img&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://dummyimage.com/400x400&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;createdAt&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2022-08-02T13:55:31.000Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;updatedAt&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2022-08-02T13:55:31.000Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;deletedAt&quot;</span><span class="punctuation">:</span> <span class="keyword">null</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;goods_name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;证断影然度叫&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;goods_price&quot;</span><span class="punctuation">:</span> <span class="string">&quot;53.00&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;goods_num&quot;</span><span class="punctuation">:</span> <span class="number">58</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;goods_img&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://dummyimage.com/400x400&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;createdAt&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2022-08-02T14:07:27.000Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;updatedAt&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2022-08-02T14:07:27.000Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;deletedAt&quot;</span><span class="punctuation">:</span> <span class="keyword">null</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">4</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;goods_name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;周根角万广&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;goods_price&quot;</span><span class="punctuation">:</span> <span class="string">&quot;95.00&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;goods_num&quot;</span><span class="punctuation">:</span> <span class="number">66</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;goods_img&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://dummyimage.com/400x400&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;createdAt&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2022-08-02T14:07:31.000Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;updatedAt&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2022-08-02T14:07:31.000Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;deletedAt&quot;</span><span class="punctuation">:</span> <span class="keyword">null</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-9"><a href="#返回结果-9" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-9"><a href="#返回数据结构-9" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h1 id="购物车模块"><a href="#购物车模块" class="headerlink" title="购物车模块"></a>购物车模块</h1><h2 id="POST-添加到购物车"><a href="#POST-添加到购物车" class="headerlink" title="POST 添加到购物车"></a>POST 添加到购物车</h2><p>POST &#x2F;carts</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;goods_id&quot;</span><span class="punctuation">:</span> <span class="number">78</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-10"><a href="#请求参数-10" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» goods_id</td>
+<td>body</td>
+<td>number</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-10"><a href="#返回结果-10" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-10"><a href="#返回数据结构-10" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="GET-获取购物车列表"><a href="#GET-获取购物车列表" class="headerlink" title="GET 获取购物车列表"></a>GET 获取购物车列表</h2><p>GET &#x2F;carts</p>
+<h3 id="请求参数-11"><a href="#请求参数-11" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pageSize</td>
+<td>query</td>
+<td>number</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>pageNum</td>
+<td>query</td>
+<td>string</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-11"><a href="#返回结果-11" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-11"><a href="#返回数据结构-11" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="DELETE-删除购物车列表"><a href="#DELETE-删除购物车列表" class="headerlink" title="DELETE 删除购物车列表"></a>DELETE 删除购物车列表</h2><p>DELETE &#x2F;carts</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;ids&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="number">0</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-12"><a href="#请求参数-12" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» ids</td>
+<td>body</td>
+<td>[number]</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-12"><a href="#返回结果-12" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-12"><a href="#返回数据结构-12" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="PATCH-更新购物车列表"><a href="#PATCH-更新购物车列表" class="headerlink" title="PATCH 更新购物车列表"></a>PATCH 更新购物车列表</h2><p>PATCH &#x2F;carts&#x2F;{id}</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;number&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;selected&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-13"><a href="#请求参数-13" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>path</td>
+<td>number</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» number</td>
+<td>body</td>
+<td>number</td>
+<td>否</td>
+<td></td>
+<td>数量</td>
+</tr>
+<tr>
+<td>» selected</td>
+<td>body</td>
+<td>boolean</td>
+<td>是</td>
+<td></td>
+<td>是否添加</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-13"><a href="#返回结果-13" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-13"><a href="#返回数据结构-13" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="POST-全选"><a href="#POST-全选" class="headerlink" title="POST 全选"></a>POST 全选</h2><p>POST &#x2F;carts&#x2F;selectAll</p>
+<h3 id="请求参数-14"><a href="#请求参数-14" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-14"><a href="#返回结果-14" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-14"><a href="#返回数据结构-14" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="POST-全不选"><a href="#POST-全不选" class="headerlink" title="POST 全不选"></a>POST 全不选</h2><p>POST &#x2F;carts&#x2F;unSelectAll</p>
+<h3 id="请求参数-15"><a href="#请求参数-15" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-15"><a href="#返回结果-15" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-15"><a href="#返回数据结构-15" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h1 id="地址模块"><a href="#地址模块" class="headerlink" title="地址模块"></a>地址模块</h1><h2 id="POST-新增地址"><a href="#POST-新增地址" class="headerlink" title="POST 新增地址"></a>POST 新增地址</h2><p>POST &#x2F;address</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;consignee&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;phone&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;address&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-16"><a href="#请求参数-16" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» consignee</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» phone</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» address</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-16"><a href="#返回结果-16" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-16"><a href="#返回数据结构-16" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="GET-获取地址列表"><a href="#GET-获取地址列表" class="headerlink" title="GET 获取地址列表"></a>GET 获取地址列表</h2><p>GET &#x2F;address</p>
+<h3 id="请求参数-17"><a href="#请求参数-17" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-17"><a href="#返回结果-17" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-17"><a href="#返回数据结构-17" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="PUT-修改地址"><a href="#PUT-修改地址" class="headerlink" title="PUT 修改地址"></a>PUT 修改地址</h2><p>PUT &#x2F;address&#x2F;{id}</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;consignee&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;phone&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;address&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-18"><a href="#请求参数-18" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>path</td>
+<td>number</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» consignee</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» phone</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» address</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-18"><a href="#返回结果-18" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-18"><a href="#返回数据结构-18" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="DELETE-删除地址"><a href="#DELETE-删除地址" class="headerlink" title="DELETE 删除地址"></a>DELETE 删除地址</h2><p>DELETE &#x2F;address&#x2F;{id}</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;consignee&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;phone&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;address&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-19"><a href="#请求参数-19" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>path</td>
+<td>number</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» consignee</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» phone</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» address</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-19"><a href="#返回结果-19" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-19"><a href="#返回数据结构-19" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="PATCH-设置默认地址"><a href="#PATCH-设置默认地址" class="headerlink" title="PATCH 设置默认地址"></a>PATCH 设置默认地址</h2><p>PATCH &#x2F;address&#x2F;{id}</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;consignee&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;phone&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;address&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-20"><a href="#请求参数-20" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>path</td>
+<td>number</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» consignee</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» phone</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» address</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-20"><a href="#返回结果-20" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-20"><a href="#返回数据结构-20" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h1 id="订单模块"><a href="#订单模块" class="headerlink" title="订单模块"></a>订单模块</h1><h2 id="POST-生成订单"><a href="#POST-生成订单" class="headerlink" title="POST 生成订单"></a>POST 生成订单</h2><p>POST &#x2F;orders</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;address_id&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;goods_info&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;total&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-21"><a href="#请求参数-21" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» address_id</td>
+<td>body</td>
+<td>integer</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» goods_info</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» total</td>
+<td>body</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-21"><a href="#返回结果-21" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-21"><a href="#返回数据结构-21" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="GET-获取订单列表"><a href="#GET-获取订单列表" class="headerlink" title="GET 获取订单列表"></a>GET 获取订单列表</h2><p>GET &#x2F;orders</p>
+<h3 id="请求参数-22"><a href="#请求参数-22" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pageNum</td>
+<td>query</td>
+<td>number</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>query</td>
+<td>number</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>status</td>
+<td>query</td>
+<td>integer</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-22"><a href="#返回结果-22" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-22"><a href="#返回数据结构-22" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h2 id="PATCH-更新订单状态"><a href="#PATCH-更新订单状态" class="headerlink" title="PATCH 更新订单状态"></a>PATCH 更新订单状态</h2><p>PATCH &#x2F;orders&#x2F;{id}</p>
+<blockquote>
+<p>Body 请求参数</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;status&quot;</span><span class="punctuation">:</span> <span class="number">0</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-23"><a href="#请求参数-23" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>位置</th>
+<th>类型</th>
+<th>必选</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>path</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>header</td>
+<td>string</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>object</td>
+<td>否</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>» status</td>
+<td>body</td>
+<td>number</td>
+<td>是</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<blockquote>
+<p>200 Response</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回结果-23"><a href="#返回结果-23" class="headerlink" title="返回结果"></a>返回结果</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态码含义</th>
+<th>说明</th>
+<th>数据模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>成功</td>
+<td>Inline</td>
+</tr>
+</tbody></table>
+<h3 id="返回数据结构-23"><a href="#返回数据结构-23" class="headerlink" title="返回数据结构"></a>返回数据结构</h3><h1 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h1><h2 id="tocS_购物车模型">购物车模型</h2>
+
+<p><a id="schema购物车模型"></a><br><a id="schema_购物车模型"></a><br><a id="tocS购物车模型"></a><br><a id="tocs购物车模型"></a></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;goods_id&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;user_id&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;number&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;selected&quot;</span><span class="punctuation">:</span> <span class="number">0</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>必选</th>
+<th>约束</th>
+<th>中文名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>goods_id</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>number</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td></td>
+<td>none</td>
+</tr>
+<tr>
+<td>selected</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody></table>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/Saiable">Sai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://mindcons.cn/2022/08/09/web/%E8%BF%9B%E9%98%B6/Node.js/Koa/koa%E5%85%A5%E9%97%A8_%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/">http://mindcons.cn/2022/08/09/web/进阶/Node.js/Koa/koa入门_接口文档/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://mindcons.cn" target="_blank">吕小布の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Koa/">Koa</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://s2.loli.net/2022/07/02/ZYspTWmDdytfLXa.png" target="_blank"><img class="post-qr-code-img" src="https://s2.loli.net/2022/07/02/ZYspTWmDdytfLXa.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://s2.loli.net/2022/07/02/3zcRHPK5m6C8sE2.png" target="_blank"><img class="post-qr-code-img" src="https://s2.loli.net/2022/07/02/3zcRHPK5m6C8sE2.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/08/09/web/%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98/Vue%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/%E7%94%B5%E5%95%86%E5%B9%B3%E5%8F%B0/%E5%B0%9A%E7%A1%85%E8%B0%B7/Vue%E5%89%8D%E5%8F%B0%E9%A1%B9%E7%9B%AE/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">电商平台Vue前台项目</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/31/web/%E8%BF%9B%E9%98%B6/Node.js/Koa/koa_EN/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Koa2 build API service</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/07/25/web/%E8%BF%9B%E9%98%B6/Node.js/Koa/koa/" title="Koa2搭建API服务"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-25</div><div class="title">Koa2搭建API服务</div></div></a></div><div><a href="/2022/07/31/web/%E8%BF%9B%E9%98%B6/Node.js/Koa/koa_EN/" title="Koa2 build API service"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-31</div><div class="title">Koa2 build API service</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sai</div><div class="author-info__description">无来无去,不悔不怨</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">98</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Saiable"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="WeChat"><i class="fa-brands fa-weixin"></i></a><a class="social-icon" href="https://github.com/Saiable" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fa-solid fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">时间再多一点的愿望无法满足，那就多清醒一会儿</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#koa%E5%85%A5%E9%97%A8"><span class="toc-number">1.</span> <span class="toc-text">koa入门</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97"><span class="toc-number">2.</span> <span class="toc-text">用户模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#POST-%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.1.</span> <span class="toc-text">POST 用户注册接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="toc-number">2.1.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="toc-number">2.1.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">2.1.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POST-%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.2.</span> <span class="toc-text">POST 用户登录接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-1"><span class="toc-number">2.2.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1"><span class="toc-number">2.2.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PATCH-%E7%94%A8%E6%88%B7%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.3.</span> <span class="toc-text">PATCH 用户修改密码接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-2"><span class="toc-number">2.3.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-2"><span class="toc-number">2.3.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-2"><span class="toc-number">2.3.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%95%86%E5%93%81%E6%A8%A1%E5%9D%97"><span class="toc-number">3.</span> <span class="toc-text">商品模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#POST-%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87"><span class="toc-number">3.1.</span> <span class="toc-text">POST 上传图片</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-3"><span class="toc-number">3.1.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-3"><span class="toc-number">3.1.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-3"><span class="toc-number">3.1.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POST-%E5%8F%91%E5%B8%83%E5%95%86%E5%93%81"><span class="toc-number">3.2.</span> <span class="toc-text">POST 发布商品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-4"><span class="toc-number">3.2.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-4"><span class="toc-number">3.2.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-4"><span class="toc-number">3.2.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PUT-%E4%BF%AE%E6%94%B9%E5%95%86%E5%93%81"><span class="toc-number">3.3.</span> <span class="toc-text">PUT 修改商品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-5"><span class="toc-number">3.3.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-5"><span class="toc-number">3.3.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-5"><span class="toc-number">3.3.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DELETE-%E7%A1%AC%E5%88%A0%E9%99%A4%E5%95%86%E5%93%81"><span class="toc-number">3.4.</span> <span class="toc-text">DELETE 硬删除商品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-6"><span class="toc-number">3.4.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-6"><span class="toc-number">3.4.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-6"><span class="toc-number">3.4.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POST-%E4%B8%8B%E6%9E%B6%E5%95%86%E5%93%81"><span class="toc-number">3.5.</span> <span class="toc-text">POST 下架商品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-7"><span class="toc-number">3.5.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-7"><span class="toc-number">3.5.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7"><span class="toc-number">3.5.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POST-%E4%B8%8A%E6%9E%B6%E5%95%86%E5%93%81"><span class="toc-number">3.6.</span> <span class="toc-text">POST 上架商品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-8"><span class="toc-number">3.6.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-8"><span class="toc-number">3.6.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-8"><span class="toc-number">3.6.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GET-%E8%8E%B7%E5%8F%96%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8"><span class="toc-number">3.7.</span> <span class="toc-text">GET 获取商品列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-9"><span class="toc-number">3.7.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-9"><span class="toc-number">3.7.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-9"><span class="toc-number">3.7.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%AD%E7%89%A9%E8%BD%A6%E6%A8%A1%E5%9D%97"><span class="toc-number">4.</span> <span class="toc-text">购物车模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#POST-%E6%B7%BB%E5%8A%A0%E5%88%B0%E8%B4%AD%E7%89%A9%E8%BD%A6"><span class="toc-number">4.1.</span> <span class="toc-text">POST 添加到购物车</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-10"><span class="toc-number">4.1.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-10"><span class="toc-number">4.1.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-10"><span class="toc-number">4.1.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GET-%E8%8E%B7%E5%8F%96%E8%B4%AD%E7%89%A9%E8%BD%A6%E5%88%97%E8%A1%A8"><span class="toc-number">4.2.</span> <span class="toc-text">GET 获取购物车列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-11"><span class="toc-number">4.2.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-11"><span class="toc-number">4.2.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-11"><span class="toc-number">4.2.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DELETE-%E5%88%A0%E9%99%A4%E8%B4%AD%E7%89%A9%E8%BD%A6%E5%88%97%E8%A1%A8"><span class="toc-number">4.3.</span> <span class="toc-text">DELETE 删除购物车列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-12"><span class="toc-number">4.3.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-12"><span class="toc-number">4.3.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-12"><span class="toc-number">4.3.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PATCH-%E6%9B%B4%E6%96%B0%E8%B4%AD%E7%89%A9%E8%BD%A6%E5%88%97%E8%A1%A8"><span class="toc-number">4.4.</span> <span class="toc-text">PATCH 更新购物车列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-13"><span class="toc-number">4.4.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-13"><span class="toc-number">4.4.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-13"><span class="toc-number">4.4.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POST-%E5%85%A8%E9%80%89"><span class="toc-number">4.5.</span> <span class="toc-text">POST 全选</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-14"><span class="toc-number">4.5.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-14"><span class="toc-number">4.5.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-14"><span class="toc-number">4.5.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POST-%E5%85%A8%E4%B8%8D%E9%80%89"><span class="toc-number">4.6.</span> <span class="toc-text">POST 全不选</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-15"><span class="toc-number">4.6.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-15"><span class="toc-number">4.6.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-15"><span class="toc-number">4.6.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E6%A8%A1%E5%9D%97"><span class="toc-number">5.</span> <span class="toc-text">地址模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#POST-%E6%96%B0%E5%A2%9E%E5%9C%B0%E5%9D%80"><span class="toc-number">5.1.</span> <span class="toc-text">POST 新增地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-16"><span class="toc-number">5.1.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-16"><span class="toc-number">5.1.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-16"><span class="toc-number">5.1.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GET-%E8%8E%B7%E5%8F%96%E5%9C%B0%E5%9D%80%E5%88%97%E8%A1%A8"><span class="toc-number">5.2.</span> <span class="toc-text">GET 获取地址列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-17"><span class="toc-number">5.2.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-17"><span class="toc-number">5.2.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-17"><span class="toc-number">5.2.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PUT-%E4%BF%AE%E6%94%B9%E5%9C%B0%E5%9D%80"><span class="toc-number">5.3.</span> <span class="toc-text">PUT 修改地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-18"><span class="toc-number">5.3.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-18"><span class="toc-number">5.3.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-18"><span class="toc-number">5.3.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DELETE-%E5%88%A0%E9%99%A4%E5%9C%B0%E5%9D%80"><span class="toc-number">5.4.</span> <span class="toc-text">DELETE 删除地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-19"><span class="toc-number">5.4.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-19"><span class="toc-number">5.4.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-19"><span class="toc-number">5.4.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PATCH-%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E5%9C%B0%E5%9D%80"><span class="toc-number">5.5.</span> <span class="toc-text">PATCH 设置默认地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-20"><span class="toc-number">5.5.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-20"><span class="toc-number">5.5.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-20"><span class="toc-number">5.5.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97"><span class="toc-number">6.</span> <span class="toc-text">订单模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#POST-%E7%94%9F%E6%88%90%E8%AE%A2%E5%8D%95"><span class="toc-number">6.1.</span> <span class="toc-text">POST 生成订单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-21"><span class="toc-number">6.1.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-21"><span class="toc-number">6.1.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-21"><span class="toc-number">6.1.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GET-%E8%8E%B7%E5%8F%96%E8%AE%A2%E5%8D%95%E5%88%97%E8%A1%A8"><span class="toc-number">6.2.</span> <span class="toc-text">GET 获取订单列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-22"><span class="toc-number">6.2.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-22"><span class="toc-number">6.2.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-22"><span class="toc-number">6.2.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PATCH-%E6%9B%B4%E6%96%B0%E8%AE%A2%E5%8D%95%E7%8A%B6%E6%80%81"><span class="toc-number">6.3.</span> <span class="toc-text">PATCH 更新订单状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-23"><span class="toc-number">6.3.1.</span> <span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C-23"><span class="toc-number">6.3.2.</span> <span class="toc-text">返回结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-23"><span class="toc-number">6.3.3.</span> <span class="toc-text">返回数据结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">7.</span> <span class="toc-text">数据模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#tocS_%E8%B4%AD%E7%89%A9%E8%BD%A6%E6%A8%A1%E5%9E%8B"><span class="toc-number">7.1.</span> <span class="toc-text">购物车模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7"><span class="toc-number">7.1.1.</span> <span class="toc-text">属性</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/08/09/web/%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98/Vue%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/%E6%90%9C%E7%B4%A2%E4%B9%A6%E7%AD%BE/pcFrontend/%E6%90%9C%E7%B4%A2%E4%B9%A6%E7%AD%BE%E5%89%8D%E5%8F%B0/" title="无题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/08/09/web/%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98/Vue%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/%E6%90%9C%E7%B4%A2%E4%B9%A6%E7%AD%BE/pcFrontend/%E6%90%9C%E7%B4%A2%E4%B9%A6%E7%AD%BE%E5%89%8D%E5%8F%B0/" title="无题">无题</a><time datetime="2022-08-09T11:22:10.600Z" title="发表于 2022-08-09 19:22:10">2022-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/09/web/%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98/Vue%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/%E6%90%9C%E7%B4%A2%E4%B9%A6%E7%AD%BE/pcBackend/%E6%90%9C%E7%B4%A2%E4%B9%A6%E7%AD%BE%E5%90%8E%E5%8F%B0/" title="搜索书签后台"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="搜索书签后台"/></a><div class="content"><a class="title" href="/2022/08/09/web/%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98/Vue%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/%E6%90%9C%E7%B4%A2%E4%B9%A6%E7%AD%BE/pcBackend/%E6%90%9C%E7%B4%A2%E4%B9%A6%E7%AD%BE%E5%90%8E%E5%8F%B0/" title="搜索书签后台">搜索书签后台</a><time datetime="2022-08-09T11:22:10.588Z" title="发表于 2022-08-09 19:22:10">2022-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/09/web/%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98/Vue%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/%E7%94%B5%E5%95%86%E5%B9%B3%E5%8F%B0/%E5%B0%9A%E7%A1%85%E8%B0%B7/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" title="无题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/08/09/web/%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98/Vue%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/%E7%94%B5%E5%95%86%E5%B9%B3%E5%8F%B0/%E5%B0%9A%E7%A1%85%E8%B0%B7/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" title="无题">无题</a><time datetime="2022-08-09T11:11:08.972Z" title="发表于 2022-08-09 19:11:08">2022-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/09/web/%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98/Vue%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/%E7%94%B5%E5%95%86%E5%B9%B3%E5%8F%B0/%E5%B0%9A%E7%A1%85%E8%B0%B7/Vue%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" title="无题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/08/09/web/%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98/Vue%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98/%E7%94%B5%E5%95%86%E5%B9%B3%E5%8F%B0/%E5%B0%9A%E7%A1%85%E8%B0%B7/Vue%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" title="无题">无题</a><time datetime="2022-08-09T11:11:08.959Z" title="发表于 2022-08-09 19:11:08">2022-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/09/web/%E6%A1%86%E6%9E%B6/Vue/Vue%E7%94%9F%E6%80%81%E5%8F%8A%E8%BF%9B%E9%98%B6/%E5%A4%8D%E5%90%88%E7%BB%84%E4%BB%B6%E4%BF%A1%E6%81%AF%E9%80%9A%E4%BF%A1%E7%9A%846%E5%A4%A7%E6%96%B9%E6%A1%88/" title="无题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/08/09/web/%E6%A1%86%E6%9E%B6/Vue/Vue%E7%94%9F%E6%80%81%E5%8F%8A%E8%BF%9B%E9%98%B6/%E5%A4%8D%E5%90%88%E7%BB%84%E4%BB%B6%E4%BF%A1%E6%81%AF%E9%80%9A%E4%BF%A1%E7%9A%846%E5%A4%A7%E6%96%B9%E6%A1%88/" title="无题">无题</a><time datetime="2022-08-09T11:11:08.924Z" title="发表于 2022-08-09 19:11:08">2022-08-09</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Sai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://saiable.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
