@@ -1,0 +1,255 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Bootstrap | 吕小布の博客</title><meta name="keywords" content="吕小布的博客"><meta name="author" content="Sai"><meta name="copyright" content="Sai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Bootstrap基础box-sizing: border-box;¶为了避免内边距影响盒子大小，计算盒子尺寸的方式被设置为了border-box; 123* &amp;#123;    box-sizing: border-box;&amp;#125;  流体容器 .container-fluid¶流体容器，width：auto;加padding会向里缩，不会撑开盒子（盒子模型的公式） 备注：width:100">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bootstrap">
+<meta property="og:url" content="http://mindcons.cn/sai/11629/index.html">
+<meta property="og:site_name" content="吕小布の博客">
+<meta property="og:description" content="Bootstrap基础box-sizing: border-box;¶为了避免内边距影响盒子大小，计算盒子尺寸的方式被设置为了border-box; 123* &amp;#123;    box-sizing: border-box;&amp;#125;  流体容器 .container-fluid¶流体容器，width：auto;加padding会向里缩，不会撑开盒子（盒子模型的公式） 备注：width:100">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png">
+<meta property="article:published_time" content="2022-08-08T23:28:42.000Z">
+<meta property="article:modified_time" content="2022-08-10T23:37:22.970Z">
+<meta property="article:author" content="Sai">
+<meta property="article:tag" content="吕小布的博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://mindcons.cn/sai/11629/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":350},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Bootstrap',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-11 07:37:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/search/"><i class="fa-fw fas fa-search"></i><span> 搜索</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-search"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/comics/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 互动</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></li><li><a class="site-page child" href="/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-coffee"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/course/"><i class="fa-fw fas fa-book"></i><span> 搭建教程</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">吕小布の博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/search/"><i class="fa-fw fas fa-search"></i><span> 搜索</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-search"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/comics/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 互动</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></li><li><a class="site-page child" href="/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-coffee"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/course/"><i class="fa-fw fas fa-book"></i><span> 搭建教程</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Bootstrap</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-08T23:28:42.000Z" title="发表于 2022-08-09 07:28:42">2022-08-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-10T23:37:22.970Z" title="更新于 2022-08-11 07:37:22">2022-08-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Bootstrap"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Bootstrap基础"><a href="#Bootstrap基础" class="headerlink" title="Bootstrap基础"></a>Bootstrap基础</h1><h3 id="box-sizing-border-box-¶"><a href="#box-sizing-border-box-¶" class="headerlink" title="box-sizing: border-box;¶"></a>box-sizing: border-box;<a href="#box-sizing-border-box">¶</a></h3><p>为了避免内边距影响盒子大小，计算盒子尺寸的方式被设置为了border-box;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">    box-sizing: border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="流体容器-container-fluid¶"><a href="#流体容器-container-fluid¶" class="headerlink" title="流体容器 .container-fluid¶"></a>流体容器 .container-fluid<a href="#container-fluid">¶</a></h3><p>流体容器，width：auto;加padding会向里缩，不会撑开盒子（盒子模型的公式）</p>
+<p>备注：width:100%;加padding会撑开盒子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.container-fluid &#123;</span><br><span class="line">    padding-right: 15px;</span><br><span class="line">    padding-left: 15px;</span><br><span class="line">    margin-right: auto;</span><br><span class="line">    margin-left: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="固定容器-container¶"><a href="#固定容器-container¶" class="headerlink" title="固定容器 .container¶"></a>固定容器 .container<a href="#container">¶</a></h3><p>固定容器的底层是<code>媒体查询</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@media (min-width: 1200px)</span><br><span class="line">.container &#123;</span><br><span class="line">    width: 1170px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@media (min-width: 992px)</span><br><span class="line">.container &#123;</span><br><span class="line">    width: 970px;</span><br><span class="line">&#125;</span><br><span class="line">@media (min-width: 768px)</span><br><span class="line">.container &#123;</span><br><span class="line">    width: 750px;</span><br><span class="line">&#125;</span><br><span class="line">.container &#123;</span><br><span class="line">    padding-right: 15px;</span><br><span class="line">    padding-left: 15px;</span><br><span class="line">    margin-right: auto;</span><br><span class="line">    margin-left: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>阈值</th>
+<th>容器的width</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>大于等于1200（lg：大屏pc）</td>
+<td>1170（1110+槽宽）</td>
+</tr>
+<tr>
+<td>大于等于992（md:中屏pc），小于1200</td>
+<td>970（940+槽宽）</td>
+</tr>
+<tr>
+<td>大于等于768（sm：平板），小于992</td>
+<td>750（720+槽宽）</td>
+</tr>
+<tr>
+<td>小于768（xs：移动手机）</td>
+<td>auto</td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">小于768时，相当于又是一个流体容器</span><br></pre></td></tr></table></figure>
+
+<h3 id="栅格系统¶"><a href="#栅格系统¶" class="headerlink" title="栅格系统¶"></a>栅格系统<a href="#_1">¶</a></h3><p>栅格使用初体验</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot;</span><br><span class="line">          content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/bootstrap.min.css&quot;&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        .container&#123;</span><br><span class="line">            background-color:pink;</span><br><span class="line">        &#125;</span><br><span class="line">        div[class|=col]&#123;</span><br><span class="line">            border:1px solid black;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;col-lg-10&quot;&gt;col-lg-10&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;col-lg-2&quot;&gt;col-lg-2&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;col-lg-6&quot;&gt;col-lg-6&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;col-lg-6&quot;&gt;col-lg-6&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;col-lg-4&quot;&gt;col-lg-4&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;col-lg-8&quot;&gt;col-lg-8&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script src=&quot;js/jquery-3.5.1.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;js/bootstrap.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="栅格源码-固定容器"><a href="#栅格源码-固定容器" class="headerlink" title="栅格源码_固定容器"></a>栅格源码_固定容器</h3><table>
+<thead>
+<tr>
+<th>源码相对路径</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>less&#x2F;variables.less</td>
+<td>变量的定义</td>
+</tr>
+<tr>
+<td>less&#x2F;grid.less</td>
+<td>整合在一起</td>
+</tr>
+<tr>
+<td>less&#x2F;mixins&#x2F;grid.less</td>
+<td>定义混合</td>
+</tr>
+<tr>
+<td>less&#x2F;mixins&#x2F;clearfix.less</td>
+<td>解决高度塌陷</td>
+</tr>
+<tr>
+<td>less&#x2F;mixins&#x2F;grid-framework.less</td>
+<td>整个文件都是用来定义列的</td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">less/mixins/grid.less</span><br></pre></td></tr></table></figure>
+
+<h4 id="固定容器和流体容器的公共样式¶"><a href="#固定容器和流体容器的公共样式¶" class="headerlink" title="固定容器和流体容器的公共样式¶"></a>固定容器和流体容器的公共样式<a href="#_2">¶</a></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//@grid-gutter-width  槽宽</span><br><span class="line">.container-fixed(@gutter: @grid-gutter-width) &#123;</span><br><span class="line">  margin-right: auto;</span><br><span class="line">  margin-left: auto;</span><br><span class="line">  padding-left:  floor((@gutter / 2));//一半向上取整</span><br><span class="line">  padding-right: ceil((@gutter / 2));//一半向下取整</span><br><span class="line">  &amp;:extend(.clearfix all);//继承clearfix的全部</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>相当于</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//固定容器和流体容器的公共样式</span><br><span class="line">margin-right: auto;</span><br><span class="line">margin-left: auto;</span><br><span class="line">padding-left:  15px;</span><br><span class="line">padding-right:  15px;</span><br></pre></td></tr></table></figure>
+
+<h4 id="固定容器单独额外的样式¶"><a href="#固定容器单独额外的样式¶" class="headerlink" title="固定容器单独额外的样式¶"></a>固定容器单独额外的样式<a href="#_3">¶</a></h4><p>就是三个媒体查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@media (min-width: @screen-sm-min) &#123;//768px 在variables.less中定义    width: @container-sm; //750 = 720 + 槽宽  &#125;  @media (min-width: @screen-md-min) &#123;    width: @container-md;  &#125;  @media (min-width: @screen-lg-min) &#123;    width: @container-lg;  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果屏幕宽度超过2000，最上面的两个样式是读到的，只不过最后被覆盖了 所以上面的3个媒体查询顺序不能变</p>
+<h4 id="栅格源码-行-row"><a href="#栅格源码-行-row" class="headerlink" title="栅格源码_行(row)"></a>栅格源码_行(row)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.make-row(@gutter: @grid-gutter-width) &#123;  margin-left:  ceil((@gutter / -2));//负的槽宽的一半  margin-right: floor((@gutter / -2));  &amp;:extend(.clearfix all);&#125;</span><br></pre></td></tr></table></figure>
+
+<p>相当于</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">margin-left:  -15px;margin-right: -15px;</span><br></pre></td></tr></table></figure>
+
+<h4 id="栅格源码-列（column）"><a href="#栅格源码-列（column）" class="headerlink" title="栅格源码_列（column）"></a>栅格源码_列（column）</h4><p>第一步 .make-grid-columns()</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid-framework.less`里面的`.make-grid-columns().make-grid-columns() &#123;  // Common styles for all sizes of grid columns, widths 1-12  .col(@index) &#123;    @item: ~&quot;.col-xs-@&#123;index&#125;, .col-sm-@&#123;index&#125;, .col-md-@&#123;index&#125;, .col-lg-@&#123;index&#125;&quot;;//避免编译    .col((@index + 1), @item);//递归.col(1)    //.col(2,&quot;.col-xs-@&#123;1&#125;, .col-sm-@&#123;1&#125;, .col-md-@&#123;1&#125;, .col-lg-@&#123;1&#125;&quot;)//less中的变量属于块级作用域    //此时，上述有两个参数  &#125;  //.col(2,&quot;.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1&quot;)  .col(@index, @list) when (@index =&lt; @grid-columns) &#123; // 2 =&lt; 12    @item: ~&quot;.col-xs-@&#123;index&#125;, .col-sm-@&#123;index&#125;, .col-md-@&#123;index&#125;, .col-lg-@&#123;index&#125;&quot;;    .col((@index + 1), ~&quot;@&#123;list&#125;, @&#123;item&#125;&quot;);    //.col(3,&quot;.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,.col-xs-2, .col-sm-2, .col-md-2, .col-lg-2&quot;)    //.col(4,&quot;.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,.col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3&quot;)    //...递归调用    //index = 12    //.col(13,str12:&quot;.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,.col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3 ...... .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12&quot;)  &#125;  .col(@index, @list) when (@index &gt; @grid-columns) &#123; // 13 &gt; 12  //把str12当作选择器来使用    @&#123;list&#125; &#123;      position: relative;      min-height: 1px;      padding-left:  ceil((@grid-gutter-width / 2));      padding-right: floor((@grid-gutter-width / 2));    &#125;  &#125;  .col(1);&#125;</span><br></pre></td></tr></table></figure>
+
+<p>跑完这个混合的递归后，相当于:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//中间就省略了.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,.col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3 ...... .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12&#123;      position: relative;      min-height: 1px;      padding-left:  15px;      padding-right: 15px;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二步 .make-grid(xs)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//移动端优先.make-grid(@class) &#123;//xs  .float-grid-columns(@class); // 给12个类名，添加左浮动  .loop-grid-columns(@grid-columns, @class, width);  .loop-grid-columns(@grid-columns, @class, pull);  .loop-grid-columns(@grid-columns, @class, push);  .loop-grid-columns(@grid-columns, @class, offset);&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.1 .float-grid-columns(xs)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.float-grid-columns(@class) &#123;//xs  .col(@index) &#123;    @item: ~&quot;.col-@&#123;class&#125;-@&#123;index&#125;&quot;;    .col((@index + 1), @item);    //.col(2,&quot;.col-xs-1&quot;)  &#125;  .col(@index, @list) when (@index =&lt; @grid-columns) &#123; //2 =&lt; 12    @item: ~&quot;.col-@&#123;class&#125;-@&#123;index&#125;&quot;;    .col((@index + 1), ~&quot;@&#123;list&#125;, @&#123;item&#125;&quot;);    //.col(2,&quot;.col-xs-1&quot;)    //递归生成    .col(13,str12:&quot;.col-xs-1,.col-xs-2,.col-xs-3,.col-xs-4, ...... , .col-xs-12,&quot;)  &#125;  .col(@index, @list) when (@index &gt; @grid-columns) &#123; // 13&gt;12    @&#123;list&#125; &#123;    //.col-xs-1,.col-xs-2,.col-xs-3,.col-xs-4, ...... , .col-xs-12      float: left;    &#125;  &#125;  .col(1);&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.2 width .loop-grid-columns(xs)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// 2.2.loop-grid-columns(@index, @class, @type) when (@index &gt;= 0) &#123;//12 xs width   12&gt;=0（这里是大于等于）index:12 ----&gt; 1  .calc-grid-column(@index, @class, @type);  // next iteration  .loop-grid-columns((@index - 1), @class, @type);&#125;    //生成类名，指定宽度.calc-grid-column(@index, @class, @type) when (@type = width) and (@index &gt; 0) &#123;// 12 xs @type = width   12&gt;0（这里是大于）  .col-@&#123;class&#125;-@&#123;index&#125; &#123;    width: percentage((@index / @grid-columns));    //每次调用的时候，都会生成一个.col的class类名    //.col-xs-12,.col-xs-12,...... ,.col-xs-1    //width:分别对应  12/12  11/12   ...... 1/12    //.col-xs-12&#123;width:12/12&#125;    //.col-xs-11&#123;width:11/12&#125;    //.col-xs-10&#123;width:10/12&#125;    // ...    //.col-xs-11&#123;width:1/12&#125;  &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由上可知，由xs版本的，最后会有sm、md、lg版本的，里面的值其实是一样的</p>
+<p>并且，lg之前，xs、sm、md都是已经被渲染过了的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;    &lt;div class=&quot;row&quot;&gt;        &lt;div class=&quot;col-lg-10 col-md-6&quot;&gt;col-lg-10&lt;/div&gt;        &lt;div class=&quot;col-lg-2 col-md-6&quot;&gt;col-lg-2&lt;/div&gt;    &lt;/div&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>所以，类名写成上述代码的时候，lg屏下是10&#x2F;2，而md屏下则是6&#x2F;6</p>
+<p>2.3 列排序pull &amp;&amp; push 当index时0时，除了生成了和上面一样的，还有<code>.col-xs-push-0&#123;left:auto&#125;</code>和<code>.col-xs-pull-0&#123;right:auto&#125;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">push.col-xs-push-12&#123;left:12/12&#125;.col-xs-push-11&#123;left:11/12&#125;.......col-xs-push-1&#123;left:1/12&#125;.col-xs-push-0&#123;left:auto&#125;pull.col-xs-pull-12&#123;right:12/12&#125;.col-xs-pull-11&#123;right:11/12&#125;.......col-xs-pull-1&#123;right:1/12&#125;.col-xs-pull-0&#123;right:auto&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.4 列偏移 实际控制的是<code>margin-left</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">offset.col-xs-offset-12&#123;right:12/12&#125;.col-xs-offset-11&#123;right:11/12&#125;.......col-xs-offset-1&#123;right:1/12&#125;.col-xs-offset-0&#123;right:0&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="响应式工具¶"><a href="#响应式工具¶" class="headerlink" title="响应式工具¶"></a>响应式工具<a href="#_4">¶</a></h3><p>ca  </p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/Saiable">Sai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://mindcons.cn/sai/11629/">http://mindcons.cn/sai/11629/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://mindcons.cn" target="_blank">吕小布の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://s2.loli.net/2022/07/02/ZYspTWmDdytfLXa.png" target="_blank"><img class="post-qr-code-img" src="https://s2.loli.net/2022/07/02/ZYspTWmDdytfLXa.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://s2.loli.net/2022/07/02/3zcRHPK5m6C8sE2.png" target="_blank"><img class="post-qr-code-img" src="https://s2.loli.net/2022/07/02/3zcRHPK5m6C8sE2.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/sai/38965/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">电商平台Vue前台项目</div></div></a></div><div class="next-post pull-right"><a href="/sai/62032/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">css页面及交互</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sai</div><div class="author-info__description">无来无去,不悔不怨</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Saiable"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="WeChat"><i class="fa-brands fa-weixin"></i></a><a class="social-icon" href="https://github.com/Saiable" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fa-solid fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">时间再多一点的愿望无法满足，那就多清醒一会儿</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Bootstrap%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">Bootstrap基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#box-sizing-border-box-%C2%B6"><span class="toc-number">1.0.1.</span> <span class="toc-text">box-sizing: border-box;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E4%BD%93%E5%AE%B9%E5%99%A8-container-fluid%C2%B6"><span class="toc-number">1.0.2.</span> <span class="toc-text">流体容器 .container-fluid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BA%E5%AE%9A%E5%AE%B9%E5%99%A8-container%C2%B6"><span class="toc-number">1.0.3.</span> <span class="toc-text">固定容器 .container</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%85%E6%A0%BC%E7%B3%BB%E7%BB%9F%C2%B6"><span class="toc-number">1.0.4.</span> <span class="toc-text">栅格系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%85%E6%A0%BC%E6%BA%90%E7%A0%81-%E5%9B%BA%E5%AE%9A%E5%AE%B9%E5%99%A8"><span class="toc-number">1.0.5.</span> <span class="toc-text">栅格源码_固定容器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BA%E5%AE%9A%E5%AE%B9%E5%99%A8%E5%92%8C%E6%B5%81%E4%BD%93%E5%AE%B9%E5%99%A8%E7%9A%84%E5%85%AC%E5%85%B1%E6%A0%B7%E5%BC%8F%C2%B6"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">固定容器和流体容器的公共样式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BA%E5%AE%9A%E5%AE%B9%E5%99%A8%E5%8D%95%E7%8B%AC%E9%A2%9D%E5%A4%96%E7%9A%84%E6%A0%B7%E5%BC%8F%C2%B6"><span class="toc-number">1.0.5.2.</span> <span class="toc-text">固定容器单独额外的样式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%85%E6%A0%BC%E6%BA%90%E7%A0%81-%E8%A1%8C-row"><span class="toc-number">1.0.5.3.</span> <span class="toc-text">栅格源码_行(row)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%85%E6%A0%BC%E6%BA%90%E7%A0%81-%E5%88%97%EF%BC%88column%EF%BC%89"><span class="toc-number">1.0.5.4.</span> <span class="toc-text">栅格源码_列（column）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B7%A5%E5%85%B7%C2%B6"><span class="toc-number">1.0.6.</span> <span class="toc-text">响应式工具</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/sai/18839/" title="HTML核心">HTML核心</a><time datetime="2022-08-10T01:03:02.000Z" title="发表于 2022-08-10 09:03:02">2022-08-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/sai/56508/" title="英雄联盟官网案例">英雄联盟官网案例</a><time datetime="2022-08-10T01:03:02.000Z" title="发表于 2022-08-10 09:03:02">2022-08-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/sai/36735/" title="回顾记录">回顾记录</a><time datetime="2022-08-09T01:03:02.000Z" title="发表于 2022-08-09 09:03:02">2022-08-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/sai/1434/" title="学习方式">学习方式</a><time datetime="2022-08-09T01:03:02.000Z" title="发表于 2022-08-09 09:03:02">2022-08-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/sai/24447/" title="web基础及进阶路线">web基础及进阶路线</a><time datetime="2022-08-09T01:03:02.000Z" title="发表于 2022-08-09 09:03:02">2022-08-09</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Sai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://saiable.github.io/">blog</a>!</div></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
