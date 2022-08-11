@@ -2,9 +2,8 @@
 # see https://butterfly.js.org/posts/4aa8abbe/#導航菜單
 # --------------------------------------
 menu:
-  搜索: /search/ || fas fa-search
   首页: / || fas fa-home
-  文章|| fas fa-search||hide:
+  文章|| fas fa-book||hide:
     分类: /categories/ || fas fa-folder-open
     标签: /tags/ || fas fa-tags
     归档: /archives/ || fas fa-archive
@@ -17,8 +16,7 @@ menu:
     留言板: /comments/ || fas fa-comments
   友链: /link/ || fas fa-link
   关于: /about/ || fas fa-heart
-  其他|| fas fa-coffee||hide:
-    搭建教程: /course/ || fas fa-book
+
 
 # Code Blocks (代碼相關)
 # --------------------------------------
@@ -61,7 +59,7 @@ algolia_search:
 
 # Local search
 local_search:
-  enable: false
+  enable: true
   preload: false
   CDN:
 
@@ -850,7 +848,7 @@ css_prefix: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-  # - <link rel="stylesheet" href="/xxx.css">
+  - <link rel="stylesheet" href="/css/custom.css">
   bottom:
   # - <script src="xxxx"></script>
 
