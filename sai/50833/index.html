@@ -1,0 +1,379 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>CSS核心 | 吕小布の博客</title><meta name="keywords" content="CSS核心"><meta name="author" content="Sai"><meta name="copyright" content="Sai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="样式的继承 我们为一个元素设置的样式，同时也会应用到它到底后台元素上  继承是发生在祖先后代之间的  继承的设计是为了方便我们的开发，利用继承我们可以将一些通用的样式，统一设置到共同的祖先元素上，这样只需设置一次即可让所有的元素具有该样式   注意：并不是所有的样式都会被继承，比如，背景相关的，布局相关的等，这些样式都不会被继承 长度单位 像素 屏幕（显示器）实际上是由一个一个小点点构成的 不同屏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS核心">
+<meta property="og:url" content="http://mindcons.cn/sai/50833/index.html">
+<meta property="og:site_name" content="吕小布の博客">
+<meta property="og:description" content="样式的继承 我们为一个元素设置的样式，同时也会应用到它到底后台元素上  继承是发生在祖先后代之间的  继承的设计是为了方便我们的开发，利用继承我们可以将一些通用的样式，统一设置到共同的祖先元素上，这样只需设置一次即可让所有的元素具有该样式   注意：并不是所有的样式都会被继承，比如，背景相关的，布局相关的等，这些样式都不会被继承 长度单位 像素 屏幕（显示器）实际上是由一个一个小点点构成的 不同屏">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png">
+<meta property="article:published_time" content="2022-07-08T23:28:42.000Z">
+<meta property="article:modified_time" content="2022-08-15T09:29:35.000Z">
+<meta property="article:author" content="Sai">
+<meta property="article:tag" content="CSS核心">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://mindcons.cn/sai/50833/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":350},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CSS核心',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-15 17:29:35'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">98</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/comics/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 互动</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></li><li><a class="site-page child" href="/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">吕小布の博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/comics/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 互动</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></li><li><a class="site-page child" href="/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CSS核心</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-08T23:28:42.000Z" title="发表于 2022-07-09 07:28:42">2022-07-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-15T09:29:35.000Z" title="更新于 2022-08-15 17:29:35">2022-08-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CSS/">CSS</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CSS核心"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="样式的继承"><a href="#样式的继承" class="headerlink" title="样式的继承"></a>样式的继承</h3><ul>
+<li><p>我们为一个元素设置的样式，同时也会应用到它到底后台元素上</p>
+</li>
+<li><p>继承是发生在祖先后代之间的</p>
+</li>
+<li><p>继承的设计是为了方便我们的开发，利用继承我们可以将一些通用的样式，统一设置到共同的祖先元素上，这样只需设置一次即可让所有的元素具有该样式</p>
+</li>
+</ul>
+<p>注意：并不是所有的样式都会被继承，比如，背景相关的，布局相关的等，这些样式都不会被继承</p>
+<h3 id="长度单位"><a href="#长度单位" class="headerlink" title="长度单位"></a>长度单位</h3><ul>
+<li>像素<ul>
+<li>屏幕（显示器）实际上是由一个一个小点点构成的</li>
+<li>不同屏幕的像素大小是不同的，像素越小的屏幕，显示效果越清晰</li>
+<li>所有同样的200px在不同的设备下显示效果不一样</li>
+</ul>
+</li>
+<li>百分比<ul>
+<li>也可以降属性值设置为相对于其父元素属性的百分比</li>
+<li>设置 百分比可以使子元素跟随父元素的改变而改变</li>
+</ul>
+</li>
+<li>em<ul>
+<li>em是相对于元素的字体大小来计算的</li>
+<li>1em &#x3D; 1fontsize</li>
+<li>em会根据字体大小的改变而改变</li>
+</ul>
+</li>
+<li>rem<ul>
+<li>rem是相对于根元素的字体大小来计算</li>
+</ul>
+</li>
+</ul>
+<h3 id="颜色单位"><a href="#颜色单位" class="headerlink" title="颜色单位"></a>颜色单位</h3><ul>
+<li>在css中可以直接使用颜色名，来设置各种颜色<ul>
+<li>比如：red、orange、yellow…</li>
+<li>但是在css中直接使用颜色是非常的不方便</li>
+</ul>
+</li>
+<li>RGB值<ul>
+<li>RGB通过三种颜色的不同浓度来调配出不同的颜色</li>
+<li>每一种颜色在0~255之间</li>
+<li>语法：rgb(红,绿,蓝)</li>
+</ul>
+</li>
+<li>RGBA：<ul>
+<li>在RGB基础上增加了不透明度</li>
+<li>1表示完全不透明，0表示完全透明，0.5表示半透明（0可以省略）</li>
+</ul>
+</li>
+<li>十六进制的RGB值<ul>
+<li>颜色浓度：00~ff</li>
+<li>如果颜色两位两位重复，可以简写：#aabbcc—-&gt;#abc</li>
+</ul>
+</li>
+<li>HLS<ul>
+<li>H（色相：0 ~ 360）</li>
+<li>S（饱和度，颜色的浓度：0% ~ 100%）</li>
+<li>L（亮度，颜色的亮度：0% ~ 100%）</li>
+</ul>
+</li>
+</ul>
+<h3 id="background"><a href="#background" class="headerlink" title="background"></a>background</h3><p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/pr_background.asp">CSS background 属性 (w3school.com.cn)</a></p>
+<ul>
+<li><p>颜色渐变</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to top, <span class="number">#a8edea</span> <span class="number">0%</span>, <span class="number">#fed6e3</span> <span class="number">100%</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><h3 id="button"><a href="#button" class="headerlink" title="button"></a>button</h3><h3 id="css变量"><a href="#css变量" class="headerlink" title="css变量"></a>css变量</h3><p>来源：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/nyw1983/p/11628729.html">CSS变量（CSS variable） - Cloud% - 博客园 (cnblogs.com)</a></p>
+<p><strong>CSS变量</strong> 是由CSS作者定义的实体，其中包含要在整个文档中重复使用的特定值。使用自定义属性来设置变量名，并使用特定的var()来访问。</p>
+<h4 id="一、CSS变量的用途"><a href="#一、CSS变量的用途" class="headerlink" title="一、CSS变量的用途"></a>一、CSS变量的用途</h4><p>​    构建大型站点时，在这些网页中，有大量的CSS样式，并且会在许多场合大量重复的使用。比如说：为了保持一种配色方案，在这个配色方案中会有一些颜色经常重复出现在CSS样式表中。如果想要修改配色方案，不论是想单独修改某个颜色或是整套配色，都不是一个简单的问题，而且很容易出错。</p>
+<p>​    CSS可以减轻工作的复杂性，更方便修改和添加。不需要额外的编译。第二个好处就是变量本身是包含语义的信息。使CSS文件变得更易读和容易理解。main-text-color比单纯出现在文档中的#00ff00要更加容易理解，特别是有相同颜色出现在不同的文件中时。</p>
+<h4 id="二、什么是CSS变量"><a href="#二、什么是CSS变量" class="headerlink" title="二、什么是CSS变量"></a>二、什么是CSS变量</h4><p><strong>CSS变量当前有两种形式：</strong></p>
+<ul>
+<li><strong>变量</strong>，就是拥有合法标识符和合法的值。可以被使用在任意的地方。可以使用var()函数使用函数</li>
+</ul>
+<p>var(–main-size)会返回–main-size对应的值。</p>
+<ul>
+<li><strong>自定义属性</strong>，这些属性使用–<em>where</em>的特殊格式作为名字</li>
+</ul>
+<p>–main-size:30px; 即声明一个CSS语句，意思是：将30px赋值给–main-size变量。</p>
+<p><strong>注意：自定义属性和常规属性一样，只作用在当前层级，如果没有特别定义则将从其父元素继承其值。</strong></p>
+<p>在之前的标准中，自定义属性以var-作为前缀，后来才改成–前缀。Firefox 31和以后的版本遵循新标准。</p>
+<h4 id="三、变量的声明"><a href="#三、变量的声明" class="headerlink" title="三、变量的声明"></a>三、变量的声明</h4><p> <strong>声明变量之前，变量名之前要加上两个连字符（–）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">body&#123;</span><br><span class="line">        --head-color:#ada5f3;</span><br><span class="line">        --foot-color:#da56d4:</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，body选择器中出现了两个变量：–head-color 和 –foot-color。</p>
+<p>CSS变量与color、background这些正式属性并没有什么不同，只是没有默认含义。CSS变量其实与自定义的CSS属性用法相同。CSS变量又叫做 <strong>CSS自定义属性（CSS custom properties）</strong>之所以选用两根连字符（–）表示CSS变量，是因为$foo 被Sass占用了，@foo被Less占用了，为了产生冲突，所以就改用（–）表示CSS变量了</p>
+<p><strong>注意：变量名的大小写敏感，–head不同于–Head，这是两个不同的变量。</strong></p>
+<p><strong>变量的作用域</strong></p>
+<p><strong>一个变量的作用域是其对应的选择器的作用范围，div选择器对应div的范围，由于这个原因，全局的变量通常放在根元素</strong>**<code>:root</code>**<strong>里面，确保任何选择器都可以读取它们。</strong></p>
+<p><strong>（一）声明一个局部变量</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">element &#123;</span><br><span class="line">  --main-bg-color: brown;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（二）声明一个全局变量</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:root &#123;</span><br><span class="line">  --global-color: #666;</span><br><span class="line">  --pane-padding: 5px 42px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>：root 这个伪类选择器匹配的是文档树的根元素。对于HTML来说，：root表示的是<code>&lt;html&gt;</code>根元素，除了优先级更高以外，与html元素选择器相同。</strong></p>
+<p>使用全局变量（在全局中声明以后，其他选择器也可以调用）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.demo&#123;</span><br><span class="line">   color: var(--global-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="四、var-函数"><a href="#四、var-函数" class="headerlink" title="四、var()函数"></a>四、var()函数</h4><p>（一） <strong>var( ) 函数用以读取变量</strong>，<strong>var（变量名）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line">        --cor:#ddf;</span><br><span class="line">        background-color: var(--cor);</span><br><span class="line">        width:400px;height:40px;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../../html&css.assets/1748092-20191007101146543-983283535.png" alt="img"></p>
+<p>（二） <strong>var()函数还可以使用第二个参数，表示变量的默认值。如果这个变量不存在，就会使用这个默认值</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line">        --cor:#ddf;</span><br><span class="line">        background-color: var(--corlo , red);</span><br><span class="line">        width:400px;height:40px;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 在这个例子里，var()使用了两个参数，变量–corlo和默认值red，由于不存在–corlo这个变量，所以使用red默认值。</p>
+<p><strong>注意：第二个参数不处理内部的逗号或是空格，都视为参数的一部分</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">font-size: var(--sizq,40px 12px);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../../html&css.assets/1748092-20191007102418482-270517516.png" alt="img"></p>
+<p> （三） <strong>var()函数还可以用在变量的声明</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line">        --cor:#ddf;</span><br><span class="line">        --bacolor: var(--cor);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：变量只能用作属性值，不能用作属性名；</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line">        --size:font-size;</span><br><span class="line">        var(--size):30px;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，变量–size用作属性名，这是无效的</p>
+<h4 id="五、变量的类型"><a href="#五、变量的类型" class="headerlink" title="五、变量的类型"></a>五、变量的类型</h4><p><strong>（一）字符串</strong></p>
+<p><strong>如果变量值是一个字符串，可以与其他字符串进行拼串</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--main-text:&quot;hello&quot;;</span><br><span class="line">--text:var(--main-text)&quot;world ! &quot;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例：</strong>（使用两个变量值，使内容显示为hello world）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">span:before&#123;</span><br><span class="line">        --main-text:&quot;hello&quot;;</span><br><span class="line">        --text:var(--main-text)&quot;world ! &quot;;</span><br><span class="line">        content:&quot;--text: &quot;var(--text);</span><br><span class="line">        background: skyblue</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>表现效果为</p>
+<p><img src="/../../html&css.assets/1748092-20191007162043064-996595741.png" alt="img"></p>
+<p><strong>（二）数值</strong></p>
+<p><strong>注意：如果变量的值为数值，则在使用的时候不可以与数值单位直接连用</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.foo &#123;</span><br><span class="line">  --gap: 20;</span><br><span class="line">  /* 无效 */</span><br><span class="line">  margin-top: var(--gap)px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>本例中，使用时数值与单位直接写在一起，这是无效的。必须使用 <strong><code>calc()</code>函数</strong>，将它们连接。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">span&#123;</span><br><span class="line">        background: skyblue;</span><br><span class="line">        --size:30;</span><br><span class="line">        font-size:calc(var(--size)*1px);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>表现效果：</p>
+<p><img src="/../../html&css.assets/1748092-20191007162904136-329405177.png" alt="img"></p>
+<p><strong>注意：如果变量赋值的时候带有单位（例如：–size:20px;），就不能写成字符串</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* 无效 */</span><br><span class="line">.foo &#123;</span><br><span class="line">  --foo: &#x27;20px&#x27;;</span><br><span class="line">  font-size: var(--foo);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 有效 */</span><br><span class="line">.foo &#123;</span><br><span class="line">  --foo: 20px;</span><br><span class="line">  font-size: var(--foo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="六、响应式布局"><a href="#六、响应式布局" class="headerlink" title="六、响应式布局"></a>六、响应式布局</h4><p>CSS 是动态的，页面的任何变化，都会导致采用的规则变化。</p>
+<p>利用这个特点，<strong>可以在响应式布局的 <code>media</code>命令里面声明变量，使得不同的屏幕宽度有不同的变量值。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">  --primary: #7F583F;</span><br><span class="line">  --secondary: #F7EFD2;</span><br><span class="line">&#125;</span><br><span class="line">a &#123;</span><br><span class="line">  color: var(--primary);</span><br><span class="line">  text-decoration-color: var(--secondary);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@media screen and (min-width: 768px) &#123;</span><br><span class="line">  body &#123;</span><br><span class="line">    --primary:  #F7EFD2;</span><br><span class="line">    --secondary: #7F583F;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="七、兼容性处理"><a href="#七、兼容性处理" class="headerlink" title="七、兼容性处理"></a>七、兼容性处理</h4><p><strong>浏览器兼容性</strong></p>
+<p><img src="/../../html&css.assets/1748092-20191007171556707-2101956118.png" alt="img"></p>
+<p><img src="/../../html&css.assets/1748092-20191007171707738-2097760259.png" alt="img"></p>
+<p><strong>对于不支持CSS变量的浏览器，可采用下面的写法</strong>（为了适应一些不支持CSS变量的浏览器，还可以在样式中另外用CSS样式单独声明以下）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">span&#123;</span><br><span class="line">    --size:30px;</span><br><span class="line">    font-size:var(--size);</span><br><span class="line">            font-size:30px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>可以使用 @supports 检测浏览器是否支持CSS变量</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@supports ( (--a: 0)) &#123;</span><br><span class="line">  /* supported */</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@supports ( not (--a: 0)) &#123;</span><br><span class="line">  /* not supported */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="八、JavaScript操作"><a href="#八、JavaScript操作" class="headerlink" title="八、JavaScript操作"></a>八、JavaScript操作</h4><p>JavaScript也可以检验浏览器是否支持CSS变量</p>
+<p><a href="javascript:void(0);"><img src="/../../html&css.assets/copycode-164237211006512.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const isSupported =</span><br><span class="line">  window.CSS &amp;&amp;</span><br><span class="line">  window.CSS.supports &amp;&amp;</span><br><span class="line">  window.CSS.supports(&#x27;--a&#x27;, 0);</span><br><span class="line"></span><br><span class="line">if (isSupported) &#123;</span><br><span class="line">  /* supported */</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  /* not supported */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>JavaScript操作CSS变量的写法如下（</strong>这表示JavaScript可以实现将任意值存入CSS样式表）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 设置变量</span><br><span class="line">document.body.style.setProperty(&#x27;--primary&#x27;, &#x27;#7F583F&#x27;);</span><br><span class="line"></span><br><span class="line">// 读取变量</span><br><span class="line">document.body.style.getPropertyValue(&#x27;--primary&#x27;).trim();</span><br><span class="line">// &#x27;#7F583F&#x27;</span><br><span class="line"></span><br><span class="line">// 删除变量</span><br><span class="line">document.body.style.removeProperty(&#x27;--primary&#x27;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h4><p>为不同的元素设置颜色</p>
+<p><strong>CSS样式</strong></p>
+<p><a href="javascript:void(0);"><img src="/../../html&css.assets/copycode-164237218083014.gif" alt="复制代码"></a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.one</span> &#123;</span><br><span class="line">          <span class="attribute">color</span>: white;</span><br><span class="line">          <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">          <span class="attribute">margin</span>: <span class="number">10px</span>;</span><br><span class="line">          <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">          <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">          <span class="attribute">display</span>: inline-block;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.two</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>:white;</span><br><span class="line">        <span class="attribute">background</span>:black;</span><br><span class="line">        <span class="attribute">margin</span>:<span class="number">10px</span>;</span><br><span class="line">        <span class="attribute">width</span>:<span class="number">150px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">        <span class="attribute">display</span>:inline-block;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.three</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>:white;</span><br><span class="line">        <span class="attribute">background-color</span>:skyblue;</span><br><span class="line">        <span class="attribute">margin</span>:<span class="number">10px</span>;</span><br><span class="line">        <span class="attribute">width</span>:<span class="number">75px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.four</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>:white;</span><br><span class="line">        <span class="attribute">background-color</span>:skyblue;</span><br><span class="line">        <span class="attribute">margin</span>:<span class="number">10px</span>;</span><br><span class="line">        <span class="attribute">width</span>:<span class="number">100px</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.five</span>&#123;</span><br><span class="line">        <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>HTML</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;one&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;two&quot;</span>&gt;</span></span><br><span class="line">   Text  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;five&quot;</span>&gt;</span>- more text<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;three&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">class</span>=<span class="string">&quot;four&quot;</span>&gt;</span>Lorem Ipsum<span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>表现效果</p>
+<p><img src="/../../html&css.assets/1748092-20191007155714104-558159243.png" alt="img"></p>
+<hr>
+<p>在这个例子中我们发现CSS样式中有很多重复的 background-color：skyblue；的背景颜色样式设置，我们可以将背景颜色定义在更高的层级，然后通过CSS继承性来接解决个问题，但是有时候这个方法并不一定好用。</p>
+<p>我们可以在：root 选择器中定义CSS变量，使用变量来减少重复的代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">:root &#123;</span><br><span class="line">          --main-bg-color: skyblue;</span><br><span class="line">     &#125;</span><br><span class="line">    .one &#123;</span><br><span class="line">          color: white;</span><br><span class="line">          background-color:var(--main-bg-color);</span><br><span class="line">          margin: 10px;</span><br><span class="line">          width: 50px;</span><br><span class="line">          height: 50px;</span><br><span class="line">          display: inline-block;</span><br><span class="line">    &#125;</span><br><span class="line">    .two&#123;</span><br><span class="line">        color:white;</span><br><span class="line">        background:black;</span><br><span class="line">        margin:10px;</span><br><span class="line">        width:150px;</span><br><span class="line">        height: 50px;</span><br><span class="line">        display:inline-block;</span><br><span class="line">    &#125;</span><br><span class="line">    .three&#123;</span><br><span class="line">        color:white;</span><br><span class="line">        background-color:var(--main-bg-color);</span><br><span class="line">        margin:10px;</span><br><span class="line">        width:75px;</span><br><span class="line">    &#125;</span><br><span class="line">    .four&#123;</span><br><span class="line">        color:white;</span><br><span class="line">        background-color:var(--main-bg-color);</span><br><span class="line">        margin:10px;</span><br><span class="line">        width:100px; </span><br><span class="line">    &#125;</span><br><span class="line">    .five&#123;</span><br><span class="line">        background-color: var(--main-bg-color);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>最终得到的效果是和上面一样的</p>
+<p><img src="/../../html&css.assets/1748092-20191007155714104-558159243.png" alt="img"></p>
+<p> 实例：</p>
+<p>为不同的元素设置颜色</p>
+<p><strong>CSS样式</strong></p>
+<p><a href="javascript:void(0);"><img src="/sai/undefined/copycode-166055405725412.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">.one &#123;</span><br><span class="line">          color: white;</span><br><span class="line">          background-color: skyblue;</span><br><span class="line">          margin: 10px;</span><br><span class="line">          width: 50px;</span><br><span class="line">          height: 50px;</span><br><span class="line">          display: inline-block;</span><br><span class="line">    &#125;</span><br><span class="line">    .two&#123;</span><br><span class="line">        color:white;</span><br><span class="line">        background:black;</span><br><span class="line">        margin:10px;</span><br><span class="line">        width:150px;</span><br><span class="line">        height: 50px;</span><br><span class="line">        display:inline-block;</span><br><span class="line">    &#125;</span><br><span class="line">    .three&#123;</span><br><span class="line">        color:white;</span><br><span class="line">        background-color:skyblue;</span><br><span class="line">        margin:10px;</span><br><span class="line">        width:75px;</span><br><span class="line">    &#125;</span><br><span class="line">    .four&#123;</span><br><span class="line">        color:white;</span><br><span class="line">        background-color:skyblue;</span><br><span class="line">        margin:10px;</span><br><span class="line">        width:100px; </span><br><span class="line">    &#125;</span><br><span class="line">    .five&#123;</span><br><span class="line">        background-color: skyblue;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="/sai/undefined/copycode-166055405725412.gif" alt="复制代码"></a></p>
+<p><strong>HTML</strong></p>
+<p><a href="javascript:void(0);"><img src="/sai/undefined/copycode-166055405725412.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;one&quot;&gt;&lt;/div&gt;</span><br><span class="line">   &lt;div class=&quot;two&quot;&gt;</span><br><span class="line">   Text  &lt;span class=&quot;five&quot;&gt;- more text&lt;/span&gt;</span><br><span class="line">   &lt;/div&gt;</span><br><span class="line">   &lt;input class=&quot;three&quot;&gt;</span><br><span class="line">   &lt;textarea class=&quot;four&quot;&gt;Lorem Ipsum&lt;/textarea&gt;</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="/sai/undefined/copycode-166055405725412.gif" alt="复制代码"></a></p>
+<p>表现效果</p>
+<p><img src="/sai/undefined/1748092-20191007155714104-558159243-166055405725011.png" alt="img"></p>
+<hr>
+<p>在这个例子中我们发现CSS样式中有很多重复的 background-color：skyblue；的背景颜色样式设置，我们可以将背景颜色定义在更高的层级，然后通过CSS继承性来接解决个问题，但是有时候这个方法并不一定好用。</p>
+<p>我们可以在：root 选择器中定义CSS变量，使用变量来减少重复的代码</p>
+<p><a href="javascript:void(0);"><img src="/sai/undefined/copycode-166055405725412.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">:root &#123;</span><br><span class="line">          --main-bg-color: skyblue;</span><br><span class="line">     &#125;</span><br><span class="line">    .one &#123;</span><br><span class="line">          color: white;</span><br><span class="line">          background-color:var(--main-bg-color);</span><br><span class="line">          margin: 10px;</span><br><span class="line">          width: 50px;</span><br><span class="line">          height: 50px;</span><br><span class="line">          display: inline-block;</span><br><span class="line">    &#125;</span><br><span class="line">    .two&#123;</span><br><span class="line">        color:white;</span><br><span class="line">        background:black;</span><br><span class="line">        margin:10px;</span><br><span class="line">        width:150px;</span><br><span class="line">        height: 50px;</span><br><span class="line">        display:inline-block;</span><br><span class="line">    &#125;</span><br><span class="line">    .three&#123;</span><br><span class="line">        color:white;</span><br><span class="line">        background-color:var(--main-bg-color);</span><br><span class="line">        margin:10px;</span><br><span class="line">        width:75px;</span><br><span class="line">    &#125;</span><br><span class="line">    .four&#123;</span><br><span class="line">        color:white;</span><br><span class="line">        background-color:var(--main-bg-color);</span><br><span class="line">        margin:10px;</span><br><span class="line">        width:100px; </span><br><span class="line">    &#125;</span><br><span class="line">    .five&#123;</span><br><span class="line">        background-color: var(--main-bg-color);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>最终得到的效果是和上面一样的</p>
+<p><img src="/sai/undefined/1748092-20191007155714104-558159243-166055405725011.png" alt="img"></p>
+<p><strong>关于CSS变量的继承性：</strong></p>
+<p><strong>优先级低的继承优先级高的变量，子元素继承父元素的变量。</strong></p>
+<p>定义下面的CSS：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.two &#123; --test: 10px; &#125;</span><br><span class="line">.three &#123; --test: 2em; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，<code>var(--test)的结果是：</code></p>
+<ul>
+<li><code>class=&quot;two&quot;</code> 对应的节点: <code>10px</code></li>
+<li><code>class=&quot;three&quot; 对应的节点</code>: element: <code>2em</code></li>
+<li><code>class=&quot;four&quot;</code> 对应的节点: <code>10px</code> (inherited from its parent)</li>
+<li><code>class=&quot;one&quot;</code> 对应的节点: <em>无效值</em>, 即此属性值为未被自定义css变量覆盖的默认值</li>
+</ul>
+<blockquote>
+<p>参考博客：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2017/05/css-variables.html">http://www.ruanyifeng.com/blog/2017/05/css-variables.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Using_CSS_custom_properties">https://developer.mozilla.org/zh-CN/docs/Web/Using_CSS_custom_properties</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/:root">https://developer.mozilla.org/zh-CN/docs/Web/:root</a></li>
+</ul>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/Saiable">Sai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://mindcons.cn/sai/50833/">http://mindcons.cn/sai/50833/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://mindcons.cn" target="_blank">吕小布の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CSS%E6%A0%B8%E5%BF%83/">CSS核心</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://s2.loli.net/2022/07/02/ZYspTWmDdytfLXa.png" target="_blank"><img class="post-qr-code-img" src="https://s2.loli.net/2022/07/02/ZYspTWmDdytfLXa.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://s2.loli.net/2022/07/02/3zcRHPK5m6C8sE2.png" target="_blank"><img class="post-qr-code-img" src="https://s2.loli.net/2022/07/02/3zcRHPK5m6C8sE2.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/sai/51756/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">《JavaScript高级程序设计（第4版）》</div></div></a></div><div class="next-post pull-right"><a href="/sai/45915/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CSS选择器汇总</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sai</div><div class="author-info__description">无来无去,不悔不怨</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">98</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Saiable"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="WeChat"><i class="fa-brands fa-weixin"></i></a><a class="social-icon" href="https://github.com/Saiable" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fa-solid fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">时间再多一点的愿望无法满足，那就多清醒一会儿</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B7%E5%BC%8F%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="toc-number">1.</span> <span class="toc-text">样式的继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%95%BF%E5%BA%A6%E5%8D%95%E4%BD%8D"><span class="toc-number">2.</span> <span class="toc-text">长度单位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2%E5%8D%95%E4%BD%8D"><span class="toc-number">3.</span> <span class="toc-text">颜色单位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#background"><span class="toc-number">4.</span> <span class="toc-text">background</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#display"><span class="toc-number">5.</span> <span class="toc-text">display</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#button"><span class="toc-number">6.</span> <span class="toc-text">button</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E5%8F%98%E9%87%8F"><span class="toc-number">7.</span> <span class="toc-text">css变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81CSS%E5%8F%98%E9%87%8F%E7%9A%84%E7%94%A8%E9%80%94"><span class="toc-number">7.1.</span> <span class="toc-text">一、CSS变量的用途</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFCSS%E5%8F%98%E9%87%8F"><span class="toc-number">7.2.</span> <span class="toc-text">二、什么是CSS变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E"><span class="toc-number">7.3.</span> <span class="toc-text">三、变量的声明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81var-%E5%87%BD%E6%95%B0"><span class="toc-number">7.4.</span> <span class="toc-text">四、var()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%8F%98%E9%87%8F%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">7.5.</span> <span class="toc-text">五、变量的类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80"><span class="toc-number">7.6.</span> <span class="toc-text">六、响应式布局</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%85%BC%E5%AE%B9%E6%80%A7%E5%A4%84%E7%90%86"><span class="toc-number">7.7.</span> <span class="toc-text">七、兼容性处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AB%E3%80%81JavaScript%E6%93%8D%E4%BD%9C"><span class="toc-number">7.8.</span> <span class="toc-text">八、JavaScript操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A"><span class="toc-number">7.9.</span> <span class="toc-text">实例：</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/sai/5592/" title="ElementUI/Plus使用与解析">ElementUI/Plus使用与解析</a><time datetime="2022-08-12T23:15:24.000Z" title="发表于 2022-08-13 07:15:24">2022-08-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/sai/18839/" title="HTML核心">HTML核心</a><time datetime="2022-08-10T01:03:02.000Z" title="发表于 2022-08-10 09:03:02">2022-08-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/sai/56508/" title="英雄联盟官网案例">英雄联盟官网案例</a><time datetime="2022-08-10T01:03:02.000Z" title="发表于 2022-08-10 09:03:02">2022-08-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/sai/36735/" title="回顾记录">回顾记录</a><time datetime="2022-08-09T01:03:02.000Z" title="发表于 2022-08-09 09:03:02">2022-08-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/sai/24447/" title="web基础及进阶路线">web基础及进阶路线</a><time datetime="2022-08-09T01:03:02.000Z" title="发表于 2022-08-09 09:03:02">2022-08-09</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Sai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://saiable.github.io/">blog</a>!</div></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
