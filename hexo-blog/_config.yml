@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 前端技术分享
+title: 吕小布の博客
 subtitle: "吕小布の博客"
 description: "无来无去,不悔不怨"
-keywords: "前端技术分享，吕小布的博客"
+keywords: "生活记录"
 author: Sai
 language: zh-CN # en(default) | zh-CN(简体中文) | zh-TW(繁体中文)
 timezone: "Asia/Shanghai"

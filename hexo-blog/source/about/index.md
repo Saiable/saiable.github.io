@@ -13,25 +13,20 @@ type: "about"
 
 ```yml
 Name: Sai
-Age: 25
+Age: 26
 Address: Nanjing
 Github: https://github.com/Saiable
 Blog: https://mindcons.cn/
 Hobbies: front-end technology
 ```
 
-# 🔨 技术栈
 
-- 精通使用`H5+CSS3`对设计稿进行高度还原(成功的页面仔)
-- 熟练使用原生`JavaScript`，可手写开源级`JS`插件
-- 熟练使用`Vue`、`React`全家桶进行工程化开发，掌握源码及设计思想
+
 - ......
 
 # 💌 联系博主
 
 ```yml
-qq: 2495620791
-vx: mindcons（加我请留下备注，无备注不会审核通过）
 email: mindcons@foxmail.com
 motto: 无来无去，不悔不怨
 ```
