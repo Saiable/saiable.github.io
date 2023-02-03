@@ -1,148 +1,214 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Neovim 配置实战：从0到1打造自己的IDE | 吕小布の博客</title><meta name="keywords" content="生活记录"><meta name="author" content="Sai"><meta name="copyright" content="Sai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC] 源链接：Neovim 配置实战：从0到1打造自己的IDE - 陈新_nshen - 掘金小册 (juejin.cn) 对应的github： 花了我26.91大洋 1.多年 VSCode 老粉，为什么最终转向 Neovim？本人常年在 Windows 系统上做程序开发，虽然已经习惯使用 “VIM” 的快捷键指法好多年了，但一直使用的都是被称为宇宙第一开发工具 VSCode 下的  VSC">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Neovim 配置实战：从0到1打造自己的IDE | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="[TOC] 源链接：Neovim 配置实战：从0到1打造自己的IDE - 陈新_nshen - 掘金小册 (juejin.cn) 对应的github： 花了我26.91大洋 1.多年 VSCode 老粉，为什么最终转向 Neovim？本人常年在 Windows 系统上做程序开发，虽然已经习惯使用 “VIM” 的快捷键指法好多年了，但一直使用的都是被称为宇宙第一开发工具 VSCode 下的  VSC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Neovim 配置实战：从0到1打造自己的IDE">
 <meta property="og:url" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/index.html">
-<meta property="og:site_name" content="吕小布の博客">
+<meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="[TOC] 源链接：Neovim 配置实战：从0到1打造自己的IDE - 陈新_nshen - 掘金小册 (juejin.cn) 对应的github： 花了我26.91大洋 1.多年 VSCode 老粉，为什么最终转向 Neovim？本人常年在 Windows 系统上做程序开发，虽然已经习惯使用 “VIM” 的快捷键指法好多年了，但一直使用的都是被称为宇宙第一开发工具 VSCode 下的  VSC">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/82fd07bc9d6746be9c786009a0321b71tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/7f4e9afbfa684e25ad4c5b2b913c7623tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/3d2b4880841d45579e7677ae1095fcf0tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/9437fd75bdcd44069d6461a9f16fe532tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/b9724b1008424c04b970dcd2cf1b9c0atplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/31609ce6810d4dbab0c84ce48aab6028tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/1f57f8fd18b84e9bb23eff999dcde775tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/41dc19d7624041089a51e32d547a130etplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/image-20220425171043801.png">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/image-20220425171122978.png">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/image-20220425171212058.png">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/image-20220425172548567.png">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/b386d4d893b24b4abed50c24f789c5batplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/38a601a67d084e67a7abae59fe28366ftplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/1dd0fbf36e6f4fbb8586891ce2bf5f4dtplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/c20f67d37cba446497fa37496c868cedtplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/075e9b3d0c404215ba3e2fe8fa84b53btplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/e06e164f2de242dc9cf71904b8417cf3tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/2d7b2baa9a4d48968ee08fc8190a5674tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/8950f36d147643b29571387a808622d8tplv-k3u1fbpfcp-zoom-in-crop-mark1304000-165061967302327.awebp">
+<meta property="og:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b47b5b326a414c56bd6047ace13fdae4~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/3feb8936a6cc4f96b52b5de2f4cdd2a8tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/e5a35990d60945d9b916e8c5d3970289tplv-k3u1fbpfcp-zoom-in-crop-mark1304000-16507631138653.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/image-20221126150213983.png">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/1b6b2482c1d14b6b9f34ef533a2526f0tplv-k3u1fbpfcp-zoom-in-crop-mark1304000-165061967302432.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/d1e2c08536324da7b90b96ab4f01bbf7tplv-k3u1fbpfcp-zoom-in-crop-mark1304000-165061967302534.awebp">
+<meta property="og:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0f8ba6c15dc843bb819396890f8b4405~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/641fccb5240f4b3fb5dbebb7f3e9e5ba~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/3baeeb8d748f4709aff1910c74fcf53dtplv-k3u1fbpfcp-zoom-in-crop-mark1304000-165061967302538.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/5e6fc8efeb404f66b1ff6fa8b997e58etplv-k3u1fbpfcp-zoom-in-crop-mark1304000-165061967302540.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/d31961d706f146ed9953e49fa7dcf784tplv-k3u1fbpfcp-zoom-in-crop-mark1304000-165061967302542.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/d9230327232f43f1a7f4d05f27b815d7tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/7e6f6aaefd514d2195b3dd442d93e47btplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/4c9c8866ba5a45d791f382005075be25tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/image-20221126153235138.png">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/9fc23c0875884bcb8c38173b0edba40dtplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/c1097b4cce304631a5f71fdd4f4f06e5tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/567f9023338b4a77b6f35716516ec2c6tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/92f2feaad2c74b19a12bdc2927bd4951tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/7b4be58055014d08980d51509497871dtplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/ea6b3e7dc16d4b6cbc426df12ba36b73tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/f735982ddd12419eaeda8a8e9fedac62tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/70bf0cddda5e47d59c27e59b2164ed5etplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/c7b923da434a4a8889a5c11b6c471a3atplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/c78f2231dc744f218ad60bcf702910e2tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/b9147a820eb84e2fbdab023ecf03d27ftplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/ffb638437139499288d8231417f5e668tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/6b61350cb44b4ff49a605b8cbcdc4166tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/258f0df0ab224a46b8106cb2ab2ffdfbtplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/b2b1436bb09941eb897ede9256e0c488tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/c907598933cc4dfea2fc32655987b3b0tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/2fab0f9a0abe4385a20735a6b14f4255tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/36c87fe145764f25bf13a2e313176468tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/d426c6a54d464b3a80bf5982aec20b75tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/243d083c59a047b2bb680454e20d2ac6tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/11556d465ae2488a81ced76c51a36bd0tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/1091ea7c9b4a4baf8c48b7e06c179beftplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/cf4bb32fa64549d184d5eb98fbcd8e9ctplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/cf8d42e048e649abad87ae3695b7ca94tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/8a7c8b650b6e45aca2ed5dfd875a9282tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/e4882f8ad7904517949855b836adcf68tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/0b46efee9ea94cb5836256252181d506tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/1215c8e0d1cc418893b7fc2780393f86tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/d6bcf9c1e1864c19aa354658eecd29d9tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/57104fd6e72c4c7f8e7a52cfac0f48cctplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/b19f94ff636746f791b63cbac676ca6ftplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/eee31ba7cf8c4e2c874faf73dedb9b8btplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/7ab8d0cc9bed4984ad44202450d1726dtplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/4e9a404e501b4d5bb64ae765cc200c70tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/2255dea199674bdb84fd21d1ece4ed83tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/ff6ebaaf12cf4257b1e46c92c2324148tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/dd2f71ac067a4608b3559b7b6220f7fbtplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/711f6de379514183b8e8d39b7b790923tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/e4882f8ad7904517949855b836adcf68tplv-k3u1fbpfcp-zoom-in-crop-mark1304000-165085841752924.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/be7fe068042e433384b0172af1d12089tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/6447fa9aa245443ea820d674fa5cd9e6tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/image-20221128084851696.png">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/c8ec4db29bdf4972b2a5e000c1be6afatplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/21f394596272493fac4cc3561f29d404tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/0f387a5f86924396850a43389108aa4dtplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/8bc58d767fdc4f68a6a9b54171d3357ftplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/1de6d20a6a0e47cb8c6cf39f89000cf6tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/a829d05b58084a528e72770fd3735637tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/347ead4bd3e24f6f9f6be2fc6ac1914ctplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/052b92c3192644d29a27ba10f630490btplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/53c419b8841143e9ae00c3b0410d69eatplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/5debd17f29974a748b7c5c5102536addtplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/f9258b313ac845d28b3f9d12c9741f17tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/5960cfc5f7084963adb5aa660cfe0ecftplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/26ba566dc89044a6a8ee999b2c3d6ca6tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/b455f6f96ef3434e9fdc033d85c5d7d9tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/98d218fd8651439d98b1106100d39aa3tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/0471d897dcd94fdaa2bb0904dbf76127tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
+<meta property="og:image" content="https://mindcons.cn/4de70a3cbd074b61ba545532168c595etplv-k3u1fbpfcp-zoom-in-crop-mark3024000.awebp">
+<meta property="og:image" content="https://mindcons.cn/29a4fa72d43c43b1af083b04b2ea0437tplv-k3u1fbpfcp-zoom-in-crop-mark3024000.awebp">
+<meta property="og:image" content="https://mindcons.cn/a3e35fa50f3046cea3a9954ff7350720tplv-k3u1fbpfcp-zoom-in-crop-mark3024000.awebp">
+<meta property="og:image" content="https://mindcons.cn/b9e9d262b13148ed947aeb57c279e617tplv-k3u1fbpfcp-zoom-in-crop-mark3024000.awebp">
+<meta property="og:image" content="https://mindcons.cn/3a3e0884eb0a43e49cfbb9ce121864b6tplv-k3u1fbpfcp-zoom-in-crop-mark3024000.awebp">
+<meta property="og:image" content="https://mindcons.cn/6094e1b46f2e43bb856ffc08906e6616tplv-k3u1fbpfcp-zoom-in-crop-mark3024000.awebp">
+<meta property="og:image" content="https://mindcons.cn/529e1cb26fa04935965cf8f759f6771dtplv-k3u1fbpfcp-zoom-in-crop-mark3024000.awebp">
+<meta property="og:image" content="https://mindcons.cn/08c35600af6644d396c05d732c993908tplv-k3u1fbpfcp-zoom-in-crop-mark3024000.awebp">
+<meta property="og:image" content="https://mindcons.cn/074a6ccdba1c4219a41e385b014ef5edtplv-k3u1fbpfcp-zoom-in-crop-mark3024000.awebp">
+<meta property="og:image" content="https://mindcons.cn/d61ed1e201d34834b0576d173d5e9b2dtplv-k3u1fbpfcp-zoom-in-crop-mark3024000.awebp">
+<meta property="og:image" content="https://mindcons.cn/4e3e4bcc62de4a49b1fbeb333a2c9bcctplv-k3u1fbpfcp-zoom-in-crop-mark3024000.awebp">
+<meta property="og:image" content="https://mindcons.cn/29c2446988a84cad857f4ddd2eb02040tplv-k3u1fbpfcp-zoom-in-crop-mark3024000.awebp">
+<meta property="og:image" content="https://mindcons.cn/34dce465c24747198f0272da519f41b3tplv-k3u1fbpfcp-zoom-in-crop-mark3024000.awebp">
+<meta property="og:image" content="https://mindcons.cn/a7984f06abad4a6ab1c4a469a0423c7ftplv-k3u1fbpfcp-zoom-in-crop-mark4536000.awebp">
+<meta property="og:image" content="https://mindcons.cn/5e1956478b2149dabf21b8c42d4d597atplv-k3u1fbpfcp-zoom-in-crop-mark4536000.awebp">
+<meta property="og:image" content="https://mindcons.cn/7c2754b162f340b894e7da85603bb1datplv-k3u1fbpfcp-zoom-in-crop-mark4536000.awebp">
+<meta property="og:image" content="https://mindcons.cn/e7be2dac858d4aecad27c7eeedcb826dtplv-k3u1fbpfcp-zoom-in-crop-mark4536000.awebp">
+<meta property="og:image" content="https://mindcons.cn/331ca16e29f14ca8812d94e0fbfd6fddtplv-k3u1fbpfcp-zoom-in-crop-mark4536000.awebp">
+<meta property="og:image" content="https://mindcons.cn/029c7c3dde994fb19dd306b7ba8c8947tplv-k3u1fbpfcp-zoom-in-crop-mark4536000.awebp">
 <meta property="article:published_time" content="2022-07-25T12:34:51.000Z">
 <meta property="article:modified_time" content="2023-01-29T23:37:52.537Z">
-<meta property="article:author" content="Sai">
-<meta property="article:tag" content="生活记录">
+<meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":350},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '天',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: true
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Neovim 配置实战：从0到1打造自己的IDE',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2023-01-30 07:37:52'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
+<meta name="twitter:image" content="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/82fd07bc9d6746be9c786009a0321b71tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp">
   
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://mindcons.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-web/其他/运维/Neovim/《Neovim 配置实战：从0到1打造自己的IDE》" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/" class="article-date">
+  <time class="dt-published" datetime="2022-07-25T12:34:51.000Z" itemprop="datePublished">2022-07-25</time>
+</a>
     
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/custom/custom.css"><link rel="stylesheet" href="/css/custom/plane_v2.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">126</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">46</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">29</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/comics/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 互动</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></li><li><a class="site-page child" href="/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">吕小布の博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/comics/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 互动</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></li><li><a class="site-page child" href="/comments/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Neovim 配置实战：从0到1打造自己的IDE</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-25T12:34:51.000Z" title="发表于 2022-07-25 20:34:51">2022-07-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-29T23:37:52.537Z" title="更新于 2023-01-30 07:37:52">2023-01-30</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Neovim 配置实战：从0到1打造自己的IDE"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[TOC]</p>
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Neovim 配置实战：从0到1打造自己的IDE
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
 <p>源链接：<a target="_blank" rel="noopener" href="https://juejin.cn/book/7051157342770954277">Neovim 配置实战：从0到1打造自己的IDE - 陈新_nshen - 掘金小册 (juejin.cn)</a></p>
 <p>对应的github：</p>
 <p>花了我<code>26.91</code>大洋</p>
@@ -1644,5 +1710,156 @@
 
 
 
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/Saiable">Sai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/">https://mindcons.cn/2022/07/25/web/其他/运维/Neovim/《Neovim 配置实战：从0到1打造自己的IDE》/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mindcons.cn" target="_blank">吕小布の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://s2.loli.net/2022/07/02/ZYspTWmDdytfLXa.png" target="_blank"><img class="post-qr-code-img" src="https://s2.loli.net/2022/07/02/ZYspTWmDdytfLXa.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://s2.loli.net/2022/07/02/3zcRHPK5m6C8sE2.png" target="_blank"><img class="post-qr-code-img" src="https://s2.loli.net/2022/07/02/3zcRHPK5m6C8sE2.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/07/25/web/%E8%BF%9B%E9%98%B6/Node.js/Koa/koa/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Koa2搭建API服务</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/25/web/%E6%A1%86%E6%9E%B6/Vue/Vue3.0/Vue3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Vue3基本使用</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sai</div><div class="author-info__description">无来无去,不悔不怨</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">126</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">46</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">29</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Saiable"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="WeChat"><i class="fa-brands fa-weixin"></i></a><a class="social-icon" href="https://github.com/Saiable" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fa-solid fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">时间再多一点的愿望无法满足，那就多清醒一会儿</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%A4%9A%E5%B9%B4-VSCode-%E8%80%81%E7%B2%89%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%80%E7%BB%88%E8%BD%AC%E5%90%91-Neovim%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">1.多年 VSCode 老粉，为什么最终转向 Neovim？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Neovim-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88"><span class="toc-number">2.</span> <span class="toc-text">2.Neovim 的安装与配置架构总览</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Windows-Terminal"><span class="toc-number">2.1.</span> <span class="toc-text">安装 Windows Terminal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Nerd-fonts"><span class="toc-number">2.2.</span> <span class="toc-text">安装 Nerd fonts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Neovim"><span class="toc-number">2.3.</span> <span class="toc-text">安装 Neovim</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%80%BB%E8%A7%88"><span class="toc-number">2.4.</span> <span class="toc-text">配置总览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-number">2.5.</span> <span class="toc-text">补充</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Neovim-%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9C%80%E8%A6%81%E5%85%B3%E6%B3%A8%E7%9A%84%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E9%A1%B9%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">3.Neovim 有哪些需要关注的基础配置项？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">配置入口文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8-vim-%E4%B8%AD%E8%B0%83%E7%94%A8-lua"><span class="toc-number">3.2.</span> <span class="toc-text">在 .vim 中调用 lua</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%85%A5%E5%8F%A3-init-lua"><span class="toc-number">3.3.</span> <span class="toc-text">配置入口 init.lua</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-basic-lua"><span class="toc-number">3.4.</span> <span class="toc-text">基础配置文件 basic.lua</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E7%82%B9%E8%AE%BE%E7%BD%AE%E9%A1%B9"><span class="toc-number">3.5.</span> <span class="toc-text">重点设置项</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%E4%BB%A5%E6%8F%90%E9%AB%98%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">4.如何设置快捷键以提高开发效率？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-Neovim-%E4%B8%AD%E8%AE%BE%E7%BD%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%EF%BC%9F"><span class="toc-number">4.1.</span> <span class="toc-text">如何在 Neovim 中设置快捷键？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Leader-Key"><span class="toc-number">4.2.</span> <span class="toc-text">Leader Key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%98%A0%E5%B0%84"><span class="toc-number">4.3.</span> <span class="toc-text">窗口管理快捷键映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Visule-%E6%A8%A1%E5%BC%8F%E4%B8%8B%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">4.4.</span> <span class="toc-text">Visule 模式下快捷键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E4%BB%A3%E7%A0%81%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">4.5.</span> <span class="toc-text">浏览代码快捷键</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E7%AE%A1%E7%90%86%E6%8F%92%E4%BB%B6%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">5.如何安装和管理插件？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Packer-nvim-%E6%8F%92%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8"><span class="toc-number">5.1.</span> <span class="toc-text">安装 Packer.nvim 插件管理器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE"><span class="toc-number">5.2.</span> <span class="toc-text">安装位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="toc-number">5.3.</span> <span class="toc-text">添加自动安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-1"><span class="toc-number">5.4.</span> <span class="toc-text">补充</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-Neovim-%E4%B8%BB%E9%A2%98%E9%85%8D%E8%89%B2%E4%B8%8E%E4%BC%98%E7%A7%80%E4%B8%BB%E9%A2%98%E6%8E%A8%E8%8D%90"><span class="toc-number">6.</span> <span class="toc-text">6.Neovim 主题配色与优秀主题推荐</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="toc-number">6.1.</span> <span class="toc-text">配置主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E4%B8%BB%E9%A2%98"><span class="toc-number">6.2.</span> <span class="toc-text">安装第三方主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E6%9C%80%E5%96%9C%E6%AC%A2%E7%9A%84%E4%B8%BB%E9%A2%98%E6%8E%A8%E8%8D%90"><span class="toc-number">6.3.</span> <span class="toc-text">我最喜欢的主题推荐</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E5%A6%82%E4%BD%95%E7%BB%99-Neovim-%E5%A2%9E%E5%8A%A0%E4%BE%A7%E8%BE%B9%E6%A0%8F%E6%96%87%E4%BB%B6%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%9F"><span class="toc-number">7.</span> <span class="toc-text">7.如何给 Neovim 增加侧边栏文件浏览器？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-nvim-tree"><span class="toc-number">7.1.</span> <span class="toc-text">配置 nvim-tree</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-%E5%A6%82%E4%BD%95%E7%BB%99-Neovim-%E5%A2%9E%E5%8A%A0%E9%A1%B6%E9%83%A8%E6%A0%87%E7%AD%BE%E9%A1%B5%E4%B8%8E%E5%BA%95%E9%83%A8%E4%BF%A1%E6%81%AF%E6%98%BE%E7%A4%BA%E6%A0%8F%EF%BC%9F"><span class="toc-number">8.</span> <span class="toc-text">8.如何给 Neovim 增加顶部标签页与底部信息显示栏？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95"><span class="toc-number">8.1.</span> <span class="toc-text">安装方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%95%E9%83%A8%E4%BF%A1%E6%81%AF%E6%98%BE%E7%A4%BA%E6%A0%8F"><span class="toc-number">8.2.</span> <span class="toc-text">底部信息显示栏</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-%E5%A6%82%E4%BD%95%E6%A8%A1%E7%B3%8A%E6%90%9C%E7%B4%A2%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6%EF%BC%9F"><span class="toc-number">9.</span> <span class="toc-text">9.如何模糊搜索快速打开文件？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-repgrep"><span class="toc-number">9.1.</span> <span class="toc-text">安装 repgrep</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-fd"><span class="toc-number">9.2.</span> <span class="toc-text">安装 fd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Telescope"><span class="toc-number">9.3.</span> <span class="toc-text">配置 Telescope</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE%E9%85%8D%E7%BD%AE"><span class="toc-number">9.4.</span> <span class="toc-text">快捷键配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-telescope-%E6%8F%92%E4%BB%B6"><span class="toc-number">9.5.</span> <span class="toc-text">配置 telescope 插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Telescope-%E6%89%A9%E5%B1%95%E5%AE%89%E8%A3%85"><span class="toc-number">9.6.</span> <span class="toc-text">Telescope 扩展安装</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%AF%E5%8A%A8%E9%A1%B5%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%97%E8%A1%A8%EF%BC%9F"><span class="toc-number">10.</span> <span class="toc-text">10.如何自定义启动页与项目列表？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-dashboard-nvim-%E6%8F%92%E4%BB%B6"><span class="toc-number">10.1.</span> <span class="toc-text">安装 dashboard-nvim 插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-project-nvim-%E6%8F%92%E4%BB%B6"><span class="toc-number">10.2.</span> <span class="toc-text">安装 project.nvim 插件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-Neovim-%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">11.</span> <span class="toc-text">11.Neovim 语法高亮的安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-nvim-treesitter"><span class="toc-number">11.1.</span> <span class="toc-text">安装 nvim-treesitter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85-Language-parser"><span class="toc-number">11.2.</span> <span class="toc-text">手动安装 Language parser</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-nvim-treesitter"><span class="toc-number">11.3.</span> <span class="toc-text">配置 nvim-treesitter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-2"><span class="toc-number">11.4.</span> <span class="toc-text">补充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A2%9E%E9%87%8F%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9D%97"><span class="toc-number">11.5.</span> <span class="toc-text">增量选择模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%BC%A9%E8%BF%9B%E6%A8%A1%E5%9D%97"><span class="toc-number">11.6.</span> <span class="toc-text">代码缩进模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%8A%98%E5%8F%A0%E6%A8%A1%E5%9D%97"><span class="toc-number">11.7.</span> <span class="toc-text">代码折叠模块</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-Neovim-%E5%86%85%E7%BD%AE-LSP-%E7%9A%84%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="toc-number">12.</span> <span class="toc-text">12.Neovim 内置 LSP 的基础配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%90%AF-Neovim-%E5%86%85%E7%BD%AE-LSP"><span class="toc-number">12.1.</span> <span class="toc-text">开启 Neovim 内置 LSP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-LSP-Servers"><span class="toc-number">12.2.</span> <span class="toc-text">安装 LSP Servers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-LSP-Server"><span class="toc-number">12.3.</span> <span class="toc-text">配置 LSP Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Lua-Server"><span class="toc-number">12.4.</span> <span class="toc-text">配置 Lua Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-LSP-%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">12.5.</span> <span class="toc-text">定义 LSP 快捷键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-LSP-%E5%B8%B8%E8%A7%81%E5%8A%9F%E8%83%BD"><span class="toc-number">12.6.</span> <span class="toc-text">测试 LSP 常见功能</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-%E5%9F%BA%E4%BA%8E-LSP-%E7%9A%84%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8%E4%B8%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BB%A3%E7%A0%81%E6%AE%B5"><span class="toc-number">13.</span> <span class="toc-text">13.基于 LSP 的代码补全与自定义代码段</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E8%A1%A5%E5%85%A8%E7%9B%B8%E5%85%B3%E6%8F%92%E4%BB%B6"><span class="toc-number">13.1.</span> <span class="toc-text">安装补全相关插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8"><span class="toc-number">13.2.</span> <span class="toc-text">配置自动补全</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14-LSP-%E5%8A%9F%E8%83%BD%E5%A2%9E%E5%BC%BA%E4%B8%8E-UI-%E7%BE%8E%E5%8C%96"><span class="toc-number">14.</span> <span class="toc-text">14.LSP 功能增强与 UI 美化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A6%E5%88%97%E7%AC%A6%E5%8F%B7%E5%9B%BE%E6%A0%87"><span class="toc-number">14.1.</span> <span class="toc-text">左列符号图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%A0%B7%E5%BC%8F%E4%BF%AE%E6%94%B9"><span class="toc-number">14.2.</span> <span class="toc-text">自动补全样式修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-indent-blankline-nvim-%E6%8F%92%E4%BB%B6"><span class="toc-number">14.3.</span> <span class="toc-text">配置 indent_blankline.nvim 插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-lspsaga-nvim"><span class="toc-number">14.4.</span> <span class="toc-text">配置 lspsaga.nvim</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#15-%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%A1%88"><span class="toc-number">15.</span> <span class="toc-text">15.代码格式化的两种方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Formatter-nvim"><span class="toc-number">15.1.</span> <span class="toc-text">安装 Formatter.nvim</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Formatter-nvim"><span class="toc-number">15.2.</span> <span class="toc-text">配置 Formatter.nvim</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-null-ls-nvim"><span class="toc-number">15.3.</span> <span class="toc-text">安装 null-ls.nvim</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-null-ls-nvim"><span class="toc-number">15.4.</span> <span class="toc-text">配置 null-ls.nvim</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">15.5.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-Neovim-%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E5%BF%85%E8%A6%81%E9%85%8D%E7%BD%AE"><span class="toc-number">16.</span> <span class="toc-text">16.Neovim 前端开发的必要配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Tree-sitter-%E9%85%8D%E7%BD%AE"><span class="toc-number">16.1.</span> <span class="toc-text">Tree-sitter 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html-%E4%B8%8E-cssls-LSP-%E9%85%8D%E7%BD%AE"><span class="toc-number">16.2.</span> <span class="toc-text">html 与 cssls LSP 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Emmet-LSP-%E9%85%8D%E7%BD%AE"><span class="toc-number">16.3.</span> <span class="toc-text">Emmet LSP 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jsonls-%E9%85%8D%E7%BD%AE"><span class="toc-number">16.4.</span> <span class="toc-text">jsonls 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-tsserver"><span class="toc-number">16.5.</span> <span class="toc-text">配置 tsserver</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ESLint-%E5%92%8C-Prettier-%E9%85%8D%E7%BD%AE"><span class="toc-number">16.6.</span> <span class="toc-text">ESLint 和 Prettier 配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#17-NeoVim-Rust%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95"><span class="toc-number">17.</span> <span class="toc-text">17.NeoVim Rust开发配置与断点调试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Rust-%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%AE%89%E8%A3%85"><span class="toc-number">17.1.</span> <span class="toc-text">Rust 编程语言安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rust-%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE%E4%B8%8E%E4%BB%A3%E7%A0%81%E6%8F%90%E7%A4%BA%E9%85%8D%E7%BD%AE"><span class="toc-number">17.2.</span> <span class="toc-text">Rust 语法高亮与代码提示配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="toc-number">17.3.</span> <span class="toc-text">代码格式化配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Debug-%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95"><span class="toc-number">17.4.</span> <span class="toc-text">配置 Debug 断点调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nvim-dap-%E9%85%8D%E7%BD%AE"><span class="toc-number">17.5.</span> <span class="toc-text">nvim-dap 配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#18-%E7%BB%93%E8%AF%AD%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94"><span class="toc-number">18.</span> <span class="toc-text">18.结语与常见问题解答</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%9B%9E%E9%A1%BE"><span class="toc-number">18.1.</span> <span class="toc-text">配置回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%98%E6%9C%89%E5%93%AA%E4%BA%9B%E6%B2%A1%E6%9C%89%E8%AE%B2%E5%88%B0%EF%BC%9F"><span class="toc-number">18.2.</span> <span class="toc-text">还有哪些没有讲到？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%B3%95%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2"><span class="toc-number">18.2.1.</span> <span class="toc-text">输入法自动切换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%96%91%E9%9A%BE%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94"><span class="toc-number">18.3.</span> <span class="toc-text">常见疑难问题解答</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%8D%B8%E8%BD%BD%E6%8F%92%E4%BB%B6"><span class="toc-number">18.3.1.</span> <span class="toc-text">如何卸载插件?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8F%92%E4%BB%B6%E6%98%8E%E6%98%8E%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F%E4%BA%86%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%8D%B4%E8%8E%AB%E5%90%8D%E6%8A%A5%E9%94%99%E6%89%BE%E4%B8%8D%E5%88%B0%E6%8F%92%E4%BB%B6%EF%BC%9F"><span class="toc-number">18.3.2.</span> <span class="toc-text">为什么插件明明安装成功了，配置文件却莫名报错找不到插件？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E5%85%A8%E9%83%A8%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="toc-number">18.3.3.</span> <span class="toc-text">插件全部安装失败，如何解决？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E6%9C%89%E4%B8%80%E4%B8%AA%E6%8F%92%E4%BB%B6%E6%9B%B4%E6%96%B0%E5%A4%B1%E8%B4%A5"><span class="toc-number">18.3.4.</span> <span class="toc-text">总有一个插件更新失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-%E7%B3%BB%E7%BB%9F%E6%B2%A1%E6%9C%89-Alt-%E9%94%AE%EF%BC%8COption-%E9%94%AE%E4%B9%9F%E4%B8%8D%E7%AE%A1%E7%94%A8%EF%BC%8C%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE-Command-%E5%BF%AB%E6%8D%B7%E9%94%AE%EF%BC%9F"><span class="toc-number">18.3.5.</span> <span class="toc-text">Mac 系统没有 Alt 键，Option 键也不管用，如何设置 Command 快捷键？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#windows-%E7%9A%84-ubuntu-%E5%AD%90%E7%B3%BB%E7%BB%9F%E4%B8%8B%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E6%8A%A5%E9%94%99-could-not-find-executable-quot-unzip-quot-in-path"><span class="toc-number">18.3.6.</span> <span class="toc-text">windows 的 ubuntu 子系统下安装插件报错 could not find executable &quot;unzip&quot; in path?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8-Windows-10-%E4%B8%AD%E5%A6%82%E4%BD%95%E5%B0%86-Neovim-%E4%B8%AD%E7%9A%84%E5%86%85%E5%AE%B9%E5%A4%8D%E5%88%B6%E5%88%B0%E7%B3%BB%E7%BB%9F%E5%89%AA%E8%B4%B4%E6%9D%BF%EF%BC%9F"><span class="toc-number">18.3.7.</span> <span class="toc-text">在 Windows 10 中如何将 Neovim 中的内容复制到系统剪贴板？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8-Windows-10-%E4%B8%AD%E5%A6%82%E4%BD%95%E5%B0%86%E7%B3%BB%E7%BB%9F%E5%89%AA%E5%88%87%E6%9D%BF%E4%B8%AD%E7%9A%84%E5%86%85%E5%AE%B9%E7%B2%98%E8%B4%B4%E5%88%B0-Neovim-%E4%B8%AD%EF%BC%9F"><span class="toc-number">18.3.8.</span> <span class="toc-text">在 Windows 10 中如何将系统剪切板中的内容粘贴到 Neovim 中？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8E-nvim-lsp-installer-%E5%8D%87%E7%BA%A7%E5%88%B0-mason-nvim"><span class="toc-number">19.</span> <span class="toc-text">从 nvim-lsp-installer 升级到 mason.nvim</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E"><span class="toc-number">20.</span> <span class="toc-text">新增</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">20.1.</span> <span class="toc-text">快捷键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E6%96%87%E4%BB%B6"><span class="toc-number">20.1.1.</span> <span class="toc-text">保存文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null-ls-lua"><span class="toc-number">20.1.2.</span> <span class="toc-text">null-ls.lua</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/01/20/web/%E5%85%B6%E4%BB%96/lua/lua%E5%9F%BA%E7%A1%80/" title="lua基础">lua基础</a><time datetime="2023-01-20T01:03:02.000Z" title="发表于 2023-01-20 09:03:02">2023-01-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/01/17/web/%E5%85%B6%E4%BB%96/python/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/" title="爬虫基础">爬虫基础</a><time datetime="2023-01-17T10:24:00.085Z" title="发表于 2023-01-17 18:24:00">2023-01-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/01/13/web/%E8%BF%9B%E9%98%B6/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" title="数据库基础">数据库基础</a><time datetime="2023-01-12T23:15:24.000Z" title="发表于 2023-01-13 07:15:24">2023-01-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/01/12/web/%E6%A1%86%E6%9E%B6/React/React%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%92%8C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/React%E5%9F%BA%E7%A1%80/" title="React基本使用">React基本使用</a><time datetime="2023-01-12T12:30:40.000Z" title="发表于 2023-01-12 20:30:40">2023-01-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/01/09/web/%E5%85%B6%E4%BB%96/%E6%A0%87%E6%B3%A8/labelStudio%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/" title="labelStudio安装及使用">labelStudio安装及使用</a><time datetime="2023-01-09T11:00:17.490Z" title="发表于 2023-01-09 19:00:17">2023-01-09</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Sai</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a><br>
-<a href="https://icp.gov.moe/?keyword=20230203" target="_blank">萌ICP备20230203号</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://saiable.github.io/">blog</a>!</div></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mindcons.cn/2022/07/25/web/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4/Neovim/%E3%80%8ANeovim%20%E9%85%8D%E7%BD%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BB%8E0%E5%88%B01%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84IDE%E3%80%8B/" data-id="cldol83iu00833cx6ccl1bz7n" data-title="Neovim 配置实战：从0到1打造自己的IDE" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/07/25/web/%E8%BF%9B%E9%98%B6/Node.js/Koa/koa/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Koa2搭建API服务
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/07/25/web/%E6%A1%86%E6%9E%B6/Vue/Vue3.0/Vue3%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vue3基本使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/">CSS预处理器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Express/">Express</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Koa/">Koa</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/books/">books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/electron/">electron</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/lua/">lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BD%8E%E4%BB%A3%E7%A0%81/">低代码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%AF%E8%A7%86%E5%8C%96/">可视化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%96%B9%E5%BC%8F/">学习方式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">学习路线</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98/">案例实战</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/">移动端开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%84%E4%BB%B6%E5%BA%93/">组件库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E5%8A%A8%E7%94%BB/" rel="tag">CSS动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E5%B8%83%E5%B1%80/" rel="tag">CSS布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E9%80%89%E6%8B%A9%E5%99%A8/" rel="tag">CSS选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/" rel="tag">CSS预处理器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ElementPlus/" rel="tag">ElementPlus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ElementUI/" rel="tag">ElementUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English/" rel="tag">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Express/" rel="tag">Express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vant/" rel="tag">Vant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue2/" rel="tag">Vue2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/" rel="tag">books</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/" rel="tag">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-cli/" rel="tag">vue-cli</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D/" rel="tag">书籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%8E%E4%BB%A3%E7%A0%81/" rel="tag">低代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="tag">可视化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E5%BC%8F/" rel="tag">学习方式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" rel="tag">学习路线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98/" rel="tag">案例实战</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="tag">移动端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" rel="tag">组件库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B7%A5%E5%85%B7%E5%BA%93/" rel="tag">自定义工具库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5/" rel="tag">认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/" rel="tag">软技能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 18.33px;">CSS</a> <a href="/tags/CSS%E5%8A%A8%E7%94%BB/" style="font-size: 10px;">CSS动画</a> <a href="/tags/CSS%E5%B8%83%E5%B1%80/" style="font-size: 13.33px;">CSS布局</a> <a href="/tags/CSS%E9%80%89%E6%8B%A9%E5%99%A8/" style="font-size: 10px;">CSS选择器</a> <a href="/tags/CSS%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/" style="font-size: 15px;">CSS预处理器</a> <a href="/tags/ElementPlus/" style="font-size: 10px;">ElementPlus</a> <a href="/tags/ElementUI/" style="font-size: 10px;">ElementUI</a> <a href="/tags/English/" style="font-size: 10px;">English</a> <a href="/tags/Express/" style="font-size: 10px;">Express</a> <a href="/tags/HTML/" style="font-size: 11.67px;">HTML</a> <a href="/tags/Koa/" style="font-size: 13.33px;">Koa</a> <a href="/tags/Linux/" style="font-size: 11.67px;">Linux</a> <a href="/tags/Node-js/" style="font-size: 11.67px;">Node.js</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/Vant/" style="font-size: 11.67px;">Vant</a> <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/Vue2/" style="font-size: 10px;">Vue2</a> <a href="/tags/Vue3/" style="font-size: 10px;">Vue3</a> <a href="/tags/books/" style="font-size: 10px;">books</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a> <a href="/tags/javascript/" style="font-size: 11.67px;">javascript</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/vue-cli/" style="font-size: 10px;">vue-cli</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 16.67px;">书籍</a> <a href="/tags/%E4%BD%8E%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">低代码</a> <a href="/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 10px;">可视化</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E5%BC%8F/" style="font-size: 10px;">学习方式</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" style="font-size: 10px;">学习路线</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">小程序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 10px;">数据结构与算法</a> <a href="/tags/%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98/" style="font-size: 20px;">案例实战</a> <a href="/tags/%E6%BA%90%E7%A0%81/" style="font-size: 10px;">源码</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/" style="font-size: 10px;">移动端开发</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" style="font-size: 11.67px;">组件库</a> <a href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B7%A5%E5%85%B7%E5%BA%93/" style="font-size: 10px;">自定义工具库</a> <a href="/tags/%E8%AE%A4%E7%9F%A5/" style="font-size: 10px;">认知</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/" style="font-size: 20px;">软技能</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 10px;">运维</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/01/20/web/%E5%85%B6%E4%BB%96/lua/lua%E5%9F%BA%E7%A1%80/">lua基础</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/17/web/%E5%85%B6%E4%BB%96/python/%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/">爬虫基础</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/13/web/%E8%BF%9B%E9%98%B6/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/">数据库基础</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/12/web/%E6%A1%86%E6%9E%B6/React/React%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%92%8C%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86/React%E5%9F%BA%E7%A1%80/">React基本使用</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/web/%E5%85%B6%E4%BB%96/%E6%A0%87%E6%B3%A8/labelStudio%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/">labelStudio安装及使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
