@@ -3405,22 +3405,23 @@ h1.page-title + .tag-cloud-list {
   font-size: 30px;
 }
 #page-header.not-home-page {
-  height: 400px;
+  height: 20rem;
 }
 @media screen and (max-width: 768px) {
   #page-header.not-home-page {
-    height: 280px;
+    height: 14rem !important;
   }
 }
 #page-header #page-site-info {
   position: absolute;
-  top: 200px;
-  padding: 0 10px;
+  top: 10rem;
+  padding: 0 0.5rem;
   width: 100%;
+  z-index: 2;
 }
 @media screen and (max-width: 768px) {
   #page-header #page-site-info {
-    top: 140px;
+    top: 7rem !important;
   }
 }
 #page-header.post-bg {
@@ -3453,8 +3454,21 @@ h1.page-title + .tag-cloud-list {
     padding: 0 22px;
   }
 }
+#page-header.has-video {
+  position: relative;
+  height: 80vh !important;
+}
+#page-header.has-video #page-site-info {
+  z-index: 2;
+  top: 15rem;
+}
+@media screen and (max-width: 768px) {
+  #page-header.has-video {
+    height: 14rem !important;
+  }
+}
 #page-header.not-top-img {
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
   height: 60px;
   background: 0;
 }

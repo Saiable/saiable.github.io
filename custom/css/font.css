@@ -1,0 +1,16 @@
+/* 更换字体开始 */
+@font-face {
+    font-family: 'mindcons';
+    /* 字体名自定义即可 */
+    src: url('../assets/ZhuZiAWan.woff2');
+    /* 字体文件路径 */
+    font-display: swap;
+}
+
+body,
+.gitcalendar {
+    font-family: mindcons !important;
+}
+
+
+/* 更换字体结束 */

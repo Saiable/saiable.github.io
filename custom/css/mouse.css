@@ -1,0 +1,16 @@
+body {
+    cursor: url('../assets/6283c365d20dd.png'), auto;
+}
+
+.hide-block>.hide-button.open,
+.hide-inline>.hide-button.open {
+    display: block
+}
+
+a,
+button,
+img {
+    cursor: url('../assets/6283c376afcfc.png'), auto
+}
+
+
