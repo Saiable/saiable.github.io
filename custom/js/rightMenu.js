@@ -18,7 +18,7 @@ rm.reloadrmSize = function () {
 };
 window.oncontextmenu = function (event) {
     if (document.body.clientWidth > 768) {
-        let pageX = event.clientX + 10;	
+        let pageX = event.clientX + 10;
         let pageY = event.clientY;
         let $rightMenuNormal = $(".rightMenuNormal");
         let $rightMenuOther = $(".rightMenuOther");
@@ -179,8 +179,12 @@ $('#menu-translate').on('click', function () {
     removeRightMenu();
     translateInitialization();
 });
-$(".menu-link").on("click", function () {
-    removeRightMenu()
+// $(".menu-link").on("click", function () {
+//     removeRightMenu()
+// });
+$("#menu-print").on("click", function () {
+    removeRightMenu();
+    window.print();
 });
 $("#rightmenu-mask").on("click", function () { removeRightMenu() });
 $("#rightmenu-mask").contextmenu(function () {
