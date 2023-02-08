@@ -33,7 +33,7 @@ if (document.body.clientWidth > 992) {
                 zoom: 0.9,
                 borderRadius: 5 + 'px',
                 right: 60 + 'px',
-                nekoImg: "https://bu.dusays.com/2022/07/20/62d812db74be9.png",
+                nekoImg: "https://biexinge.cn/blog/cat_zip.webp",
                 hoverMsg: "喵喵喵~",
                 color: "#6f42c1",
                 during: 500,

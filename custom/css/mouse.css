@@ -1,5 +1,5 @@
 body {
-    cursor: url('../assets/6283c365d20dd.png'), auto;
+    cursor: url('/custom/assets/mouse_a_zip.webp'), auto;
 }
 
 .hide-block>.hide-button.open,
@@ -10,7 +10,7 @@ body {
 a,
 button,
 img {
-    cursor: url('../assets/6283c376afcfc.png'), auto
+    cursor: url('/custom/assets/mouse_b_zip.webp'), auto
 }
 
 
