@@ -1,3 +1,14 @@
+
+
+# 如果你有使用hexo-douban，可配置這個
+douban:
+  meta: true
+#  movies_img: https://fastly.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/movie.jpg
+  books_img: https://fastly.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/movie.jpg
+#   games_img:
+
+
+
 # Main menu navigation (導航目錄)
 # see https://butterfly.js.org/posts/4aa8abbe/#導航菜單
 # --------------------------------------
@@ -8,12 +19,13 @@ menu:
     标签: /tags/ || fas fa-tags
     归档: /archives/ || fas fa-archive
   娱乐||fas fa-list||hide:
-    音乐: /music/ || fas fa-music
-    电影: /movies/ || fas fa-video
-    番剧: /comics/ || fas fa-video
-  互动||fas fa-list||hide:
-    赞助墙: /sponsorWall/ || fas fa-money-check-alt
-    留言板: /comments/ || fas fa-comments
+    相册: /Gallery/ || fa-sharp fa-solid fa-photo-film
+    番剧: /bangumis/ || fas fa-video
+    # 电影: /movies/ || fa-brands fa-youtube
+    书单: /booklist/ || fa-solid fa-book
+  # 互动||fas fa-list||hide:
+  赞助墙: /sponsorWall/ || fas fa-money-check-alt
+  留言板: /comment/ || fas fa-comments
   友链: /link/ || fas fa-link
   关于: /about/ || fas fa-heart
 
@@ -21,7 +33,7 @@ menu:
 # Code Blocks (代碼相關)
 # --------------------------------------
 
-highlight_theme: light #  darker / pale night / light / ocean / mac / mac light / false
+highlight_theme: pale night #  darker / pale night / light / ocean / mac / mac light / false
 highlight_copy: true # copy button
 highlight_lang: true # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
@@ -33,7 +45,7 @@ code_word_wrap: false # true | false
 copy:
   enable: true
   copyright:
-    enable: false
+    enable: true
     limit_count: 50
 
 # social settings (社交圖標設置)
@@ -41,25 +53,30 @@ copy:
 #   icon: link || the description
 # search https://fontawesome.com/icons
 social:
- fa-brands fa-qq: https://github.com/xxxxx || QQ
- fa-brands fa-weixin: https://github.com/xxxxx || WeChat
+ fa-brands fa-qq: https://bu.dusays.com/2023/02/10/63e57e822f198.webp || QQ
+ fa-brands fa-weixin: https://bu.dusays.com/2023/02/10/63e57f8ac9fae.webp || WeChat
  fab fa-github: https://github.com/Saiable || Github
- fas fa-envelope: mailto:xxxxxx@gmail.com || Email
- fa-solid fa-rss: mailto:xxxxxx@gmail.com || Email
+ fas fa-envelope: mailto:mindcons@foxmail.com || Email
+#  fa-solid fa-rss: mailto:xxxxxx@gmail.com || Rss
 
 # search (搜索)
 # see https://butterfly.js.org/posts/ceeb73f/#搜索系統
 # --------------------------------------
 
+
 # Algolia search
 algolia_search:
-  enable: false
+  enable: true
   hits:
-    per_page: 6
+    per_page: 10
+  labels:
+    input_placeholder: Search for Posts
+    hits_empty: "我们没有找到任何搜索结果: ${query}"
+    hits_stats: "找到${hits}条结果（用时${time} ms）"
 
 # Local search
 local_search:
-  enable: true
+  enable: false
   preload: false
   CDN:
 
@@ -89,7 +106,7 @@ favicon: /img/favicon.png
 
 # Avatar (頭像)
 avatar:
-  img: https://s2.loli.net/2022/07/02/xjocPR8fnLu64KU.png
+  img: https://bu.dusays.com/2023/02/10/63e583843360e.webp
   effect: false
 
 # Disable all banner image
@@ -101,14 +118,16 @@ index_img:
 # If the banner of page not setting, it will show the top_img
 # 它是先渲染的default_top_img，然后再渲染了index_img，只设置index_img，而不设置default_top_img时可以看出来
 # 利用它的处理方式，只设置default_top_img，避免页面重复渲染
-default_top_img: https://s2.loli.net/2022/07/02/LUfbSm2HQzOIVvM.jpg
+default_top_img: https://bu.dusays.com/2023/02/09/63e48e08658fb.webp
+# https://bu.dusays.com/2023/02/09/63e48e08658fb.webp
+
 
 # The banner image of archive page
-archive_img: https://s2.loli.net/2022/07/02/LUfbSm2HQzOIVvM.jpg
+archive_img: https://bu.dusays.com/2023/02/09/63e498fb067b9.webp
 
 # If the banner of tag page not setting, it will show the top_img
 # note: tag page, not tags page (子標籤頁面的 top_img)
-tag_img: https://s2.loli.net/2022/07/02/LUfbSm2HQzOIVvM.jpg
+tag_img: https://bu.dusays.com/2023/02/10/63e58456a7f91.webp
 
 # The banner image of tag page
 # format:
@@ -117,7 +136,7 @@ tag_per_img:
 
 # If the banner of category page not setting, it will show the top_img
 # note: category page, not categories page (子分類頁面的 top_img)
-category_img: https://s2.loli.net/2022/07/02/LUfbSm2HQzOIVvM.jpg
+category_img: https://bu.dusays.com/2023/02/10/63e583498c066.webp
 
 # The banner image of category page
 # format:
@@ -145,7 +164,7 @@ error_img:
 error_404:
   enable: true
   subtitle: 'Page Not Found'
-  background: https://i.loli.net/2020/05/19/aKOcLiyPl2JQdFD.png
+  background: https://bu.dusays.com/2023/02/09/63e486f00be3a.webp
 
 post_meta:
   page: # Home Page
@@ -204,11 +223,11 @@ post_copyright:
 reward:
   enable: true
   QR_code:
-   - img: https://s2.loli.net/2022/07/02/ZYspTWmDdytfLXa.png
-     link:
+   - img: https://bu.dusays.com/2023/02/10/63e580229ee01.webp
+     link: https://bu.dusays.com/2023/02/10/63e580229ee01.webp
      text: wechat
-   - img: https://s2.loli.net/2022/07/02/3zcRHPK5m6C8sE2.png
-     link:
+   - img: https://bu.dusays.com/2023/02/09/63e48775d4f42.webp
+     link: https://bu.dusays.com/2023/02/09/63e48775d4f42.webp
      text: alipay
 
 # Post edit
@@ -237,7 +256,7 @@ post_pagination: 1
 
 # Displays outdated notice for a post (文章過期提醒)
 noticeOutdate:
-  enable: false
+  enable: true
   style: flat # style: simple/flat
   limit_day: 500 # When will it be shown
   position: top # position: top/bottom
@@ -271,12 +290,13 @@ addtoany:
 comments:
   # Up to two comments system, the first will be shown as default
   # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Waline/Utterances/Facebook Comments/Twikoo/Giscus/Remark42
-  use: # Valine,Disqus
+  use: Twikoo # Valine,Disqus
+    # - Twikoo # 这里按照你主题版本的格式写
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
-  lazyload: false
-  count: false # Display comment count in post's top_img
+  lazyload: true
+  count: true # Display comment count in post's top_img
   card_post_count: false # Display comment count in Home Page
 
 # disqus
@@ -348,10 +368,12 @@ facebook_comments:
 
 # Twikoo
 # https://github.com/imaegoo/twikoo
+# envId: https://twikoo-saiable.vercel.app/
+
 twikoo:
-  envId:
+  envId: https://twikoo.mindcons.cn/
   region:
-  visitor: false
+  visitor: true
   option:
 
 # Giscus
@@ -377,10 +399,10 @@ remark42:
 
 # Chat Button [recommend]
 # It will create a button in the bottom right corner of website, and hide the origin button
-chat_btn: false
+chat_btn: true
 
 # The origin chat button is displayed when scrolling up, and the button is hidden when scrolling down
-chat_hide_show: false
+chat_hide_show: true
 
 # chatra
 # https://chatra.io/
@@ -409,8 +431,8 @@ gitter:
 # crisp
 # https://crisp.chat/en/
 crisp:
-  enable: false
-  website_id:
+  enable: true
+  website_id: 717070d8-e449-4d60-b9b6-c1421478f42c
 
 # Footer Settings
 # --------------------------------------
@@ -418,7 +440,7 @@ footer:
   owner:
     enable: true
     since: 2020
-  custom_text: Hi, welcome to my <a href="https://saiable.github.io/">blog</a>!
+  custom_text: <p><a target="_blank" href="https://hexo.io/"><img src="https://bu.dusays.com/2023/02/09/63e488a78b827.webp" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="https://bu.dusays.com/2023/02/10/63e57f321880a.webp" title="主题采用butterfly"></a></p>
   copyright: true # Copyright of theme and framework
 
 # Analysis
@@ -513,7 +535,7 @@ tag_ui: # 留空或 index
 background:
 
 # Footer Background
-footer_bg: false
+footer_bg: https://bu.dusays.com/2023/02/10/63e57cef87293.webp
 
 # the position of bottom right button/default unit: px (右下角按鈕距離底部的距離/默認單位為px)
 rightside-bottom:
@@ -527,11 +549,11 @@ enter_transitions: true
 # canvas_ribbon (靜止彩帶背景)
 # See: https://github.com/hustcc/ribbon.js
 canvas_ribbon:
-  enable: false
+  enable: true
   size: 150
   alpha: 0.6
   zIndex: -1
-  click_to_change: false
+  click_to_change: true
   mobile: false
 
 # Fluttering Ribbon (動態彩帶)
@@ -565,7 +587,7 @@ fireworks:
 
 # Mouse click effects: Heart symbol (鼠標點擊效果: 愛心)
 click_heart:
-  enable: false
+  enable: true
   mobile: false
 
 # Mouse click effects: words (鼠標點擊效果: 文字)
@@ -612,7 +634,7 @@ hr_icon:
 
 # the subtitle on homepage (主頁subtitle)
 subtitle:
-  enable: false
+  enable: true
   # Typewriter Effect (打字效果)
   effect: true
   # loop (循環打字)
@@ -626,10 +648,19 @@ subtitle:
   source: false
   # 如果關閉打字效果，subtitle 只會顯示 sub 的第一行文字
   sub:
+    - 天可补,海可填,南山可移。
+    - 日月既往,不可复追。
 
 # Loading Animation (加載動畫)
-preloader: false
-
+preloader: true
+# preloader:
+#   enable: false
+#   # source
+#   # 1. fullpage-loading
+#   # 2. pace (progress bar)
+#   source: 1
+#   # pace theme (see https://codebyzach.github.io/pace/)
+#   pace_css_url: https://cdn.jsdelivr.net/gh/Saiable/cdn@.1.0.0/css/loading-bar.css
 # aside (側邊欄)
 # --------------------------------------
 
@@ -638,7 +669,7 @@ aside:
   hide: false
   button: true
   mobile: true # display on mobile
-  position: right # left or right
+  position: left # left or right
   display:
     archive: true
     tag: true
@@ -653,7 +684,7 @@ aside:
       link: https://github.com/Saiable
   card_announcement:
     enable: true
-    content: 时间再多一点的愿望无法满足，那就多清醒一会儿
+    content: 日月既往,不可复追。
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
@@ -665,12 +696,12 @@ aside:
     expand: none # none/true/false
     sort_order: # Don't modify the setting unless you know how it works
   card_tags:
-    enable: true
-    limit: 40 # if set 0 will show all
+    enable: false
+    limit: 20 # if set 0 will show all
     color: false
     sort_order: # Don't modify the setting unless you know how it works
   card_archives:
-    enable: true
+    enable: false
     type: monthly # yearly or monthly
     format: MMMM YYYY # eg: YYYY年MM月
     order: -1 # Sort of order. 1, asc for ascending; -1, desc for descending
@@ -708,7 +739,7 @@ newest_comments:
 
 # Conversion between Traditional and Simplified Chinese (簡繁轉換)
 translate:
-  enable: false
+  enable: true
   # The text of a button
   default: 繁
   # the language of website (1 - Traditional Chinese/ 2 - Simplified Chinese）
@@ -732,7 +763,7 @@ darkmode:
   # autoChangeMode: 1  Following System Settings, if the system doesn't support dark mode, it will switch dark mode between 6 pm to 6 am
   # autoChangeMode: 2  Switch dark mode between 6 pm to 6 am
   # autoChangeMode: false
-  autoChangeMode: false
+  autoChangeMode: 1
 
 # Don't modify the following settings unless you know how they work (非必要請不要修改 )
 # Choose: readmode,translate,darkmode,hideAside,toc,chat,comment
@@ -848,10 +879,35 @@ css_prefix: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-  - <link rel="stylesheet" href="/css/custom/custom.css">
-  - <link rel="stylesheet" href="/css/custom/plane_v2.css">
+  # 微信公众号
+  # - <link rel="stylesheet" href="/custom/css/card_wx.css">
+  # 首页的飞机
+  # - <link rel="stylesheet" href="/custom/css/plane_v2.css">
+  # - <link rel="stylesheet" href="/custom/css/scrollbar.css">
+  # - <link rel="stylesheet" href="/custom/css/font.css">
+  # - <link rel="stylesheet" href="/custom/css/windmill.css">
+  # - <link rel="stylesheet" href="/custom/css/mouse.css">
+  # - <link rel="stylesheet" href="/custom/css/optimize.css">
+  # - <link rel="stylesheet" href="/custom/css/video.css">
+  # 星空背景
+  # - <link rel="stylesheet" href="/custom/css/universe.css">
+  # 右键菜单栏
+  # - <link rel="stylesheet" href="/custom/css/rightMenu.css"> 
+  # 猫咪滚动栏
+  # - <link rel="stylesheet" href="/custom/css/cat.css">
+  # 打包后的所有css文件
+  - <link rel="stylesheet" href="/custom/css/custom.min.css">
+
+
   bottom:
-  # - <script src="xxxx"></script>
+  # - <script src="/custom/js/banF12.js"></script>
+   # 星空背景
+   - <canvas id="universe"></canvas>
+   - <script defer src="/custom/js/universe.js"></script>
+   - <script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script>
+   - <script defer data-pjax src="/custom/js/rightMenu.js"></script>
+   - <script defer data-pjax src="/custom/js/cat.js"></script>
+
 
 # CDN
 # Don't modify the following settings unless you know how they work
@@ -924,3 +980,5 @@ CDN:
   # prismjs_js:
   # prismjs_lineNumber_js:
   # prismjs_autoloader:
+
+
