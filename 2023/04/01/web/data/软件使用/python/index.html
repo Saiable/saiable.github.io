@@ -1,0 +1,719 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>python | 吕小布の博客</title><meta name="keywords" content="python"><meta name="author" content="Sai"><meta name="copyright" content="Sai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="基本概念Python 教程 — Python 3.11.3 文档 python解释器数据类型基本数据类型字符串避免转义 在Python的string前面加上‘r’， 是为了告诉编译器这个string是个raw string，不要转意backslash ‘\’ 。 例如，\n 在raw string中，是两个字符，\和n， 而不会转意为换行符。由于正则表达式和 \ 会有冲突，因此，当一个字符串使用了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python">
+<meta property="og:url" content="https://mindcons.cn/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/index.html">
+<meta property="og:site_name" content="吕小布の博客">
+<meta property="og:description" content="基本概念Python 教程 — Python 3.11.3 文档 python解释器数据类型基本数据类型字符串避免转义 在Python的string前面加上‘r’， 是为了告诉编译器这个string是个raw string，不要转意backslash ‘\’ 。 例如，\n 在raw string中，是两个字符，\和n， 而不会转意为换行符。由于正则表达式和 \ 会有冲突，因此，当一个字符串使用了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bu.dusays.com/2023/02/10/63e583843360e.webp">
+<meta property="article:published_time" content="2023-04-01T01:03:02.000Z">
+<meta property="article:modified_time" content="2023-04-19T09:48:45.000Z">
+<meta property="article:author" content="Sai">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bu.dusays.com/2023/02/10/63e583843360e.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mindcons.cn/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"61301LMFP2","apiKey":"a7627d15f4af23df7fbc3e2922471858","indexName":"mindcons","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":350},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Sai","link":"链接: ","source":"来源: 吕小布の博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'python',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-19 17:48:45'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/custom/css/custom.min.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://bu.dusays.com/2023/02/10/63e583843360e.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">145</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">54</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">37</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fa-sharp fa-solid fa-photo-film"></i><span> 相册</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/booklist/"><i class="fa-fw fa-solid fa-book"></i><span> 书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">吕小布の博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fa-sharp fa-solid fa-photo-film"></i><span> 相册</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/booklist/"><i class="fa-fw fa-solid fa-book"></i><span> 书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">python</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-01T01:03:02.000Z" title="发表于 2023-04-01 09:03:02">2023-04-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-19T09:48:45.000Z" title="更新于 2023-04-19 17:48:45">2023-04-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/python/">python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="python"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/tutorial/index.html">Python 教程 — Python 3.11.3 文档</a></p>
+<h2 id="python解释器"><a href="#python解释器" class="headerlink" title="python解释器"></a>python解释器</h2><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>避免转义</p>
+<p>在Python的string前面加上‘r’， 是为了告诉编译器这个string是个raw string，不要转意backslash ‘\’ 。 例如，\n 在raw string中，是两个字符，\和n， 而不会转意为换行符。由于正则表达式和 \ 会有冲突，因此，当一个字符串使用了正则表达式后，最好在前面加上’r’。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">s=<span class="string">r&#x27;\tt&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(s)</span><br><span class="line">Output:</span><br><span class="line"><span class="string">&#x27;\tt&#x27;</span></span><br><span class="line"> </span><br><span class="line">s=<span class="string">&#x27;\tt&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(s)</span><br><span class="line">Output:</span><br><span class="line"><span class="string">&#x27;        t&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><h2 id="包与模块"><a href="#包与模块" class="headerlink" title="包与模块"></a>包与模块</h2><p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/tutorial/modules.html">6. 模块 — Python 3.11.3 文档</a></p>
+<p>一个文件，就是一个模块。</p>
+<ul>
+<li><p>模块是包含 Python 定义和语句的文件。其文件名是模块名加后缀名 <code>.py</code> 。</p>
+</li>
+<li><p>在模块内部，通过全局变量 <code>__name__</code> 可以获取模块名（即字符串）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Fibonacci numbers module</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fib</span>(<span class="params">n</span>):    <span class="comment"># write Fibonacci series up to n</span></span><br><span class="line">    a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> a &lt; n:</span><br><span class="line">        <span class="built_in">print</span>(a, end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        a, b = b, a+b</span><br><span class="line">    <span class="built_in">print</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fib2</span>(<span class="params">n</span>):   <span class="comment"># return Fibonacci series up to n</span></span><br><span class="line">    result = []</span><br><span class="line">    a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> a &lt; n:</span><br><span class="line">        result.append(a)</span><br><span class="line">        a, b = b, a+b</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="输入与输出"><a href="#输入与输出" class="headerlink" title="输入与输出"></a>输入与输出</h2><h3 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h3><h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><h2 id="错误与异常"><a href="#错误与异常" class="headerlink" title="错误与异常"></a>错误与异常</h2><h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><h3 id="名称和对象"><a href="#名称和对象" class="headerlink" title="名称和对象"></a>名称和对象</h3><h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><h3 id="常见的编码格式"><a href="#常见的编码格式" class="headerlink" title="常见的编码格式"></a>常见的编码格式</h3><ul>
+<li>utf-8</li>
+<li>url编码</li>
+</ul>
+<h3 id="解码"><a href="#解码" class="headerlink" title="解码"></a>解码</h3><h4 id="url解码"><a href="#url解码" class="headerlink" title="url解码"></a>url解码</h4><p>常用的python url解码代码 ：</p>
+<ol>
+<li>使用urllib库的unquote方法进行url解码：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line">url = <span class="string">&quot;https://www.example.com/?q=%E6%9D%8E%E5%9B%9B&quot;</span></span><br><span class="line">decoded_url = urllib.parse.unquote(url)</span><br><span class="line"><span class="built_in">print</span>(decoded_url)</span><br></pre></td></tr></table></figure>
+输出结果为：<code>https://www.example.com/?q=李四</code></li>
+<li>使用requests库的unquote方法进行url解码：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&quot;https://www.example.com/?q=%E6%9D%8E%E5%9B%9B&quot;</span></span><br><span class="line">decoded_url = requests.utils.unquote(url)</span><br><span class="line"><span class="built_in">print</span>(decoded_url)</span><br></pre></td></tr></table></figure>
+输出结果为：<code>https://www.example.com/?q=李四</code></li>
+<li>使用urllib.parse.unquote_plus方法进行url解码，该方法会将空格解码为加号：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line">url = <span class="string">&quot;https://www.example.com/?q=%E6%9D%8E%E5%9B%9B+%E5%8A%A0%E5%8A%A0&quot;</span></span><br><span class="line">decoded_url = urllib.parse.unquote_plus(url)</span><br><span class="line"><span class="built_in">print</span>(decoded_url)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="进阶概念"><a href="#进阶概念" class="headerlink" title="进阶概念"></a>进阶概念</h1><h2 id="默认概念"><a href="#默认概念" class="headerlink" title="默认概念"></a>默认概念</h2><h3 id="if-name-main的作用"><a href="#if-name-main的作用" class="headerlink" title="if name main的作用"></a><code>if name main</code>的作用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br></pre></td></tr></table></figure>
+
+<p>一个python文件通常有两种使用方法</p>
+<ul>
+<li>第一是作为脚本直接执行</li>
+<li>第二是 import 到其他的 python 脚本中被调用（模块重用）执行。</li>
+</ul>
+<p>因此<code>if __name__ == &quot;__main__&quot;:</code> 的作用就是控制这两种情况执行代码的过程，在<code>if __name__ == &quot;__main__&quot;:</code> 下的代码只有在第一种情况下（即文件作为脚本直接执行）才会被执行，而 import 到其他脚本中是不会被执行的。</p>
+<p>举例说明如下：</p>
+<p><strong>直接执行</strong></p>
+<p>在 test.py 中写入如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;this is one&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;this is two&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>直接执行<code>python3  test.py</code>，结果如下图，可以成功 print 两行字符串。即，<code>if __name__ == &quot;__main__&quot;:</code>语句之前和之后的代码都被执行。</p>
+<p><img src="/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/image-20230418093555629.png" alt="image-20230418093555629"></p>
+<p><strong>import 执行</strong></p>
+<p>然后在同一文件夹新建名称为 import_test.py 的脚本，输入如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> test</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>执行<code>python3 import_test.py</code> 脚本，输出结果如下：</p>
+<p><img src="/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/image-20230418093951722.png" alt="image-20230418093951722"></p>
+<p>作为模块import执行，只输出了第一行字符串。即，<code>if __name__ == &quot;__main__&quot;:</code>外部的语句被执行，内部的没有被执行。</p>
+<p><strong>运行原理</strong></p>
+<p>每个python模块（python文件，也就是此处的 test.py 和 import_test.py）都包含内置的变量 <code>__name__</code>，当该模块被直接当作脚本执行的时候，<code>__name__</code> 等于<code>__main__</code>；如果该模块 import 到其他模块中，则该模块的 <code>__name__</code> 等于模块（文件）名称（不包含后缀.py）。</p>
+<p>进而当模块被直接当作脚本执行时，<code>__name__</code> &#x3D;&#x3D;  ‘<code>__main__</code>‘ 结果为真。</p>
+<p>为了进一步说明，使用如下代码验证：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># test.py</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;this is one&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;__name__: &#x27;</span>, __name__ )</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(__name__ == <span class="string">&#x27;__main__&#x27;</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;this is two&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>直接以脚本运行，结果如下</p>
+<p><img src="/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/image-20230419094141166.png" alt="image-20230419094141166"></p>
+<p>新建<code>import_test.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># import_test.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> test</span><br></pre></td></tr></table></figure>
+
+<p>运行<code>python3 import_test.py</code>，结果如下：</p>
+<p><img src="/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/image-20230419094318903.png" alt="image-20230419094318903"></p>
+<h2 id="上下文管理器"><a href="#上下文管理器" class="headerlink" title="上下文管理器"></a>上下文管理器</h2><p>Context Manager指的是python在执行一段代码前后，做的一些预处理和后处理，使得代码块运行处于一个小的环境（surrounding），出了这个小环境之后，资源释放，环境中的各种配置也失效。</p>
+<p>例如在打开文件需要关闭，连接数据库后需要关闭连接。很多优雅第三方库也会利用上下文使得对象进入特定的某种状态。</p>
+<h3 id="with关键字"><a href="#with关键字" class="headerlink" title="with关键字"></a>with关键字</h3><p>with的基本用法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> EXPR <span class="keyword">as</span> VAR:</span><br><span class="line">  BLOCK</span><br></pre></td></tr></table></figure>
+
+<p>其中发生了一系列过程：</p>
+<ol>
+<li>EXPR语句被执行，得到ContextManager</li>
+<li>调用ContextManager.__enter__方法</li>
+<li>如果有as VAR，则ContextManager.__enter__的返回值赋给VAR，否则就不管返回值</li>
+<li>执行BLOCK，如果有VAR被用到，就和普通变量一样</li>
+<li>调用ContextManager.__exit__方法<ul>
+<li>__exit__有三个参数：type, value, traceback，BLOCK出异常时会得到对应值，正常情况就都为None</li>
+<li>__exit__返回值为True表示BLOCK中出现的异常可以忽略，False表示需要raise</li>
+</ul>
+</li>
+</ol>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><h4 id="资源操作："><a href="#资源操作：" class="headerlink" title="资源操作："></a>资源操作：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CustomOpen</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, filename: <span class="built_in">str</span></span>):</span><br><span class="line">        self.__filename = filename</span><br><span class="line">        self.__handler = <span class="literal">None</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__enter__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;enter......&quot;</span>)</span><br><span class="line">        self.__handler = <span class="built_in">open</span>(self.__filename)</span><br><span class="line">        <span class="keyword">return</span> self.__handler</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__exit__</span>(<span class="params">self, exc_type, exc_val, exc_tb</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;exit...&quot;</span>, exc_type, exc_val, exc_tb)</span><br><span class="line">        <span class="keyword">if</span> self.__handler <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.__handler.close()</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> CustomOpen(<span class="string">&quot;hello.txt&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="built_in">print</span>(f.read())</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">enter......</span><br><span class="line">hello world</span><br><span class="line"><span class="built_in">exit</span>... None None None</span><br></pre></td></tr></table></figure>
+
+<h4 id="状态维护"><a href="#状态维护" class="headerlink" title="状态维护"></a>状态维护</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CustomBrain</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.__status = <span class="string">&quot;normal&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">say</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> self.__status == <span class="string">&quot;normal&quot;</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;You&#x27;re a great man&quot;</span>)</span><br><span class="line">        <span class="keyword">elif</span> self.__status == <span class="string">&quot;special&quot;</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;You are a very outstanding person &quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__enter__</span>(<span class="params">self</span>):</span><br><span class="line">        self.__status = <span class="string">&quot;special&quot;</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__exit__</span>(<span class="params">self, exc_type, exc_val, exc_tb</span>):</span><br><span class="line">        self.__status = <span class="string">&quot;normal&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">brain = CustomBrain()</span><br><span class="line">brain.say() <span class="comment"># 普通状态</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以通过上下文维护一些状态</span></span><br><span class="line"><span class="keyword">with</span> brain:</span><br><span class="line">    brain.say() <span class="comment"># 特殊状态</span></span><br><span class="line"></span><br><span class="line">brain.say() <span class="comment"># 普通状态</span></span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">You<span class="string">&#x27;re a great man</span></span><br><span class="line"><span class="string">You are a very outstanding person</span></span><br><span class="line"><span class="string">You&#x27;</span>re a great man</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用contextlib简化编写"><a href="#使用contextlib简化编写" class="headerlink" title="使用contextlib简化编写"></a>使用contextlib简化编写</h3><p>python内置的标准库contextlib可以使得代码书写更加简洁，本质是一样的。比较有用的是<code>contextlib.contextmanager</code>这个装饰器，被装饰的函数在<code>yield</code>的前面相当于__enter__，yield的后面相当于__exit__，<code>yield</code>本身的返回值赋给<code>as</code>后的变量</p>
+<p>所以第一个示例可以这么写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> contextmanager</span><br><span class="line"></span><br><span class="line"><span class="meta">@contextmanager</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">custom_open</span>(<span class="params">filename: <span class="built_in">str</span></span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;enter......&quot;</span>)</span><br><span class="line">    handler = <span class="built_in">open</span>(filename)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">yield</span> handler</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;exit...&quot;</span>)</span><br><span class="line">    handler.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> custom_open(<span class="string">&quot;hello.txt&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="built_in">print</span>(f.read())</span><br></pre></td></tr></table></figure>
+
+<p>还是优雅了许多~</p>
+<h1 id="模块专题"><a href="#模块专题" class="headerlink" title="模块专题"></a>模块专题</h1><h2 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h2><h2 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h2><h3 id="Excel读取"><a href="#Excel读取" class="headerlink" title="Excel读取"></a>Excel读取</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43092663/article/details/124155354">https://blog.csdn.net/weixin_43092663/article/details/124155354</a></p>
+</blockquote>
+<h4 id="读写Excel详解"><a href="#读写Excel详解" class="headerlink" title="读写Excel详解"></a>读写Excel详解</h4><p>Excel的读取可以采用ExcelFile类和read_excel两种方法，在实际使用中差别不大。其区别可以见<a target="_blank" rel="noopener" href="https://www.e-learn.cn/topic/210541">e-learn</a>上贴子讨论，观点摘录如下：</p>
+<p>除了语法之外没有特别的区别。从技术上讲，ExcelFile是一个类，read_excel是一个函数。在任何一种情况下，实际都是由定义在ExcelFile的_parse_excel解析<br>ExcelFile.parse循环速度更快（存疑）</p>
+<h5 id="ExcelFile类"><a href="#ExcelFile类" class="headerlink" title="ExcelFile类"></a>ExcelFile类</h5><p>类的定义和方法参数感兴趣的可以查看源码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ExcelFile.parse(sheet_name=<span class="number">0</span>, header=<span class="number">0</span>, names=<span class="literal">None</span>, index_col=<span class="literal">None</span>, usecols=<span class="literal">None</span>, squeeze=<span class="literal">None</span>, converters=<span class="literal">None</span>, true_values=<span class="literal">None</span>, false_values=<span class="literal">None</span>, skiprows=<span class="literal">None</span>, nrows=<span class="literal">None</span>, na_values=<span class="literal">None</span>, parse_dates=<span class="literal">False</span>, date_parser=<span class="literal">None</span>, thousands=<span class="literal">None</span>, comment=<span class="literal">None</span>, skipfooter=<span class="number">0</span>, convert_float=<span class="literal">None</span>, mangle_dupe_cols=<span class="literal">True</span>, **kwds)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">table = pd.ExcelFile(<span class="string">&#x27;./data/table1.xlsx&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(table))</span><br><span class="line"><span class="built_in">print</span>(table.sheet_names) <span class="comment">##按顺序获取sheet名称</span></span><br><span class="line"><span class="comment">## 提取表格信息</span></span><br><span class="line">sheet1 = table.parse(sheet_name=<span class="number">0</span>) <span class="comment">#可以使用序号，一次性读取多个用列表[0,1]</span></span><br><span class="line">sheet2 = table.parse(sheet_name=table.sheet_names[<span class="number">1</span>]) <span class="comment">#也可以使用sheet名</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;sheet1:\n&#123;0&#125;\n sheet2:\n&#123;1&#125;&#x27;</span>.<span class="built_in">format</span>(sheet1,sheet2))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下：</p>
+<p><img src="/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/image-20230419112206485.png" alt="image-20230419112206485"></p>
+<h5 id="read-excel-方法"><a href="#read-excel-方法" class="headerlink" title="read_excel()方法"></a>read_excel()方法</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pandas.read_excel(io, sheet_name=<span class="number">0</span>, header=<span class="number">0</span>, names=<span class="literal">None</span>, index_col=<span class="literal">None</span>, usecols=<span class="literal">None</span>, squeeze=<span class="literal">None</span>, dtype=<span class="literal">None</span>, engine=<span class="literal">None</span>, converters=<span class="literal">None</span>, true_values=<span class="literal">None</span>, false_values=<span class="literal">None</span>, skiprows=<span class="literal">None</span>, nrows=<span class="literal">None</span>, na_values=<span class="literal">None</span>, keep_default_na=<span class="literal">True</span>, na_filter=<span class="literal">True</span>, verbose=<span class="literal">False</span>, parse_dates=<span class="literal">False</span>, date_parser=<span class="literal">None</span>, thousands=<span class="literal">None</span>, decimal=’.’, comment=<span class="literal">None</span>, skipfooter=<span class="number">0</span>, convert_float=<span class="literal">None</span>, mangle_dupe_cols=<span class="literal">True</span>, storage_options=<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">主要参数	解释</span><br><span class="line">io	文件路径</span><br><span class="line">sheet_name	sheet名称，可以是数字或sheet名，默认‘sheet1 ’</span><br><span class="line">header	指定标题行，默认第一行为标题，可以设置多行如[<span class="number">0</span>,<span class="number">1</span>]为标题行</span><br><span class="line">names	在header=<span class="literal">None</span>的前提下，补充列名</span><br><span class="line">index_col	用于指定索引，默认为<span class="literal">None</span>，设置多列索引index_col=[<span class="number">0</span>,<span class="number">1</span>]</span><br><span class="line">usecols	用于指定读取的列，默认为<span class="literal">None</span>，读取第<span class="number">2</span>-<span class="number">4</span>列usecols = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">engine	“xlrd”支持.xls，“openpyxl”支持.xlsx</span><br><span class="line">dtype	指定数据列的类型，如&#123;‘a’: np.float64, ‘b’: <span class="built_in">str</span>&#125;</span><br><span class="line">converters	转换指定列的函数字典&#123;“A”:<span class="keyword">lambda</span> x: x/<span class="number">100</span>,“B”:<span class="keyword">lambda</span> x: x/<span class="number">100</span>&#125;</span><br><span class="line">skiprows	省略指定行数的数据，从第一行开始</span><br><span class="line">skipfooter	省略指定行数的数据，是从尾部数的行开始</span><br></pre></td></tr></table></figure>
+
+<p>示例如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##可以逐个sheet读取，也可以一次读取</span></span><br><span class="line">st1 = pd.read_excel(<span class="string">&#x27;./data/table1.xlsx&#x27;</span>,sheet_name=<span class="string">&#x27;1班&#x27;</span>)</span><br><span class="line">st2 = pd.read_excel(<span class="string">&#x27;./data/table1.xlsx&#x27;</span>,sheet_name=<span class="string">&#x27;2班&#x27;</span>)</span><br><span class="line">table = pd.read_excel(<span class="string">&#x27;./data/table1.xlsx&#x27;</span>,sheet_name=[<span class="number">0</span>,<span class="number">1</span>]) <span class="comment">## 一次性读取 st1 = table[0],st2 = table[1]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;st1:\n&#123;0&#125;\n st2:\n&#123;1&#125;&#x27;</span>.<span class="built_in">format</span>(st1,st2)) <span class="comment">#与上面输出结果相同</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>使用其他参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">st3 = pd.read_excel(<span class="string">&#x27;./data/table1.xlsx&#x27;</span>,sheet_name=<span class="number">1</span>,dtype=&#123;<span class="string">&#x27;体重&#x27;</span>: <span class="built_in">int</span>,<span class="string">&#x27;分数&#x27;</span>: <span class="built_in">float</span>&#125;) </span><br><span class="line">st4 = pd.read_excel(<span class="string">&#x27;./data/table1.xlsx&#x27;</span>,sheet_name=<span class="number">1</span>,converters=&#123;<span class="string">&#x27;身高&#x27;</span>:<span class="keyword">lambda</span> x:x*<span class="number">100</span>,<span class="string">&#x27;体重&#x27;</span>:<span class="keyword">lambda</span> x:x*<span class="number">2</span>&#125;) </span><br><span class="line"><span class="comment">#Both a converter and dtype were specified for column 体重 - only the converter will be used</span></span><br><span class="line">st5 = pd.read_excel(<span class="string">&#x27;./data/table1.xlsx&#x27;</span>,sheet_name=<span class="number">1</span>,dtype=&#123;<span class="string">&#x27;体重&#x27;</span>: <span class="built_in">int</span>,<span class="string">&#x27;分数&#x27;</span>: <span class="built_in">float</span>&#125;,converters=&#123;<span class="string">&#x27;身高&#x27;</span>:<span class="keyword">lambda</span> x:x*<span class="number">100</span>,<span class="string">&#x27;体重&#x27;</span>:<span class="keyword">lambda</span> x:x*<span class="number">2</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;st3:\n&#123;0&#125;\n st4:\n&#123;1&#125;\n st5:\n&#123;2&#125;&#x27;</span>.<span class="built_in">format</span>(st3,st4,st5))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注意：对某一列同时使用dtype和converters，仅仅converter被有效使用</p>
+<p><img src="/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/image-20230419112722695.png" alt="image-20230419112722695"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_excel(<span class="string">&#x27;./xdiwfjH98xxone (1).xlsx&#x27;</span>)</span><br><span class="line">row, col = df.shape</span><br><span class="line"><span class="comment"># print(row, col)</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(row):</span><br><span class="line">    tmp = df.iloc[i]</span><br><span class="line">    <span class="built_in">print</span>(tmp[key]) <span class="comment"># key为excel中每一列的关键字</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Excel写入"><a href="#Excel写入" class="headerlink" title="Excel写入"></a>Excel写入</h3><h4 id="写入Excel"><a href="#写入Excel" class="headerlink" title="写入Excel"></a>写入Excel</h4><p>有两种方法可以进行写入，使用to_excel方法和ExcelWriter类，如要写入到一个文件中多个sheet，需要使用ExcelWriter类。<br>ExcelWriter定义如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">pandas</span>.ExcelWriter(path, engine=<span class="literal">None</span>, date_format=<span class="literal">None</span>, datetime_format=<span class="literal">None</span>, mode=‘w’, storage_options=<span class="literal">None</span>, if_sheet_exists=<span class="literal">None</span>, engine_kwargs=<span class="literal">None</span>, **kwargs)</span><br></pre></td></tr></table></figure>
+
+<p>to_excel方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataFrame.to_excel(excel_writer, sheet_name=‘Sheet1’, na_rep=’’, float_format=<span class="literal">None</span>, columns=<span class="literal">None</span>, header=<span class="literal">True</span>, index=<span class="literal">True</span>, index_label=<span class="literal">None</span>, startrow=<span class="number">0</span>, startcol=<span class="number">0</span>, engine=<span class="literal">None</span>, merge_cells=<span class="literal">True</span>, encoding=<span class="literal">None</span>, inf_rep=‘inf’, verbose=<span class="literal">True</span>, freeze_panes=<span class="literal">None</span>, storage_options=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<p>ExcelWriter()可以向同一个excel的不同sheet中写入对应的表格数据<br>代码如下（示例）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用pd.to_excel方法</span></span><br><span class="line">st5.to_excel(<span class="string">&#x27;./data/table2.xlsx&#x27;</span>,sheet_name=<span class="string">&#x27;newSheet&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>ExcelWriter类写入流程：基于已创建的writer对象，利用to_excel()方法将不同的dataframe及其对应的sheet名称写入该writer对象中，并在全部表格写入完成之后，使用save()方法来执行writer中内容向对应实体excel文件写入数据的过程<br>同python文件IO一样，有两种写入方式。writer应该作为上下文管理器，否则，需要调用close() 保持和关闭打开的文件句柄<br>第一种：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">writer = pd.ExcelWriter(<span class="string">&#x27;./data/table3.xlsx&#x27;</span>)</span><br><span class="line">st4.to_excel(writer,sheet_name=<span class="string">&#x27;st4&#x27;</span>,index=<span class="literal">False</span>)</span><br><span class="line">st5.to_excel(writer,sheet_name=<span class="string">&#x27;st5&#x27;</span>,index=<span class="literal">False</span>)</span><br><span class="line"><span class="comment">##数据写出到excel文件中</span></span><br><span class="line">writer.save()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第二种：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">&#x27;./data/table4.xlsx&#x27;</span>) <span class="keyword">as</span> writer:  </span><br><span class="line">    st4.to_excel(writer, sheet_name=<span class="string">&#x27;st4&#x27;</span>,index=<span class="literal">False</span>)</span><br><span class="line">    st5.to_excel(writer, sheet_name=<span class="string">&#x27;st5&#x27;</span>,index=<span class="literal">False</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="已有Excel增加sheet"><a href="#已有Excel增加sheet" class="headerlink" title="已有Excel增加sheet"></a>已有Excel增加sheet</h4><p>mode分为两种写入’w’和追加‘a’，在已有表格中增加sheet使用‘a’模式，指定写入的sheet名称，代码如下（示例）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">&#x27;./data/table4.xlsx&#x27;</span>,mode=<span class="string">&#x27;a&#x27;</span>,engine=<span class="string">&#x27;openpyxl&#x27;</span>) <span class="keyword">as</span> writer:</span><br><span class="line">    st3.to_excel(writer, sheet_name=<span class="string">&#x27;st3&#x27;</span>,index=<span class="literal">False</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="覆盖Excel中已有sheet"><a href="#覆盖Excel中已有sheet" class="headerlink" title="覆盖Excel中已有sheet"></a>覆盖Excel中已有sheet</h4><p>如果需要重新写入Excel中某个sheet，直接往Excel写入同名sheet不会覆盖，而是创建一个新的表单（sheet1），需要采用以下方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> pd.ExcelWriter(<span class="string">&#x27;./data/table4.xlsx&#x27;</span>,mode=<span class="string">&#x27;a&#x27;</span>,engine=<span class="string">&#x27;openpyxl&#x27;</span>) <span class="keyword">as</span> writer:</span><br><span class="line">    wb = writer.book <span class="comment"># openpyxl.workbook.workbook.Workbook 获取所有sheet</span></span><br><span class="line">    wb.remove(wb[<span class="string">&#x27;st3&#x27;</span>]) <span class="comment">#删除需要覆盖的sheet</span></span><br><span class="line">    st1.to_excel(writer, sheet_name=<span class="string">&#x27;st3&#x27;</span>,index=<span class="literal">False</span>) <span class="comment">##sheet st3的内容更新成st1值</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="已有sheet中追加数据"><a href="#已有sheet中追加数据" class="headerlink" title="已有sheet中追加数据"></a>已有sheet中追加数据</h4><p>读取原表格的Workbook和sheets，赋给writer句柄，保证数据内容的一致。获取拟写入表单的数据行数，从下一行开始写入，需要设置header &#x3D; False</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> load_workbook</span><br><span class="line">newdata = pd.DataFrame([(<span class="string">&#x27;6&#x27;</span>,<span class="string">&#x27;LUCY&#x27;</span>,<span class="string">&#x27;F&#x27;</span>,<span class="number">190</span>,<span class="number">135</span>,<span class="number">90</span>),(<span class="string">&#x27;7&#x27;</span>,<span class="string">&#x27;ROB&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="number">181</span>,<span class="number">145</span>,<span class="number">78</span>),(<span class="string">&#x27;8&#x27;</span>,<span class="string">&#x27;FRADI&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="number">176</span>,<span class="number">133</span>,<span class="number">80</span>)])<span class="comment">#需要新写入的数据</span></span><br><span class="line">df = pd.read_excel(<span class="string">&#x27;./data/table4.xlsx&#x27;</span>,sheet_name=<span class="string">&#x27;st4&#x27;</span>) <span class="comment">#读取原数据文件和表</span></span><br><span class="line">writer = pd.ExcelWriter(<span class="string">&#x27;./data/table4.xlsx&#x27;</span>,engine=<span class="string">&#x27;openpyxl&#x27;</span>)</span><br><span class="line">book = load_workbook(<span class="string">&#x27;./data/table4.xlsx&#x27;</span>)</span><br><span class="line">writer.book = book <span class="comment"># openpyxl.workbook.workbook.Workbook</span></span><br><span class="line">writer.sheets = <span class="built_in">dict</span>((ws.title, ws) <span class="keyword">for</span> ws <span class="keyword">in</span> book.worksheets) <span class="comment">#&#123;&#x27;st4&#x27;: &lt;Worksheet &quot;st4&quot;&gt;, &#x27;st5&#x27;: &lt;Worksheet &quot;st5&quot;&gt;, &#x27;st3&#x27;: &lt;Worksheet &quot;st3&quot;&gt;&#125;</span></span><br><span class="line">df_rows = df.shape[<span class="number">0</span>] <span class="comment">#获取原数据的行数</span></span><br><span class="line">newdata.to_excel(writer, sheet_name=<span class="string">&#x27;st4&#x27;</span>,startrow = df_rows + <span class="number">1</span>, index = <span class="literal">False</span>, header = <span class="literal">False</span>)<span class="comment">#将数据写入excel中的st3,从第一个空行开始写</span></span><br><span class="line">writer.save()<span class="comment">#保存</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="os"><a href="#os" class="headerlink" title="os"></a>os</h2><h1 id="办公自动化专题"><a href="#办公自动化专题" class="headerlink" title="办公自动化专题"></a>办公自动化专题</h1><blockquote>
+<p> 涵盖了Excel、Word、PPT、ODF、PDF、邮件、微信、文件处理等所有能在办公场景实现自动化的库</p>
+</blockquote>
+<h2 id="Excel自动化库"><a href="#Excel自动化库" class="headerlink" title="Excel自动化库"></a>Excel自动化库</h2><p>1.xlwings 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://www.xlwings.org/">https://www.xlwings.org/</a></p>
+<p>特点：xlwings 是开源且免费的，预装了 Anaconda 和 WinPython，可在 Windows 和 macOS 上运行。通过 Python 脚本或 Jupyter notebook 自动化 Excel，通过宏从 Excel 调用 Python，并编写用户定义的函数（UDF 仅适用于 Windows）</p>
+<p> 2.openpyxl 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://openpyxl.readthedocs.io/">https://openpyxl.readthedocs.io</a></p>
+<p>特点：openpyxl 是一个用于读取 &#x2F; 编写 Excel 2010 xlsx&#x2F;xlsm&#x2F;xltx&#x2F;xltm 文件的 Python 库。它是由于缺乏从 Python 中读取 &#x2F; 编写 Office Open XML 格式的现有库而诞生的。</p>
+<p>3.xlrd 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/xlrd">https://pypi.python.org/pypi/xlrd</a></p>
+<p>特点：在 python 中，xlrd 库是一个很常用的读取 excel 文件的库，其对 excel 文件的读取可以实现比较精细的控制。</p>
+<p> 4.xlwt 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://pypi.org/project/xlwt/">https://pypi.org/project/xlwt/</a></p>
+<p>特点：类比于 xlrd 的 reader，那么 xlwt 就相对于 writer，而且很纯正的一点就是它只能对 Excel 进行写操作。xlwt 和 xlrd 不光名字像，连很多函数和操作格式也是完全相同。</p>
+<p>5.xlutils 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://pypi.org/project/xlutils/">https://pypi.org/project/xlutils/</a></p>
+<p>特点：xlutils（excel utilities）是一个提供了许多操作修改 excel 文件方法的库。xlutils 库也仅仅是通过复制一个副本进行操作后保存一个新文件，xlutils 库就像是 xlrd 库和 xlwt 库之间的一座桥梁，因此，xlutils 库是依赖于 xlrd 和 xlwt 两个库的。</p>
+<p>6.xlsxwriter 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://xlsxwriter.readthedocs.io/">https://xlsxwriter.readthedocs.io/</a></p>
+<p>特点：xlsxwriter 是用于创建 Excel XLSX 文件的 Python 模块，可用于将文本、数字、公式和超链接写入 Excel2007 + XLSX 文件中的多个工作表。它支持格式化等功能。可以说除了 Excel 本身，就属这个功能最齐全了。</p>
+<p>7.pandas 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://www.pypandas.cn/docs/">https://www.pypandas.cn/docs/</a></p>
+<p>特点：pandas 是基于 NumPy 的一种工具，该工具是为了解决数据分析任务而创建的。Pandas 纳入了大量库和一些标准的数据模型，提供了高效地操作大型数据集所需的工具。</p>
+<p>8.Marmir 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/brianray/mm">https://github.com/brianray/mm</a></p>
+<p>特点：Marmir 采用 Python 数据结构并将其转换为电子表格。它是类固醇上的 xlwt 和 google 电子表格。目标是使用最少的配置轻松生成多种类型的有用表文件。</p>
+<h2 id="Word自动化库"><a href="#Word自动化库" class="headerlink" title="Word自动化库"></a>Word自动化库</h2><p>9.python-docx 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://python-docx.readthedocs.io/en/latest/">https://python-docx.readthedocs.io/en/latest/</a></p>
+<p>特点：python-docx 是一个用于创建和更新 Microsoft Word (.docx) 文件的 Python 库。快速开始、处理文档、处理文本、使用截面、使用页眉和页脚、API基础理、解样式、使用样式理解图片和其他形状。只对 windows 平台有效。</p>
+<p>10.textract 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/mirrors/textract">https://gitee.com/mirrors/textract</a></p>
+<p>特点：它同时兼顾 “doc” 和 “docx”，但安装过程需要一些依赖。你可以批量的用 python 生成 word 文件，推荐使用 docx，不需要会太多。</p>
+<h2 id="PPT自动化库"><a href="#PPT自动化库" class="headerlink" title="PPT自动化库"></a>PPT自动化库</h2><p>11.python-pptx 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://python-pptx.readthedocs.io/">https://python-pptx.readthedocs.io</a></p>
+<p>特点：python-pptx 是一个用于创建和更新 PowerPoint (.pptx) 文件的 Python 库。典型用途是从数据库内容生成自定义 PowerPoint 演示文稿，可通过单击 Web 应用程序中的链接下载。</p>
+<h2 id="ODF自动化库"><a href="#ODF自动化库" class="headerlink" title="ODF自动化库"></a>ODF自动化库</h2><p>12.Relatorio 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://pypi.org/project/relatorio/">https://pypi.org/project/relatorio/</a></p>
+<p>特点：Relatorio 是一个模板库，它提供了一种轻松输出多种文件（odt、ods、png、svg 等）的方法。通过为它们创建插件可以轻松添加对更多文件类型的支持。Relatorio 还提供了一个报告存储库，允许您将 python 对象和报告链接在一起，按 mimetype&#x2F;name&#x2F;python 对象查找报告。ODF：开放文档格式（外文名：OpenDocument Format，外语简称：ODF）是一种规范，基于 XML（标准通用标记语言的子集）的文件格式，因应试算表、图表、演示稿和文字处理文件等电子文件而设置。</p>
+<h2 id="PDF自动化库"><a href="#PDF自动化库" class="headerlink" title="PDF自动化库"></a>PDF自动化库</h2><p>13.PyPDF2 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mstamy2/PyPDF2">https://github.com/mstamy2/PyPDF2</a></p>
+<p>特点：PyPDF2 是一个纯 Python PDF 库，能够拆分、合并、裁剪和转换 PDF 文件的页面。它还可以向 PDF 文件添加自定义数据、查看选项和密码。它可以从 PDF 中检索文本和元数据，也可以将整个文件合并在一起。</p>
+<p>14.ReportLab 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://www.reportlab.com/opensource/">https://www.reportlab.com/opensource/</a></p>
+<p>特点：ReportLab 是久经考验、超强大的开源引擎，用于创建复杂的、数据驱动的 PDF 文档和自定义矢量图形。它是免费的、开源的，并且是用 Python 编写的。</p>
+<p>15.PDFminer 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/euske/pdfminer">https://github.com/euske/pdfminer</a></p>
+<p>特点：PDFMiner 是一款用于 PDF 文档的文本提取工具。</p>
+<h2 id="邮件自动化库"><a href="#邮件自动化库" class="headerlink" title="邮件自动化库"></a>邮件自动化库</h2><p>16.Django Celery SES 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/StreetVoice/django-celery-ses">https://github.com/StreetVoice/django-celery-ses</a></p>
+<p>特点：这个包提供了一个 EmailBackend 来利用 django-celery 发送电子邮件。您可以将 EmailBackend 插入您的项目中，而无需对代码进行任何修改。</p>
+<p>17.Envelopes 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="http://tomekwojcik.github.io/envelopes/">http://tomekwojcik.github.io/envelopes/</a></p>
+<p>特点：Envelopes 是 Python 的电子邮件和 smtplib 模块的包装器。它旨在使在 Python 中处理外发电子邮件变得简单而有趣。</p>
+<p>18.Flanker 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mailgun/flanker">https://github.com/mailgun/flanker</a></p>
+<p>特点：由 mailgun 开源的 Flanker - email address and MIME parsing for Python 是一个解析高效、容错率不错的 python 第三方扩展库。python 3 也可以正常使用，该库包含了邮件地址解析和邮件 mime 格式解析。</p>
+<p> 19.imbox 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/martinrusev/imbox">https://github.com/martinrusev/imbox</a></p>
+<p>特点：用于读取 IMAP 邮箱并将电子邮件内容转换为机器可读数据的 Python 库</p>
+<p>20.inbox.py 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/billzhong/inbox.py">https://github.com/billzhong/inbox.py</a></p>
+<p>特点：这是您见过的最简单的 SMTP 服务器。它是异步的。一个实例每秒应该处理一千多封电子邮件。</p>
+<p>21.sync-engine 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/nylas/sync-engine">https://github.com/nylas/sync-engine</a></p>
+<p>特点：Nylas 同步引擎在强大的电子邮件同步平台之上提供了一个 RESTful API，可以轻松地在电子邮件之上构建应用程序。</p>
+<p>22.Lamson 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/zedshaw/lamson">https://github.com/zedshaw/lamson</a></p>
+<p>特点：Lamson 是一个纯 Python SMTP 服务器，旨在以现代 Web 框架（如 Django）的风格创建强大而复杂的邮件应用程序。</p>
+<p>23.Marrow Mailer 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/marrow/mailer">https://github.com/marrow/mailer</a></p>
+<p>特点：Marrow Mailer 是一个 Python 库，可以轻松地从您的应用程序发送电子邮件。通过使用 Marrow Mailer，您可以：轻松构建纯文本和 HTML 电子邮件；提高电子邮件传递的可测试性；使用不同的邮件投递管理策略；例如立即，延迟，甚至多服务器等。</p>
+<p>24.Modoboa 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/modoboa/modoboa">https://github.com/modoboa/modoboa</a></p>
+<p>特点：Modoboa 是一个邮件托管和管理平台，包括一个现代和简化的 Web 用户界面。它提供了有用的组件，例如管理面板或网络邮件。</p>
+<p>25.smtplib 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/smtplib.html">https://docs.python.org/zh-cn/3/library/smtplib.html</a></p>
+<p>特点：smtplib 模块是 python 中 smtp (简单邮件传输协议) 的客户端实现。我们可以使用 smtplib 模块，轻松的发送电子邮件。</p>
+<h2 id="微信自动化库"><a href="#微信自动化库" class="headerlink" title="微信自动化库"></a>微信自动化库</h2><p>26.Python wxpy 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://wxpy.readthedocs.io/zh/latest/">https://wxpy.readthedocs.io/zh/latest/</a></p>
+<p>特点：微信机器人&#x2F;可能是最优雅的微信个人号API，wxpy 在 itchat 的基础上，通过大量接口优化提升了模块的易用性，并进行丰富的功能扩展。</p>
+<h2 id="文件处理自动化库"><a href="#文件处理自动化库" class="headerlink" title="文件处理自动化库"></a>文件处理自动化库</h2><p>27.os 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/os.html?highlight=os#module-os">https://docs.python.org/zh-cn/3/library/os.html?highlight=os#module-os</a></p>
+<p>特点：本模块提供了一种使用与操作系统相关的功能的便捷式途径。如果你只是想读写一个文件，请参阅 open()，如果你想操作文件路径，请参阅 os.path 模块，如果你想读取通过命令行给出的所有文件中的所有行，请参阅 fileinput 模块。为了创建临时文件和目录，请参阅 tempfile 模块，对于高级文件和目录处理，请参阅 shutil 模块。</p>
+<h2 id="综合功能自动化库"><a href="#综合功能自动化库" class="headerlink" title="综合功能自动化库"></a>综合功能自动化库</h2><p>28.win32com 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://pypi.org/project/pywin32/">https://pypi.org/project/pywin32/</a></p>
+<p>特点：win32com 模块主要为 Python 提供调用 windows 底层组件对 word 、Excel、PPT 等进行操作的功能，只能在 Windows 环境下使用，并且需要安装 office 相关软件才行（WPS 也行）。</p>
+<p> 29.unoconv 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/unoconv/unoconv">https://github.com/unoconv/unoconv</a></p>
+<p>特点：是一个命令行工具，可以将 LibreOffice 可以导入的任何文档格式转换为 LibreOffice 可以导出的任何文档格式。它利用 LibreOffice 的 UNO 绑定进行文档的非交互式转换，也支持 OpenOffice。</p>
+<p>30.Tablib 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://www.osgeo.cn/tablib/">https://www.osgeo.cn/tablib/</a></p>
+<p>特点：Python tablib 模块是第三方模块，主要作用是将数据导出为各种不同的格式，包括 excel，json，html，yaml，csv，tsv 等格式，怎么样，有点心动了吧，当然这个模块使用起来也是超级简单的。</p>
+<p>31.SnowNLP 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/isnowfy/snownlp">https://github.com/isnowfy/snownlp</a></p>
+<p>特点：SnowNLP 是一个 python 写的类库，可以方便的处理中文文本内容，是受到了 TextBlob 的启发而写的，由于现在大部分的自然语言处理库基本都是针对英文的，于是写了一个方便处理中文的类库，并且和 TextBlob 不同的是，这里没有用 NLTK，所有的算法都是自己实现的，并且自带了一些训练好的字典。注意本程序都是处理的 unicode 编码，所以使用时请自行 decode 成 unicode。</p>
+<p>32.TextBlob 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://textblob.readthedocs.io/">https://textblob.readthedocs.io</a></p>
+<p>特点：TextBlob 是一个用于处理文本数据的 Python（2 和 3）库。它提供了一个简单的 API，用于深入研究常见的自然语言处理 (NLP) 任务，例如词性标注、名词短语提取、情感分析、分类、翻译等。</p>
+<p>33.TextGrocery 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://textgrocery.readthedocs.io/">https://textgrocery.readthedocs.io</a></p>
+<p>特点：TextGrocery 是一个基于 LibLinear 和结巴分词的短文本分类工具，特点是高效易用，同时支持中文和英文语料。</p>
+<p>34.NumPy 库</p>
+<p>官网：</p>
+<p><a target="_blank" rel="noopener" href="https://www.numpy.org.cn/">https://www.numpy.org.cn/</a></p>
+<p>特点：NumPy 是 Python 中科学计算的基础包。它是一个 Python 库，提供多维数组对象，各种派生对象（如掩码数组和矩阵），以及用于数组快速操作的各种 API，有包括数学、逻辑、形状操作、排序、选择、输入输出、离散傅立叶变换、基本线性代数，基本统计运算和随机模拟等等。</p>
+<h1 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h1><blockquote>
+<p>存在key-value的数据，无论是啥格式，第一步优先处理成json格式</p>
+</blockquote>
+<h2 id="txt"><a href="#txt" class="headerlink" title="txt"></a>txt</h2><h2 id="docx"><a href="#docx" class="headerlink" title="docx"></a>docx</h2><h2 id="json"><a href="#json" class="headerlink" title="json"></a>json</h2><p>常见json格式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;&#125;, &#123;&#125;]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">infile = <span class="string">&#x27;filename.txt&#x27;</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(infile, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fr:</span><br><span class="line">        context = fr.read()</span><br><span class="line">        json_context = json.loads(context)</span><br><span class="line">        <span class="built_in">print</span>(json_context[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<h2 id="xls"><a href="#xls" class="headerlink" title="xls"></a>xls</h2><h2 id="xlsx"><a href="#xlsx" class="headerlink" title="xlsx"></a>xlsx</h2><p>如果我们只是要 <code>读取</code> Excel文件里面的数据进行处理，可以使用 <code>xlrd</code> 这个库。</p>
+<p>首先我们安装xlrd库，执行下面的命令，必须指定版本号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install xlrd==1.2.0</span><br></pre></td></tr></table></figure>
+
+<p>注意：xlrd 新版本只支持 xls 格式，所以我们这里指定安装 1.2.0 老版本，可以支持xlsx格式。<a target="_blank" rel="noopener" href="https://cdn2.byhy.net/files/py/income.xlsx">点击这里，下载 Excel文件 income.xlsx</a></p>
+<p><strong>使用pandas</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 处理模型提取的结果</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">deal_al_res</span>():</span><br><span class="line">    <span class="comment"># 打开表</span></span><br><span class="line">    df = pd.read_excel(<span class="string">&#x27;./xdiwfjH98xxone (1).xlsx&#x27;</span>)</span><br><span class="line">    row, col = df.shape</span><br><span class="line">    <span class="comment"># print(row, col)</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(row):</span><br><span class="line">        tmp = df.iloc[i]</span><br><span class="line">        <span class="built_in">print</span>(tmp[<span class="string">&#x27;file_name&#x27;</span>])</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;res.txt&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fw:</span><br><span class="line">            fw.write(tmp[<span class="string">&#x27;file_name&#x27;</span>] + <span class="string">&#x27;\n&#x27;</span> + <span class="built_in">str</span>(tmp[<span class="string">&#x27;合同名称&#x27;</span>]) + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">        <span class="comment"># break</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="csv"><a href="#csv" class="headerlink" title="csv"></a>csv</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/junpengwang/p/10803339.html">https://www.cnblogs.com/junpengwang/p/10803339.html</a></p>
+<h2 id="pdf"><a href="#pdf" class="headerlink" title="pdf"></a>pdf</h2><blockquote>
+<p>su rhino</p>
+<p>conda activate zkq_py36</p>
+<p>python …</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pdf分页</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pdf2image <span class="keyword">import</span> convert_from_path</span><br><span class="line"><span class="keyword">import</span> tempfile</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> paddleocr <span class="keyword">import</span> PaddleOCR, draw_ocr</span><br><span class="line">ocr=PaddleOCR(use_angle_cls=<span class="literal">True</span>, lang=<span class="string">&#x27;ch&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pdf2img</span>(<span class="params">filename,outputDir=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;filename=&#x27;</span>, filename)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tempfile.TemporaryDirectory() <span class="keyword">as</span> path:</span><br><span class="line">        images = convert_from_path(filename)</span><br><span class="line">    <span class="keyword">return</span> images</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pdfs2img</span>(<span class="params">pdf_dir, save_dir</span>):</span><br><span class="line">    <span class="keyword">for</span> rt, folders, files <span class="keyword">in</span> os.walk(pdf_dir):</span><br><span class="line">        <span class="keyword">for</span> f <span class="keyword">in</span> files:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> f.endswith(<span class="string">&quot;pdf&quot;</span>):</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            pdf_path = os.path.join(rt, f)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                images = pdf2img(filename=pdf_path)</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;f:<span class="subst">&#123;pdf_path&#125;</span>,error_msg:<span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">for</span> index, img <span class="keyword">in</span> <span class="built_in">enumerate</span>(images):</span><br><span class="line">                img.save(save_dir + <span class="string">f&quot;<span class="subst">&#123;f.strip(<span class="string">&#x27;.pdf&#x27;</span>)&#125;</span>_<span class="subst">&#123;index&#125;</span>.png&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Compeleted.&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="comment"># pdf_dir = &quot;/data/data01/ztp/苏粮/data/&quot;</span></span><br><span class="line">    pdf_dir = <span class="string">&quot;/data/data02/wj/PythonWorkspace/YuHuaPdfScan/code/ocr/data/stamp/I/&quot;</span></span><br><span class="line">    <span class="comment"># save_dir = &quot;/data/data02/wj/PythonWorkspace/YuHuaPdfScan/code/ocr/src/suliang_pdf2imgs/&quot;</span></span><br><span class="line">    save_dir = <span class="string">&quot;/data/data02/wj/PythonWorkspace/YuHuaPdfScan/code/ocr/data/stamp/res/I/&quot;</span></span><br><span class="line">    pdfs2img(pdf_dir=pdf_dir, save_dir=save_dir)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h1><h2 id="Python程序的执行过程"><a href="#Python程序的执行过程" class="headerlink" title="Python程序的执行过程"></a>Python程序的执行过程</h2><blockquote>
+<p>其实了解Python程序的执行过程对于大部分程序员来说意义都是不大的，那么真正有意义的是，我们可以从Python解释器的做法上<strong>学到一些处理问题的方式和方法</strong></p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.shuzhiduo.com/A/obzbMY1bdE/">Python程序的执行过程原理（解释型语言和编译型语言）</a></p>
+<p><strong>Python是一门解释型语言？</strong></p>
+<p>我初学Python时，听到的关于Python的第一句话就是Python是一门解释型语言，我就这样一直相信下去，直到发现.pyc文件的存在，如果真是解释型语言，那么生成的.pyc文件的是什么呢？c应该是compiled的缩写才对啊！<br>为了防止其他学习Python的人也被这句话误解，那么我们就在文中来澄清一下这个问题，并且把一些基础概念给理一理。</p>
+<p><strong>解释型语言和编译型语言</strong></p>
+<p>计算机是不能够识别高级语言的，所以当我们运行一个高级语言程序的时候，就需要一个“翻译机”来从事把高级语言转变成计算机能读懂的机器语言的过程。这个过程分成两类，第一种是编译，第二种是解释。<br>编译型语言在程序执行之前，先会通过编译器对程序执行一个编译的过程，把程序转变成机器语言。运行时就不需要翻译，而直接执行就可以了，最典型的例子就是C语言。</p>
+<p>解释型语言就没有这个编译过程，而是在程序运行的时候，通过解释器对程序逐行做出解释，然后直接运行，最典型的例子是Ruby。<br>通过以上的例子，我们可以来总结一下解释型语言和编译型语言的优缺点，因为编译型语言在程序运行之前就已经对程序做出了“翻译”，所以在运行时就少掉了“翻译”的过程，所以效率比较高。但是我们也不能一概而论，一些解释型语言也可以通过解释器的优化来在对程序做出翻译时对整个程序做出优化，从而在效率上超过编译型语言。</p>
+<p>此外，随着Java等基于虚拟机的语言的兴起，我们又不能把语言纯粹的分成解释型和编译型这两种。<br>用Java来举例，Java首先是通过编译器编译成字节码文件，然后在运行时通过解释器给解释成机器文件。所以我们说Java是一种先编译后解释的语言。<br>再换成C#，C#首先是通过编译器将C#文件编译成IL文件，然后在通过CLR将IL文件编译成机器文件。所以我们说C#是一门纯编译语言，但是C#是一门需要二次编译的语言。同理也可以等效运用到基于.NET平台上的 其他语言。</p>
+<p><strong>Python到底属于哪一种类型？</strong></p>
+<p>其实Python和Java&#x2F;C#一样，也是一门基于虚拟机的语言，我们先来从表面上简单的了解一下Python程序的运行过程吧。<br>当我们在命令行中输入python hello.py时，其实是激活了Python的“解释器”，告诉“解释器”：你要开始工作了。可是在“解释”之前，其实执行的第一项工作和Java一样，是编译。<br>熟悉Java的同学可以想象一下我们在命令行中如何执行一个Java的程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javac hello.java</span><br><span class="line">java hello</span><br></pre></td></tr></table></figure>
+
+<p>只是我们在用eclipse之类的IDE时，将这两步给融合成了一步而已。其实Python也是一样的，当我们执行python hello.py时，它也一样执行了这么一个过程，所以我们应该这样来描述Python，Python是一门先编译后解释的语言。</p>
+<p><strong>简述Python中程序的运行过程</strong></p>
+<p>在说这个问题之前，我们先来说两个概念，PyCodeObject和pyc文件。<br>我们在硬盘上看到的pyc自然不必多说，而其实PyCodeObject则是Python编译器真正编译成的结果。我们先简单知道就可以了，继续向下看。<br>当Python程序运行时，编译的结果则是保存在位于内存中的PyCodeObject中，当Python程序运行结束时，Python解释器则将PyCodeObject写回到pyc文件中。<br>当Python程序第二次运行时，首先程序会在硬盘中寻找对应的pyc文件，如果找到，则直接载入，否则就重复上面的过程。</p>
+<p>所以我们应该这样来定位PyCodeObject和pyc文件：pyc文件其实是PyCodeObject的一种持久化保存方式。</p>
+<p>我们先来简单看两个例子<br>写一段简单的程序运行一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">print_hello</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;welcome information: %s&#x27;</span> %s)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    print_hello(<span class="string">&#x27;hello world&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>执行<code>python3 test.py</code></p>
+<p>我们发现在运行完test.py这个程序后，当前路径下并没有生成相应的pyc文件。那是为什么呢？<br>我们再来做一个小测试，将test.py当做模块导入到test888.py文件中，然后在这个程序中运行print_hello这个程序：</p>
+<p><code>test.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">print_hello</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;welcome information: %s&#x27;</span> %s)</span><br></pre></td></tr></table></figure>
+
+<p><code>test888.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> test <span class="keyword">import</span> print_hello</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    print_hello(<span class="string">&#x27;hello world&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>我们可以发现运行完test888.py文件后在当前路径下出现了一个名叫<code>__pycache__</code>的文件夹，里面包含了一个pyc文件，下面我们来分析一下这个过程到底发生了什么。</p>
+<p><img src="/pythonimage-20230419092124600.png" alt="image-20230419092124600"></p>
+<p><strong>pyc文件的目的</strong><br>回想上面我们在分析编译型语言和解释型语言的优缺点时，编译型语言的优点在于，我们可以在程序运行时不用解释，而直接利用已经翻译过的文件。也就是说，我们之所以要把py文件编译成pyc文件，最大的优点在于我们在运行程序时，不需要重新对该模块进行再次解释。<br>所以，需要编译成pyc文件的应该是那些可以重用的模块，这于我们在设计类时是一样的目的。所以Python的解释器认为：只有import进来的模块，才是需要被重用的模块。</p>
+<p>这个时候也许有人会有疑问，我的test.py不是也需要运行吗，虽然不是一个模块，但是以后我每次运行也可以节省时间啊！<br>OK，我们从实际情况出发，思考一下我们在什么时候才可能运行python xxx.py文件：</p>
+<ol>
+<li>执行测试时；</li>
+<li>开启一个Web进程时；</li>
+<li>执行一个脚本时。</li>
+</ol>
+<p>我们来逐条分析，第一种情况就不多说了，这个时候哪怕所有的文件都没有pyc文件都是无所谓的。</p>
+<p>第二种情况，试想一个web.py的程序，通常是这样执行的：</p>
+<p>然后这个程序就类似于一个守护进程一样一直监视着8000端口，而一旦中断，只可能是程序被杀死或者其他的意外情况，那么你要做的是把整个Web服务重启，那么既然一直监视着，把PyCodeObject一直放在内存中就足够了，完全没有必要持久化到硬盘上。</p>
+<p>再来看看最后一个情况，执行一个程序脚本，一个程序的主入口其实很类似于Web程序中的Controller，也就是说，他负责的应该是Model之间的调度，而不包含任何的主逻辑在内，只是负责把参数转来转去而已，那么如果做算法的同学可以知道，在一段算法脚本中，最容易改变的就是算法的各个参数，那么这个时候将它持久化成pyc文件就未免有些画蛇添足了。</p>
+<p>所以我们可以这样理解Python解释器的意图，Python解释器只是把我们可能重用到的模块持久化成pyc文件。</p>
+<p><strong>pyc文件的过期时间</strong></p>
+<p>说完了pyc文件，可能有人会想到，每次Python解释器都把模块给持久化成pyc文件，那么当我的模块发生改变的时候，是不是都要手动的把之前的pyc文件remove掉呢？<br>当然Python的设计者是不会犯这样的错误的，这个过程其实取决于PyCodeObject是如何写入pyc文件中的。<br>我们仔细看一下Import模块的源码其实不难发现，它在写入pyc文件的时候，写了一个Long型变量，变量的内容则是文件的最近修改日期，同理，在pyc文件中，每次在载入之前都会检查一下py文件和pyc文件保存的最后修改日期，如果不一致则重新生成新的pyc文件。</p>
+<p><strong>总结</strong></p>
+<p>其实了解Python程序的执行过程对于大部分程序员来说意义都是不大的，那么真正有意义的是，我们可以从Python解释器的做法上<strong>学到一些处理问题的方式和方法</strong>：</p>
+<p>在Python中判断是否生成pyc文件和我们在设计缓存系统时是一样的，我们可以仔细想想，到底什么是值得扔在缓存里面的，什么是不值得的。<br>在运行一个耗时的Python脚本时，我们如何能够做到稍微压榨一些程序的运行时间呢？就是将模块从主模块分开。（虽然往往这都不是瓶颈）<br>在设计一个软件系统时，重用和非重用的东西是不是也可以分开来对待，这是软件设计原则的重要部分。<br>在设计缓存系统（或者其他系统）时，我们如何来避免程序的过期，其实Python解释器为我们提供了一个特别常见而且有效的解决方案。</p>
+<h1 id="源码剖析"><a href="#源码剖析" class="headerlink" title="源码剖析"></a>源码剖析</h1><h1 id="工具软件"><a href="#工具软件" class="headerlink" title="工具软件"></a>工具软件</h1><h2 id="文件整理系统设计"><a href="#文件整理系统设计" class="headerlink" title="文件整理系统设计"></a>文件整理系统设计</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/34633472?sort=created"> 有哪些值得借鉴的工作文件分类和整理方法？</a></p>
+<h3 id="文件夹相关"><a href="#文件夹相关" class="headerlink" title="文件夹相关"></a>文件夹相关</h3><p><strong>命名</strong></p>
+<p>以<code>数字-部门/功能</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">01_HR</span><br><span class="line">02_admin</span><br><span class="line">03_Fin</span><br><span class="line">04_Engg</span><br><span class="line">05_Sales</span><br></pre></td></tr></table></figure>
+
+<p><strong>嵌套</strong></p>
+<p>取消多级文件夹嵌套，两层最好，最多三层</p>
+<p>所有文件夹，甭管它属于哪个大分类，全部都在最外层。直接把所有子文件夹放到外面来，然后用数字前缀归类。</p>
+<p><img src="/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/image-20230419161931232.png" alt="image-20230419161931232"></p>
+<p>二级分类也可以按照A、B、C、D字母排，看自己的喜好。</p>
+<p>单独的file可以建立一个folder，里面只装这个file，让它强制参与folder的排序就OK了。</p>
+<p>后期维护可以手动修改前缀调整逻辑层级，或者借助批量命名工具等(linux环境下更方便)</p>
+<p>问题：文件会越来越多怎么办？继续往下看</p>
+<p><strong>全盘文件分类</strong></p>
+<p>按用途分，同一个用途下，不管什么类型的文件，都可以放在一起</p>
+<p><img src="/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/image-20230419163129678.png" alt="image-20230419163129678"></p>
+<ul>
+<li><p>01 工作目录</p>
+<p>所有正在处理或者待处理的工作，都在这个文件夹 下。包括公司的工作、私活、杂事、计算房贷、个人计划、打官司、帮别人写资料等。可以理解为是一个todolist，可以在编号前加上时间，比如：</p>
+<p><img src="/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/image-20230419163448449.png" alt="image-20230419163448449"></p>
+<p>这里的文件迟早会越积越多，会督促我们及时处理。需要及时把处理完的文件移动到08 存档资料中。</p>
+<p>宗旨是，要把工作目录里的文件夹控制在一定的数量，做完就移走</p>
+<p>拓展：上面描述的是已经在做的事，和知道了即将要做的事，可以做一个excel，记录下文件夹名称，及此次job的背景、目标等。也可记录即将可能落到自己头上的事情。当然也没必要这样，因为这需要始终同步。不一定同步，如果不通过这种方式来写readme，可以在每个文件夹下，加上各自的readme即可。</p>
+</li>
+<li><p>02 学习资料</p>
+<p>放一些学习教程，如职场技能学习，英语学习、法律学习等等，同样也只建立一层子文件夹，参考上述第二点。</p>
+<p><img src="/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/image-20230419164117933.png" alt="image-20230419164117933"></p>
+<p>我自己的实际是，把所有的文档笔记，放在一个目录下，用tpora管理，并同步github</p>
+<p><img src="/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/image-20230419164224210.png" alt="image-20230419164224210"></p>
+</li>
+<li><p>03 参考资料&amp;素材</p>
+<p>可能需要用到的参考资料，这是从事工作的原材料。比如网上下载的模板、表格、视频、字体等</p>
+</li>
+<li><p>04 视频</p>
+<p>放一些娱乐视频，不包括学习教程，不包括自己收集拍摄的视频</p>
+<p>自己的实际是将学习教程下载下来，同步到网盘</p>
+</li>
+<li><p>05 相册</p>
+<p>按照时间 + 主题建立子文件夹</p>
+</li>
+<li><p>06 软件工具</p>
+<p>放一些软件安装包，如office365、abobe系列、IDE等</p>
+<p>自己的实际是同步到网盘</p>
+</li>
+<li><p>07 个人重要资料</p>
+<p>身份证复印件、户口本复印件、房产证复印件、银行卡复印件、体检报告、个人简历等等</p>
+<p>这种类型的资料最好集中存放。云端的话自行选择</p>
+</li>
+<li><p>08 存档资料</p>
+<p>放已经完成的工作</p>
+</li>
+</ul>
+<p>以上只是参考，根据实际情况自行调整</p>
+<p><strong>其他技巧</strong></p>
+<ul>
+<li>桌面建立临时文件夹</li>
+<li>添加到快速访问</li>
+<li>配合<code>everything</code>文件搜索</li>
+</ul>
+<h3 id="文件相关"><a href="#文件相关" class="headerlink" title="文件相关"></a>文件相关</h3><p><strong>如何给文件起名</strong></p>
+<p>文件添加时间后缀，如project_checklist_20220523</p>
+<p>这样的好处是下载下来永远不会乱，系统会自动按照时间顺序排列，而你也知道这个文件是什么时候创建的，方便识别和追溯。</p>
+<p>在创建文件加事件后缀，发给比人修改后从接收新的文件，也要更新时间后缀。如果基于已有的某个版本更新，复制当前副本并修改时间后缀。这样永远知道那个版本是最新的。</p>
+<p>发给别人的文件如果都加上一个时间后缀，会显得专业很多。</p>
+<p>其他：</p>
+<p>2、工作文件夹命名可以采用：年月节点+ 项目名 + 备注的方式，备注可以写用途等，比如：22年中_大促_100亿补贴</p>
+<p>3、文件夹和文件名尽量采用下划线，非数字文本下划线的字符，在计算机里有时会被判断为非法字符</p>
+<p>4、可以用 QTTabBar 加强文件管理器的功能，翻文件和另存为时会很方便</p>
+<p>5、同步文件的工具，可以用 OneDrive，重要资料放里面</p>
+<p>5、用 Zotero 可以管理信息，配合 OneDrive，可以同步和检索各种格式的数据，包括PDF、Excel、PPT等。有两大亮点：一是Zotero 里点一下就能打开其他文件，这是各类笔记不支持的功能；二是支持给文件加标签，树状目录+标签的方式检索功能更强大，适合沉淀专业知识</p>
+<p>6、工具软件可以用一个硬盘来存，重装系统，换电脑的迁移成本会小点</p>
+<p>7、梯子可以用 V2，开启Pac模式，可以后台常驻。Zotero 和 OneDrive 要搭配用，Chrome 上一些好用的插件也需要在应用商店里下</p>
+<h3 id="邮件相关"><a href="#邮件相关" class="headerlink" title="邮件相关"></a>邮件相关</h3><p>处理的主要是数据，此篇略</p>
+<h3 id="桌面整理相关"><a href="#桌面整理相关" class="headerlink" title="桌面整理相关"></a>桌面整理相关</h3><h2 id="ETL工具"><a href="#ETL工具" class="headerlink" title="ETL工具"></a>ETL工具</h2><h3 id="Kettle"><a href="#Kettle" class="headerlink" title="Kettle"></a>Kettle</h3><blockquote>
+<p>现在的数据库种类越来越多，数据库备份的格式也越来越复杂，所以数据格式化一直是一个老生常谈的问题。据库备份文件格式那么多，既有SQL的，也有BAK的，还有TXT的等。数据库种类也有很多，MySQL，Oracle，SQL server等，怎么对这些数据库进行管理？</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15076209/4338401">数据库数据格式化之Kettle Spoon_51CTO博客_kettle 数据同步</a></p>
+<p>视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1NT4y1c7o8/">https://www.bilibili.com/video/BV1NT4y1c7o8/</a></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>vscode添加头模板：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/odesey/p/16555873.html">https://www.cnblogs.com/odesey/p/16555873.html</a></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">	<span class="comment">// Place your snippets for python here. Each snippet is defined under a snippet name and has a prefix, body and </span></span><br><span class="line">	<span class="comment">// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:</span></span><br><span class="line">	<span class="comment">// $1, $2 for tab stops, $0 for the final cursor position, and $&#123;1:label&#125;, $&#123;2:another&#125; for placeholders. Placeholders with the </span></span><br><span class="line">	<span class="comment">// same ids are connected.</span></span><br><span class="line">	<span class="comment">// Example:</span></span><br><span class="line">	<span class="comment">// &quot;Print to console&quot;: &#123;</span></span><br><span class="line">	<span class="comment">// 	&quot;prefix&quot;: &quot;log&quot;,</span></span><br><span class="line">	<span class="comment">// 	&quot;body&quot;: [</span></span><br><span class="line">	<span class="comment">// 		&quot;console.log(&#x27;$1&#x27;);&quot;,</span></span><br><span class="line">	<span class="comment">// 		&quot;$2&quot;</span></span><br><span class="line">	<span class="comment">// 	],</span></span><br><span class="line">	<span class="comment">// 	&quot;description&quot;: &quot;Log output to console&quot;</span></span><br><span class="line">	<span class="comment">// &#125;</span></span><br><span class="line">	<span class="attr">&quot;HEADER&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">		<span class="attr">&quot;prefix&quot;</span><span class="punctuation">:</span> <span class="string">&quot;desc&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">			<span class="comment">// &quot;#!/usr/bin/env python&quot;,</span></span><br><span class="line">			<span class="string">&quot;# -*- encoding: utf-8 -*-&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">&quot;&#x27;&#x27;&#x27;&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">&quot;@File    :   $TM_FILENAME&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">&quot;@Time    :   $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">&quot;@Version :   1.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">&quot;@Desc    :   None&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">&quot;&#x27;&#x27;&#x27;&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">&quot;# import lib here&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">&quot;if __name__ == &#x27;__main__&#x27;:&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">&quot;\t$0&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="string">&quot;\tpass&quot;</span></span><br><span class="line">		<span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">	<span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/Saiable">Sai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mindcons.cn/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/">https://mindcons.cn/2023/04/01/web/data/软件使用/python/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mindcons.cn" target="_blank">吕小布の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/02/10/63e583843360e.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://bu.dusays.com/2023/02/10/63e580229ee01.webp" target="_blank"><img class="post-qr-code-img" src="https://bu.dusays.com/2023/02/10/63e580229ee01.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://bu.dusays.com/2023/02/09/63e48775d4f42.webp" target="_blank"><img class="post-qr-code-img" src="https://bu.dusays.com/2023/02/09/63e48775d4f42.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/04/08/web/web/JavaScript/xstate%20catalogue/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">xstate catalogue</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/17/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/sql/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">sql</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/02/16/web/data/%E5%9F%BA%E5%BB%BA%E7%8E%AF%E5%A2%83/python%E7%8E%AF%E5%A2%83/" title="python环境"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-16</div><div class="title">python环境</div></div></a></div><div><a href="/2023/02/16/web/data/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/%E7%88%AC%E8%99%AB/" title="爬虫"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-16</div><div class="title">爬虫</div></div></a></div><div><a href="/2023/03/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/shell/" title="shell"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-01</div><div class="title">shell</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://bu.dusays.com/2023/02/10/63e583843360e.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sai</div><div class="author-info__description">天可补,海可填,南山可移。日月既往,不可复追。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">145</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">54</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">37</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Saiable"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://bu.dusays.com/2023/02/10/63e57e822f198.webp" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://bu.dusays.com/2023/02/10/63e57f8ac9fae.webp" target="_blank" title="WeChat"><i class="fa-brands fa-weixin"></i></a><a class="social-icon" href="https://github.com/Saiable" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:mindcons@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">日月既往,不可复追。</div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople1.js"></script><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/zdog.dist.js"></script><script id="rendered-js" src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="card-widget tzy-right-widget" id="card-wechat"><div id="flip-wrapper"><div id="flip-content"><div class="face"></div><div class="back face"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#python%E8%A7%A3%E9%87%8A%E5%99%A8"><span class="toc-number">1.1.</span> <span class="toc-text">python解释器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">字符串</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="toc-number">1.3.</span> <span class="toc-text">流程控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%85%E4%B8%8E%E6%A8%A1%E5%9D%97"><span class="toc-number">1.4.</span> <span class="toc-text">包与模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA"><span class="toc-number">1.5.</span> <span class="toc-text">输入与输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA"><span class="toc-number">1.5.1.</span> <span class="toc-text">格式化输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99"><span class="toc-number">1.5.2.</span> <span class="toc-text">文件读写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E4%B8%8E%E5%BC%82%E5%B8%B8"><span class="toc-number">1.6.</span> <span class="toc-text">错误与异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB"><span class="toc-number">1.7.</span> <span class="toc-text">类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8D%E7%A7%B0%E5%92%8C%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.7.1.</span> <span class="toc-text">名称和对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="toc-number">1.7.2.</span> <span class="toc-text">命名空间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A0%81"><span class="toc-number">1.8.</span> <span class="toc-text">编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.8.1.</span> <span class="toc-text">常见的编码格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E7%A0%81"><span class="toc-number">1.8.2.</span> <span class="toc-text">解码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#url%E8%A7%A3%E7%A0%81"><span class="toc-number">1.8.2.1.</span> <span class="toc-text">url解码</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">进阶概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">默认概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if-name-main%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">2.1.1.</span> <span class="toc-text">if name main的作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8"><span class="toc-number">2.2.</span> <span class="toc-text">上下文管理器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#with%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">2.2.1.</span> <span class="toc-text">with关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">2.2.2.</span> <span class="toc-text">例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">资源操作：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%BB%B4%E6%8A%A4"><span class="toc-number">2.2.2.2.</span> <span class="toc-text">状态维护</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8contextlib%E7%AE%80%E5%8C%96%E7%BC%96%E5%86%99"><span class="toc-number">2.2.3.</span> <span class="toc-text">使用contextlib简化编写</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E4%B8%93%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">模块专题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#numpy"><span class="toc-number">3.1.</span> <span class="toc-text">numpy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas"><span class="toc-number">3.2.</span> <span class="toc-text">pandas</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Excel%E8%AF%BB%E5%8F%96"><span class="toc-number">3.2.1.</span> <span class="toc-text">Excel读取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BB%E5%86%99Excel%E8%AF%A6%E8%A7%A3"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">读写Excel详解</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ExcelFile%E7%B1%BB"><span class="toc-number">3.2.1.1.1.</span> <span class="toc-text">ExcelFile类</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#read-excel-%E6%96%B9%E6%B3%95"><span class="toc-number">3.2.1.1.2.</span> <span class="toc-text">read_excel()方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Excel%E5%86%99%E5%85%A5"><span class="toc-number">3.2.2.</span> <span class="toc-text">Excel写入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99%E5%85%A5Excel"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">写入Excel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%B2%E6%9C%89Excel%E5%A2%9E%E5%8A%A0sheet"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">已有Excel增加sheet</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A6%86%E7%9B%96Excel%E4%B8%AD%E5%B7%B2%E6%9C%89sheet"><span class="toc-number">3.2.2.3.</span> <span class="toc-text">覆盖Excel中已有sheet</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%B2%E6%9C%89sheet%E4%B8%AD%E8%BF%BD%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="toc-number">3.2.2.4.</span> <span class="toc-text">已有sheet中追加数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#os"><span class="toc-number">3.3.</span> <span class="toc-text">os</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96%E4%B8%93%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">办公自动化专题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Excel%E8%87%AA%E5%8A%A8%E5%8C%96%E5%BA%93"><span class="toc-number">4.1.</span> <span class="toc-text">Excel自动化库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Word%E8%87%AA%E5%8A%A8%E5%8C%96%E5%BA%93"><span class="toc-number">4.2.</span> <span class="toc-text">Word自动化库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PPT%E8%87%AA%E5%8A%A8%E5%8C%96%E5%BA%93"><span class="toc-number">4.3.</span> <span class="toc-text">PPT自动化库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ODF%E8%87%AA%E5%8A%A8%E5%8C%96%E5%BA%93"><span class="toc-number">4.4.</span> <span class="toc-text">ODF自动化库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PDF%E8%87%AA%E5%8A%A8%E5%8C%96%E5%BA%93"><span class="toc-number">4.5.</span> <span class="toc-text">PDF自动化库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%82%AE%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%8C%96%E5%BA%93"><span class="toc-number">4.6.</span> <span class="toc-text">邮件自动化库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AE%E4%BF%A1%E8%87%AA%E5%8A%A8%E5%8C%96%E5%BA%93"><span class="toc-number">4.7.</span> <span class="toc-text">微信自动化库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E8%87%AA%E5%8A%A8%E5%8C%96%E5%BA%93"><span class="toc-number">4.8.</span> <span class="toc-text">文件处理自动化库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%8A%9F%E8%83%BD%E8%87%AA%E5%8A%A8%E5%8C%96%E5%BA%93"><span class="toc-number">4.9.</span> <span class="toc-text">综合功能自动化库</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">数据处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#txt"><span class="toc-number">5.1.</span> <span class="toc-text">txt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docx"><span class="toc-number">5.2.</span> <span class="toc-text">docx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#json"><span class="toc-number">5.3.</span> <span class="toc-text">json</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xls"><span class="toc-number">5.4.</span> <span class="toc-text">xls</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xlsx"><span class="toc-number">5.5.</span> <span class="toc-text">xlsx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#csv"><span class="toc-number">5.6.</span> <span class="toc-text">csv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pdf"><span class="toc-number">5.7.</span> <span class="toc-text">pdf</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">底层原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">6.1.</span> <span class="toc-text">Python程序的执行过程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90"><span class="toc-number">7.</span> <span class="toc-text">源码剖析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6"><span class="toc-number">8.</span> <span class="toc-text">工具软件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%95%B4%E7%90%86%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1"><span class="toc-number">8.1.</span> <span class="toc-text">文件整理系统设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9B%B8%E5%85%B3"><span class="toc-number">8.1.1.</span> <span class="toc-text">文件夹相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3"><span class="toc-number">8.1.2.</span> <span class="toc-text">文件相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%AE%E4%BB%B6%E7%9B%B8%E5%85%B3"><span class="toc-number">8.1.3.</span> <span class="toc-text">邮件相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%8C%E9%9D%A2%E6%95%B4%E7%90%86%E7%9B%B8%E5%85%B3"><span class="toc-number">8.1.4.</span> <span class="toc-text">桌面整理相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ETL%E5%B7%A5%E5%85%B7"><span class="toc-number">8.2.</span> <span class="toc-text">ETL工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Kettle"><span class="toc-number">8.2.1.</span> <span class="toc-text">Kettle</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">8.3.</span> <span class="toc-text">配置</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/08/web/web/JavaScript/xstate%20catalogue/" title="xstate catalogue">xstate catalogue</a><time datetime="2023-04-08T01:03:02.000Z" title="发表于 2023-04-08 09:03:02">2023-04-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/01/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/python/" title="python">python</a><time datetime="2023-04-01T01:03:02.000Z" title="发表于 2023-04-01 09:03:02">2023-04-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/17/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/sql/" title="sql">sql</a><time datetime="2023-03-17T01:03:02.000Z" title="发表于 2023-03-17 09:03:02">2023-03-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/16/web/web/%E5%85%B6%E4%BB%96/%E5%B7%A5%E5%85%B7/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E8%BD%AF%E7%A1%AC%E4%BB%B6%E7%AF%87/" title="开发环境软硬件篇">开发环境软硬件篇</a><time datetime="2023-03-16T01:03:02.000Z" title="发表于 2023-03-16 09:03:02">2023-03-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/06/web/web/JavaScript/%E7%8A%B6%E6%80%81%E6%9C%BA/" title="状态机">状态机</a><time datetime="2023-03-06T01:03:02.000Z" title="发表于 2023-03-06 09:03:02">2023-03-06</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://bu.dusays.com/2023/02/10/63e57cef87293.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 <i id="heartbeat" class="fa fas fa-heartbeat"></i> Sai</div><a href="https://icp.gov.moe/?keyword=20230203" target="_blank">萌ICP备20230203号</a><div class="footer_custom_text"><p><a target="_blank" href="https://hexo.io/"><img src="https://bu.dusays.com/2023/02/09/63e488a78b827.webp" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="https://bu.dusays.com/2023/02/10/63e57f321880a.webp" title="主题采用butterfly"></a></p></div></div><link rel="stylesheet" href="/custom/css/heartbeat.min.css" ></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换模式</span></div><div class="rightMenu-item" id="menu-print"><i class="fa-solid fa-print fa-fw"></i><span>打印页面</span></div></div></div><div id="rightmenu-mask"></div><div id="myscoll"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.mindcons.cn/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.mindcons.cn/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><canvas id="universe"></canvas><script defer src="/custom/js/universe.js"></script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer data-pjax src="/custom/js/rightMenu.js"></script><script defer data-pjax src="/custom/js/cat.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "717070d8-e449-4d60-b9b6-c1421478f42c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
