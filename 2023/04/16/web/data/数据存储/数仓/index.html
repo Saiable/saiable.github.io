@@ -1,0 +1,314 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>数仓 | 吕小布の博客</title><meta name="keywords" content="吕小布;博客;生活记录"><meta name="author" content="Sai"><meta name="copyright" content="Sai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="引言数据库vs仓库 数据库面向业务存储，仓库面向主题存储（主题：较高层次上对分析对象数据的一个完整并一致的描述） 数据库很对应用（OLTP），仓库针对分析（OLAP）  数据仓库ADS、DWD、DWS、ADS分层详解http:&#x2F;&#x2F;www.360doc.com&#x2F;content&#x2F;12&#x2F;0121&#x2F;07&#x2F;63948659_1072256786.shtml  ODS层ODS层通常包含多个数据源，包括企业内部">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数仓">
+<meta property="og:url" content="https://mindcons.cn/2023/04/16/web/data/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/%E6%95%B0%E4%BB%93/index.html">
+<meta property="og:site_name" content="吕小布の博客">
+<meta property="og:description" content="引言数据库vs仓库 数据库面向业务存储，仓库面向主题存储（主题：较高层次上对分析对象数据的一个完整并一致的描述） 数据库很对应用（OLTP），仓库针对分析（OLAP）  数据仓库ADS、DWD、DWS、ADS分层详解http:&#x2F;&#x2F;www.360doc.com&#x2F;content&#x2F;12&#x2F;0121&#x2F;07&#x2F;63948659_1072256786.shtml  ODS层ODS层通常包含多个数据源，包括企业内部">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bu.dusays.com/2023/02/10/63e583843360e.webp">
+<meta property="article:published_time" content="2023-04-16T01:03:02.000Z">
+<meta property="article:modified_time" content="2023-05-25T02:20:23.000Z">
+<meta property="article:author" content="Sai">
+<meta property="article:tag" content="吕小布;博客;生活记录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bu.dusays.com/2023/02/10/63e583843360e.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mindcons.cn/2023/04/16/web/data/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/%E6%95%B0%E4%BB%93/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"61301LMFP2","apiKey":"a7627d15f4af23df7fbc3e2922471858","indexName":"mindcons","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":350},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Sai","link":"链接: ","source":"来源: 吕小布の博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数仓',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-25 10:20:23'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/custom/css/custom.min.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://bu.dusays.com/2023/02/10/63e583843360e.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">160</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">57</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">40</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fa-sharp fa-solid fa-photo-film"></i><span> 相册</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/booklist/"><i class="fa-fw fa-solid fa-book"></i><span> 书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">吕小布の博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fa-sharp fa-solid fa-photo-film"></i><span> 相册</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/booklist/"><i class="fa-fw fa-solid fa-book"></i><span> 书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数仓</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-16T01:03:02.000Z" title="发表于 2023-04-16 09:03:02">2023-04-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-25T02:20:23.000Z" title="更新于 2023-05-25 10:20:23">2023-05-25</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="数仓"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><h1 id="数据库vs仓库"><a href="#数据库vs仓库" class="headerlink" title="数据库vs仓库"></a>数据库vs仓库</h1><ul>
+<li>数据库面向业务存储，仓库面向主题存储（主题：较高层次上对分析对象数据的一个完整并一致的描述）</li>
+<li>数据库很对应用（OLTP），仓库针对分析（OLAP）</li>
+</ul>
+<h1 id="数据仓库ADS、DWD、DWS、ADS分层详解"><a href="#数据仓库ADS、DWD、DWS、ADS分层详解" class="headerlink" title="数据仓库ADS、DWD、DWS、ADS分层详解"></a>数据仓库ADS、DWD、DWS、ADS分层详解</h1><p><a target="_blank" rel="noopener" href="http://www.360doc.com/content/12/0121/07/63948659_1072256786.shtml">http://www.360doc.com/content/12/0121/07/63948659_1072256786.shtml</a></p>
+<p><img src="/2023/04/16/web/data/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/%E6%95%B0%E4%BB%93/image-20230502121553596.png" alt="image-20230502121553596"></p>
+<h2 id="ODS层"><a href="#ODS层" class="headerlink" title="ODS层"></a>ODS层</h2><p>ODS层通常包含多个数据源，包括企业内部的各种业务系统、外部的数据供应商、第三方数据服务等。这些数据源通常具有不同的数据格式、结构、语义和质量，因此需要进行一系列的数据处理和转换，以使其能够被有效地集成到数据仓库中。</p>
+<p>ODS层的数据处理主要包括以下几个方面：</p>
+<p>数据抽取：从各个数据源中抽取数据，包括全量抽取和增量抽取等方式。</p>
+<p>数据清洗：对抽取到的数据进行清洗和去重，确保数据的一致性和准确性。</p>
+<p>数据集成：将清洗后的数据进行整合和集成，以生成一个一致的、可信的、实时的数据集。</p>
+<p>数据同步：将ODS层的数据同步到下一层，即DWD层，以供后续的数据处理和分析。</p>
+<p>ODS层的数据模型通常是基于源系统中的数据模型进行设计，其主要目的是将不同的数据源中的数据整合到一个统一的数据集中，并尽量保证数据的质量和可用性。ODS层的数据通常是面向业务过程和业务事件的，包含大量的原始业务数据和事件流数据，可以为企业提供实时的数据集成和分析能力。</p>
+<p>ODS层是数据仓库架构中的第一层，主要负责数据集成和整合，将多个数据源中的数据进行清洗、整合和同步，为后续的数据仓库处理提供原始数据。ODS层的数据模型通常是基于源系统中的数据模型进行设计，其主要目的是将不同的数据源中的数据整合到一个统一的数据集中，并尽量保证数据的质量和可用性。</p>
+<h2 id="DWD层"><a href="#DWD层" class="headerlink" title="DWD层"></a>DWD层</h2><p>数据仓库的DWD层（Data Warehouse Detail Layer）是整个数据仓库架构中的核心层次，也是数据仓库的基础层，它主要用于存储处理过的数据。</p>
+<p>DWD层是对原始数据进行清洗、整合、标准化和去重等处理，将数据转化为面向主题的数据集。在DWD层，数据会被按照主题进行建模，即按照不同的业务领域或业务流程进行分类和组织。这种建模方法被称为主题建模，它是数据仓库架构的核心特点之一。</p>
+<p>DWD层的主要任务是将原始数据转换成具有较高质量和较高复用性的数据集，使得数据在后续的处理和分析过程中更加容易理解和使用。DWD层的数据一般不包括计算和汇总的结果，而是以最原始的形式存储，这样可以保证数据的完整性和准确性，并支持更灵活的分析和查询操作。</p>
+<p>DWD层的数据模型通常以星型模型或雪花模型为主，其中，星型模型包括一个中心的事实表和多个维度表，每个维度表代表一个业务维度，包含相关的属性和描述信息，事实表则包含与这些业务维度相关的度量值；而雪花模型则是在星型模型的基础上，对一些维度表进行进一步的规范化，使得数据更加清晰和精细。</p>
+<p>DWD层的数据来源包括多个数据源，例如传感器、设备、应用程序、数据采集系统等等。在ETL过程中，数据会经过多次转换和清洗操作，以保证数据的质量和完整性，例如数据清洗、数据标准化、数据合并、数据分割、数据重构等等。</p>
+<p>DWD层是数据仓库架构中最重要的层次之一，它将原始数据转化为具有高质量和高复用性的数据集，为数据分析、查询和应用提供了强有力的支持。</p>
+<h2 id="DWS层"><a href="#DWS层" class="headerlink" title="DWS层"></a>DWS层</h2><p>数据仓库的DWS层（Data Warehouse Service Layer）是数据仓库架构中的一层，它是在DWD层的基础上进一步处理数据，提供更加灵活、高效、可扩展的数据查询和分析服务。</p>
+<p>DWS层的主要任务是对DWD层的数据进行加工、聚合、计算和汇总，以满足各种业务需求和分析场景。在DWS层，数据模型以业务应用为中心，根据业务流程和业务需求进行建模，以支持各种复杂的查询和分析操作。</p>
+<p>与DWD层相比，DWS层的数据模型更加灵活和多样化，可以采用星型模型、雪花模型、多维模型、标签模型等多种建模方式，以满足各种业务需求和分析场景。此外，DWS层的数据通常是预处理后的聚合数据，包括各种汇总指标、计算结果、模型输出等等，以支持更快速、高效的查询和分析操作。</p>
+<p>DWS层的数据处理主要包括以下几个方面：</p>
+<p>1.数据加工和清洗：对DWD层的数据进行进一步加工和清洗，包括数据清洗、数据转换、数据格式化、数据归一化等，以确保数据质量和准确性。</p>
+<p>2.数据聚合和计算：对DWD层的数据进行聚合和计算，生成各种汇总指标、计算结果和模型输出，以支持各种业务分析和决策需求。</p>
+<p>3.数据存储和管理：将处理后的数据存储到DWS层的数据库中，并进行管理和维护，以确保数据的安全性、可靠性和可用性。</p>
+<p>4.数据访问和服务：提供各种数据查询和分析服务，包括OLAP分析、数据挖掘、报表生成、可视化等，以支持各种业务需求和决策场景。</p>
+<p>DWS层是数据仓库架构中重要的一层，它为业务分析和决策提供了强有力的支持，能够提供高效、灵活、可扩展的数据查询和分析服务，为企业的业务决策提供有力的支撑。</p>
+<h2 id="ADS层"><a href="#ADS层" class="headerlink" title="ADS层"></a>ADS层</h2><p>ADS层（Application Data Service Layer）是数据仓库中的最上层，它是基于DWS层数据进行二次加工和业务应用开发的层级。ADS层通常是面向特定的业务场景和业务需求进行建模和开发，提供各种业务分析、报表、可视化和决策支持等服务。</p>
+<p>ADS层的主要任务是将DWS层的数据进行业务化加工和转换，以生成各种针对具体业务需求的洞察和分析结果。此外，ADS层还负责提供各种业务应用和服务，包括数据可视化、报表生成、数据挖掘、预测建模、决策支持等，以支持企业的各种业务需求和决策场景。</p>
+<p>与DWS层相比，ADS层的数据模型更加业务化和定制化，通常是基于具体的业务场景和业务需求进行建模和开发，以支持各种复杂的分析和决策操作。在ADS层，数据通常是以应用为中心进行组织和管理，以支持各种复杂的业务场景和分析需求。</p>
+<p>ADS层的数据处理主要包括以下几个方面：</p>
+<p>1.数据加工和转换：将DWS层的数据进行业务化加工和转换，包括数据清洗、数据抽取、数据加工、数据集成、数据转换等，以满足具体的业务需求和场景。</p>
+<p>2.数据建模和开发：基于具体业务需求进行数据建模和开发，包括模型设计、数据架构、应用开发、服务开发等，以支持各种业务分析和决策需求。</p>
+<p>3.数据存储和管理：将处理后的数据存储到ADS层的数据库中，并进行管理和维护，以确保数据的安全性、可靠性和可用性。</p>
+<p>4.数据分析和服务：提供各种数据分析和服务，包括OLAP分析、数据挖掘、报表生成、可视化等，以支持各种业务需求和决策场景。</p>
+<p>ADS层是数据仓库架构中最上层的一层，它是数据仓库的最终输出，能够提供针对具体业务场景和业务需求的各种分析和决策支持。ADS层通过二次加工和业务应用开发，将数据转化为有价值的信息和智能洞察，为企业的业务决策提供有力的支持。</p>
+<h2 id="DIM层"><a href="#DIM层" class="headerlink" title="DIM层"></a>DIM层</h2><p>在数据仓库中，DIM（Dimension）层通常用于存储业务维度信息。维度是指一组具有共同特征的属性，用于描述事实数据。例如，在销售业务中，产品、客户、时间等都可以作为维度来描述销售情况。</p>
+<p>在数据仓库中，DIM层通常包含一系列维度表，每个维度表包含了该维度的详细信息。维度表通常包含两种类型的字段：描述性字段和层次字段。描述性字段包含了该维度的详细信息，如名称、描述、编码等；层次字段则用于描述该维度的层次结构，例如时间维度可以按照年、月、日等不同的层次进行划分，产品维度可以按照品类、品牌、型号等不同的层次进行划分。</p>
+<p>维度表通常采用基于主题建模的模型，如星型模型或雪花模型。在星型模型中，维度表位于中心的星型结构中，与事实表通过外键关联；在雪花模型中，维度表与星型模型类似，但是维度表中的层次字段通常被拆分成多个表，形成类似于雪花的结构。</p>
+<p>在数据仓库中，维度表的设计需要考虑以下几个方面：</p>
+<p>1、数据的准确性：维度表中的数据应该准确、完整、一致。通常可以通过数据清洗、校验等方式来确保数据的质量。</p>
+<p>2、数据的可扩展性：维度表应该具有可扩展性，能够支持快速地添加新的维度和层次。</p>
+<p>3、数据的性能：维度表应该具有良好的查询性能，通常可以采用列式存储、分区、索引等方式来优化查询性能。</p>
+<p>4、数据的易用性：维度表中的字段应该易于使用和理解，通常可以通过命名规范、字段注释等方式来提高数据的易用性。</p>
+<p>DIM层在数据仓库中扮演着非常重要的角色，是实现数据分析和BI报表的关键。通过合理的维度设计和维度表建模，可以为数据分析提供更加准确、全面、可靠的基础数据。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/Saiable">Sai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mindcons.cn/2023/04/16/web/data/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/%E6%95%B0%E4%BB%93/">https://mindcons.cn/2023/04/16/web/data/数据存储/数仓/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mindcons.cn" target="_blank">吕小布の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/02/10/63e583843360e.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://bu.dusays.com/2023/02/10/63e580229ee01.webp" target="_blank"><img class="post-qr-code-img" src="https://bu.dusays.com/2023/02/10/63e580229ee01.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://bu.dusays.com/2023/02/09/63e48775d4f42.webp" target="_blank"><img class="post-qr-code-img" src="https://bu.dusays.com/2023/02/09/63e48775d4f42.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/04/26/web/data/%E5%95%86%E4%B8%9A%E6%96%B9%E5%90%91/%E5%95%86%E4%B8%9A%E6%9E%B6%E6%9E%84/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">商业架构</div></div></a></div><div class="next-post pull-right"><a href="/2023/04/08/web/web/JavaScript/xstate%20catalogue/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">xstate catalogue</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://bu.dusays.com/2023/02/10/63e583843360e.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sai</div><div class="author-info__description">天可补,海可填,南山可移。日月既往,不可复追。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">160</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">57</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">40</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Saiable"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://bu.dusays.com/2023/02/10/63e57e822f198.webp" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://bu.dusays.com/2023/02/10/63e57f8ac9fae.webp" target="_blank" title="WeChat"><i class="fa-brands fa-weixin"></i></a><a class="social-icon" href="https://github.com/Saiable" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:mindcons@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">日月既往,不可复追。</div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople1.js"></script><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/zdog.dist.js"></script><script id="rendered-js" src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="card-widget tzy-right-widget" id="card-wechat"><div id="flip-wrapper"><div id="flip-content"><div class="face"></div><div class="back face"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93vs%E4%BB%93%E5%BA%93"><span class="toc-number">2.</span> <span class="toc-text">数据库vs仓库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93ADS%E3%80%81DWD%E3%80%81DWS%E3%80%81ADS%E5%88%86%E5%B1%82%E8%AF%A6%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">数据仓库ADS、DWD、DWS、ADS分层详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ODS%E5%B1%82"><span class="toc-number">3.1.</span> <span class="toc-text">ODS层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DWD%E5%B1%82"><span class="toc-number">3.2.</span> <span class="toc-text">DWD层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DWS%E5%B1%82"><span class="toc-number">3.3.</span> <span class="toc-text">DWS层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ADS%E5%B1%82"><span class="toc-number">3.4.</span> <span class="toc-text">ADS层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DIM%E5%B1%82"><span class="toc-number">3.5.</span> <span class="toc-text">DIM层</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/22/web/data/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/%E7%88%AC%E8%99%AB%E7%9B%B8%E5%85%B3%E8%B5%84%E6%BA%90/" title="爬虫相关资源">爬虫相关资源</a><time datetime="2023-08-21T22:56:51.405Z" title="发表于 2023-08-22 06:56:51">2023-08-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/20/web/data/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="无题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/08/20/web/data/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="无题">无题</a><time datetime="2023-08-20T01:30:18.361Z" title="发表于 2023-08-20 09:30:18">2023-08-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/29/web/%E7%AE%97%E6%B3%95/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="机器学习">机器学习</a><time datetime="2023-07-29T01:03:02.000Z" title="发表于 2023-07-29 09:03:02">2023-07-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/29/web/%E7%AE%97%E6%B3%95/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" title="深度学习">深度学习</a><time datetime="2023-07-29T01:03:02.000Z" title="发表于 2023-07-29 09:03:02">2023-07-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/14/web/data/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/FastAPI/" title="FaseAPI">FaseAPI</a><time datetime="2023-07-14T01:03:02.000Z" title="发表于 2023-07-14 09:03:02">2023-07-14</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://bu.dusays.com/2023/02/10/63e57cef87293.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 <i id="heartbeat" class="fa fas fa-heartbeat"></i> Sai</div><a href="https://icp.gov.moe/?keyword=20230203" target="_blank">萌ICP备20230203号</a><div class="footer_custom_text"><p><a target="_blank" href="https://hexo.io/"><img src="https://bu.dusays.com/2023/02/09/63e488a78b827.webp" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="https://bu.dusays.com/2023/02/10/63e57f321880a.webp" title="主题采用butterfly"></a></p></div></div><link rel="stylesheet" href="/custom/css/heartbeat.min.css" ></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换模式</span></div><div class="rightMenu-item" id="menu-print"><i class="fa-solid fa-print fa-fw"></i><span>打印页面</span></div></div></div><div id="rightmenu-mask"></div><div id="myscoll"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.mindcons.cn/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.mindcons.cn/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><canvas id="universe"></canvas><script defer src="/custom/js/universe.js"></script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer data-pjax src="/custom/js/rightMenu.js"></script><script defer data-pjax src="/custom/js/cat.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "717070d8-e449-4d60-b9b6-c1421478f42c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
