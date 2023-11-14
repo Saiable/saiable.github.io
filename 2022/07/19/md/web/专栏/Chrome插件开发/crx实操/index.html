@@ -1,0 +1,748 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>crx实操 | 吕小布の博客</title><meta name="keywords" content="吕小布;博客;生活记录"><meta name="author" content="Sai"><meta name="copyright" content="Sai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[toc] 来源：https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;7035782439590952968 简单小插件Chrome插件并没有很严格的项目结构要求，比如src、public、components等等，因此我们如果去看很多插件的源码，会发现每个插件的项目结构，甚至项目下的文件名称都大相径庭； 但是在根目录下我们都会找到一个manifest.json文件，这是插件的配置文件，说明了插件的各种">
+<meta property="og:type" content="article">
+<meta property="og:title" content="crx实操">
+<meta property="og:url" content="https://mindcons.cn/2022/07/19/md/web/%E4%B8%93%E6%A0%8F/Chrome%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/crx%E5%AE%9E%E6%93%8D/index.html">
+<meta property="og:site_name" content="吕小布の博客">
+<meta property="og:description" content="[toc] 来源：https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;7035782439590952968 简单小插件Chrome插件并没有很严格的项目结构要求，比如src、public、components等等，因此我们如果去看很多插件的源码，会发现每个插件的项目结构，甚至项目下的文件名称都大相径庭； 但是在根目录下我们都会找到一个manifest.json文件，这是插件的配置文件，说明了插件的各种">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bu.dusays.com/2023/02/10/63e583843360e.webp">
+<meta property="article:published_time" content="2022-07-18T23:28:42.000Z">
+<meta property="article:modified_time" content="2023-11-14T23:27:26.757Z">
+<meta property="article:author" content="Sai">
+<meta property="article:tag" content="吕小布;博客;生活记录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bu.dusays.com/2023/02/10/63e583843360e.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mindcons.cn/2022/07/19/md/web/%E4%B8%93%E6%A0%8F/Chrome%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/crx%E5%AE%9E%E6%93%8D/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"61301LMFP2","apiKey":"a7627d15f4af23df7fbc3e2922471858","indexName":"mindcons","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":350},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Sai","link":"链接: ","source":"来源: 吕小布の博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'crx实操',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-15 07:27:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/custom/css/custom.min.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://bu.dusays.com/2023/02/10/63e583843360e.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">175</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">36</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fa-sharp fa-solid fa-photo-film"></i><span> 相册</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/booklist/"><i class="fa-fw fa-solid fa-book"></i><span> 书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">吕小布の博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fa-sharp fa-solid fa-photo-film"></i><span> 相册</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/booklist/"><i class="fa-fw fa-solid fa-book"></i><span> 书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">crx实操</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-18T23:28:42.000Z" title="发表于 2022-07-19 07:28:42">2022-07-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-14T23:27:26.757Z" title="更新于 2023-11-15 07:27:26">2023-11-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="crx实操"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[toc]</p>
+<p>来源：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7035782439590952968">https://juejin.cn/post/7035782439590952968</a></p>
+<h1 id="简单小插件"><a href="#简单小插件" class="headerlink" title="简单小插件"></a>简单小插件</h1><p>Chrome插件并没有很严格的项目结构要求，比如src、public、components等等，因此我们如果去看很多插件的源码，会发现每个插件的项目结构，甚至项目下的文件名称都大相径庭；</p>
+<p>但是在根目录下我们都会找到一个<code>manifest.json</code>文件，这是插件的配置文件，说明了插件的各种信息；它的作用等同于小程序的<code>app.json</code>和前端项目的<code>package.json</code>。</p>
+<p>我们在项目中创建一个最简单的manifest.json配置文件：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">// 插件名称</span></span><br><span class="line">    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Hello Extensions&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="comment">// 插件的描述</span></span><br><span class="line">    <span class="attr">&quot;description&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;Base Level Extension&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="comment">// 插件的版本</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="comment">// 配置插件程序的版本号，主流版本是2，最新是3</span></span><br><span class="line">    <span class="attr">&quot;manifest_version&quot;</span><span class="punctuation">:</span> <span class="number">2</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>实际导入时，要把注释都删掉。</p>
+<p>我们经常会点击右上角插件图标时弹出一个小窗口的页面，焦点离开时就关闭了，一般做一些临时性的交互操作；在配置文件中新增<code>browser_action</code>字段，配置<code>popup</code>弹框：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Hello Extensions&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;description&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;Base Level Extension&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;manifest_version&quot;</span><span class="punctuation">:</span> <span class="number">2</span><span class="punctuation">,</span></span><br><span class="line">    <span class="comment">// 新增popup弹框</span></span><br><span class="line">    <span class="attr">&quot;browser_action&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;default_popup&quot;</span><span class="punctuation">:</span> <span class="string">&quot;popup.html&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;default_icon&quot;</span><span class="punctuation">:</span> <span class="string">&quot;popup.png&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>此时目录结构如下：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321095147393.png" alt="image-20220321095147393"></p>
+<p>popup.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">content</span>=<span class="string">&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;ie=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello Extensions<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>导入后效果：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321095317286.png" alt="image-20220321095317286"></p>
+<p>为了用户方便点击，我们还可以在<code>manifest.json</code>中设置一个键盘快捷键的命令，通过快捷键来弹出popup页面：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Hello Extensions&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;Base Level Extension&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;manifest_version&quot;</span><span class="punctuation">:</span> <span class="number">2</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;browser_action&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;default_popup&quot;</span><span class="punctuation">:</span> <span class="string">&quot;popup.html&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;default_icon&quot;</span><span class="punctuation">:</span> <span class="string">&quot;popup.png&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">// 新增命令</span></span><br><span class="line">  <span class="attr">&quot;commands&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;_execute_browser_action&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;suggested_key&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;default&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Ctrl+Shift+F&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;mac&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MacCtrl+Shift+F&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Opens popup.html&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>每次更新文件后，浏览器端需要重新加载下：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321095757603.png" alt="image-20220321095757603"></p>
+<p>快捷键好像不支持<code>Alt</code>：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321095835389.png" alt="image-20220321095835389"></p>
+<h2 id="后台background"><a href="#后台background" class="headerlink" title="后台background"></a>后台background</h2><p>我们的插件安装后，popup页面也运行了；但是我们也发现了，popup页面只能做临时性的交互操作，用完就关了，不能存储信息或者和其他标签页进行交互等等；</p>
+<p>这时就需要用到background（后台），它是一个常驻的页面，它的生命周期是插件中所有类型页面中最长的；它随着浏览器的打开而打开，随着浏览器的关闭而关闭，所以通常把需要一直运行的、启动就运行的、全局的代码放在background里面。</p>
+<p>background也是需要在<code>manifest.json</code>中进行配置，可以通过page指定一张网页，<strong>或者</strong>通过scripts直接指定一个js数组，Chrome会自动为js生成默认网页：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;background&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">// &quot;page&quot;: &quot;background.html&quot;,</span></span><br><span class="line">    <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;background.js&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;persistent&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321100317840.png" alt="image-20220321100317840"></p>
+<p>但是控制台，没有在当前页面打印，因为两者不是一个页面。</p>
+<p>我们给background设置一个监听事件，当插件安装时打印日志：</p>
+<p>background.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// background.js</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onInstalled</span>.<span class="title function_">addListener</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;插件已被安装&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321140551498.png" alt="image-20220321140551498"></p>
+<p>点击后chrome会弹出一个新的，针对background.js页面的控制台</p>
+<p>拓展：</p>
+<ul>
+<li><p>直接打印chrome对象</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321141128109.png" alt="image-20220321141128109"></p>
+<p>所调用的方法，都是在chrome对象上的</p>
+</li>
+</ul>
+<h2 id="storage存储"><a href="#storage存储" class="headerlink" title="storage存储"></a>storage存储</h2><p>我们在插件安装时在storage中设置一个值，这将允许多个插件组件访问该值并进行更新操作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//background.js</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onInstalled</span>.<span class="title function_">addListener</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// storage中设置值</span></span><br><span class="line">  chrome.<span class="property">storage</span>.<span class="property">sync</span>.<span class="title function_">set</span>(&#123; <span class="attr">color</span>: <span class="string">&quot;#3aa757&quot;</span> &#125;, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;storage init color value&quot;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 为特定的网址显示图标</span></span><br><span class="line">  chrome.<span class="property">declarativeContent</span>.<span class="property">onPageChanged</span>.<span class="title function_">removeRules</span>(<span class="literal">undefined</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    chrome.<span class="property">declarativeContent</span>.<span class="property">onPageChanged</span>.<span class="title function_">addRules</span>([</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">conditions</span>: [</span><br><span class="line">          <span class="keyword">new</span> chrome.<span class="property">declarativeContent</span>.<span class="title class_">PageStateMatcher</span>(&#123;</span><br><span class="line">            <span class="attr">pageUrl</span>: &#123; <span class="attr">hostEquals</span>: <span class="string">&quot;baidu.com&quot;</span> &#125;,</span><br><span class="line">          &#125;),</span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">actions</span>: [<span class="keyword">new</span> chrome.<span class="property">declarativeContent</span>.<span class="title class_">ShowPageAction</span>()],</span><br><span class="line">      &#125;,</span><br><span class="line">    ]);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>chrome.declarativeContent</code>用于精确地控制什么时候显示我们的页面按钮，或者需要在用户单击它之前更改它的外观以匹配当前标签页。</p>
+<p>这里调用的<code>chrome.storage</code>和我们常用的<code>localStorage</code>和<code>sessionStorage</code>不是一个东西。</p>
+<p>值得注意得是，我们需要在manifest中给插件注册使用的权限，否则chrome对象中，将没有<code>storage</code>和<code>declarativeContent</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="comment">// 新增</span></span><br><span class="line">  <span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;storage&quot;</span><span class="punctuation">,</span> <span class="string">&quot;declarativeContent&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;background&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;background.js&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;persistent&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>再次查看背景页的视图，我们就能看到打印的日志了；</p>
+<p>既然可以存储，那也能取出来，我们在<code>popup</code>中添加事件进行获取，首先我们新增一个触发的button：</p>
+<p>popup.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">content</span>=<span class="string">&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;ie=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">button</span> &#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">width</span>: <span class="number">60px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">height</span>: <span class="number">30px</span>;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">outline</span>: none;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello Extensions<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;changeColor&quot;</span>&gt;</span>change<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./popup.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们再创建一个<code>popup.js</code>的文件，用来从storage存储中拿到颜色值，并将此颜色作为按钮的背景色：</p>
+<p>popup.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> changeColor = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;changeColor&quot;</span>);</span><br><span class="line"></span><br><span class="line">changeColor.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params">el</span>) &#123;</span><br><span class="line">    chrome.<span class="property">storage</span>.<span class="property">sync</span>.<span class="title function_">get</span>(<span class="string">&quot;color&quot;</span>, <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">        changeColor.<span class="property">style</span>.<span class="property">backgroundColor</span> = data.<span class="property">color</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>效果：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321144203403.png" alt="image-20220321144203403"></p>
+<blockquote>
+<p>如果需要调试popup页面，可以在弹框中右击 &#x3D;&gt; 检查，在DevTools中进行调试查看。</p>
+</blockquote>
+<h2 id="获取浏览器tabs"><a href="#获取浏览器tabs" class="headerlink" title="获取浏览器tabs"></a>获取浏览器tabs</h2><p>现在，我们获取到了storage中的值，需要逻辑来进一步与用户交互；更新popup.js中的交互代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// popupjs</span></span><br><span class="line">changeColor.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params">el</span>) &#123;</span><br><span class="line">  chrome.<span class="property">storage</span>.<span class="property">sync</span>.<span class="title function_">get</span>(<span class="string">&quot;color&quot;</span>, <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> &#123; color &#125; = data;</span><br><span class="line">    chrome.<span class="property">tabs</span>.<span class="title function_">query</span>(&#123; <span class="attr">active</span>: <span class="literal">true</span>, <span class="attr">currentWindow</span>: <span class="literal">true</span> &#125;, <span class="keyword">function</span> (<span class="params">tabs</span>) &#123;</span><br><span class="line">      chrome.<span class="property">tabs</span>.<span class="title function_">executeScript</span>(tabs[<span class="number">0</span>].<span class="property">id</span>, &#123;</span><br><span class="line">        <span class="attr">code</span>: <span class="string">&#x27;document.body.style.backgroundColor = &quot;&#x27;</span> + color + <span class="string">&#x27;&quot;;&#x27;</span>,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>chrome.tabs</code>的API主要是和浏览器的标签页进行交互，通过query找到当前的激活中的tab，然后使用<code>executeScript</code>向标签页注入脚本内容。</p>
+<p><code>manifest</code>同样需要<code>activeTab</code>的权限，来允许我们的插件使用tabs的API。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Hello Extensions&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;storage&quot;</span><span class="punctuation">,</span> <span class="string">&quot;declarativeContent&quot;</span><span class="punctuation">,</span> <span class="string">&quot;activeTab&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321150503262.png" alt="image-20220321150503262"></p>
+<h2 id="颜色选项页面"><a href="#颜色选项页面" class="headerlink" title="颜色选项页面"></a>颜色选项页面</h2><p>现在我们的插件功能还比较单一，只能让用户选择唯一的颜色；我们可以在插件中加入选项页面，以便用户更好的自定义插件的功能。</p>
+<p>在程序目录新增一个options.html文件：</p>
+<p>options.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">      <span class="selector-tag">button</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>: <span class="number">30px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">30px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">outline</span>: none;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">10px</span>;</span></span><br><span class="line"><span class="language-css">      &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;buttonDiv&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>选择一个不同的颜色<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;options.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后添加选择页面的逻辑代码options.js：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> page = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;buttonDiv&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> kButtonColors = [<span class="string">&quot;#3aa757&quot;</span>, <span class="string">&quot;#e8453c&quot;</span>, <span class="string">&quot;#f9bb2d&quot;</span>, <span class="string">&quot;#4688f1&quot;</span>];</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">constructOptions</span>(<span class="params">kButtonColors</span>) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> kButtonColors) &#123;</span><br><span class="line">    <span class="keyword">let</span> button = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;button&quot;</span>);</span><br><span class="line">    button.<span class="property">style</span>.<span class="property">backgroundColor</span> = item;</span><br><span class="line">    button.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      chrome.<span class="property">storage</span>.<span class="property">sync</span>.<span class="title function_">set</span>(&#123; <span class="attr">color</span>: item &#125;, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;color is &quot;</span> + item);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    page.<span class="title function_">appendChild</span>(button);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">constructOptions</span>(kButtonColors);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中预设了四个颜色选项，通过onclick事件监听，生成页面上的按钮；当用户单击按钮时，将更新storage中存储的颜色值。</p>
+<p>options页面完成后，我们可以将其在manifest的options_page进行注册：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Hello Extensions&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">  <span class="attr">&quot;options_page&quot;</span><span class="punctuation">:</span> <span class="string">&quot;options.html&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">  <span class="attr">&quot;manifest_version&quot;</span><span class="punctuation">:</span> <span class="number">2</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>重新加载我们的插件，点击详情，滚动到底部，点击<code>扩展程序选项</code>来查看选项页面。或者可以在浏览器右上角插件图标上<code>右击 =&gt; 选项</code>。</p>
+<p>此时可以选择背景色，效果如下：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321151521321.png" alt="image-20220321151521321"></p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321151534275.png" alt="image-20220321151534275"></p>
+<p>我的理解，options.html提供了一个，可针对插件配置的一个页面</p>
+<h1 id="插件功能进阶"><a href="#插件功能进阶" class="headerlink" title="插件功能进阶"></a>插件功能进阶</h1><p>通过上面一个简单的小插件，相信大家对插件的功能和组件都有了一个大致的了解，知道了每个组件在其中发挥的作用；</p>
+<p>但这还只是插件的一小部分功能，下面我们对插件每个部分的功能以及组件做一个更深入的了解。</p>
+<h2 id="使用background管理事件"><a href="#使用background管理事件" class="headerlink" title="使用background管理事件"></a>使用background管理事件</h2><p>background是插件的事件处理程序，它包含对插件很重要的浏览器事件的监听器。</p>
+<p>background处于休眠状态，直到触发事件，然后执行指示的逻辑；</p>
+<p>一个好的background仅在需要时加载，并在空闲时卸载。</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/42fadde3d4fd4ee78f8acc36082099aatplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp" alt="background和popup交互"></p>
+<p>background监听的一些浏览器事件包括：</p>
+<ul>
+<li>插件程序首次安装或更新为新版本。</li>
+<li>后台页面正在监听事件，并且已调度该事件</li>
+<li>内容脚本或其他插件发送消息</li>
+<li>插件中的另一个视图（例如弹出窗口）调用runtime.getBackgroundPage</li>
+</ul>
+<p>加载完成后，只要触发某个事件，background就会保持运行状态；在上面manifest中，我们还指定了一个persistent属性：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;background&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;background.js&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;persistent&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>persistent属性定义了插件常驻后台的方式；</p>
+<p>当其值为true时，表示插件将一直在后台运行，无论其是否正在工作；</p>
+<p>当其值为false时，表示插件在后台按需运行，这就是Chrome后来提出的Event Page（非持久性后台）。</p>
+<p>Event Page是基于事件驱动运行的，只有在事件发生的时候才可以访问；</p>
+<p>这样做的目的是为了能够有效减小插件对内存的消耗，如非必要，请将persistent设置为false。</p>
+<blockquote>
+<p>persistent属性的默认值为true</p>
+</blockquote>
+<h3 id="alarms"><a href="#alarms" class="headerlink" title="alarms"></a>alarms</h3><p>一些基于DOM页面的计时器（例如window.setTimeout或window.setInterval），如果在非持久后台休眠时进行了触发，可能不会按照预定的时间运行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> timeout = <span class="number">1000</span> * <span class="number">60</span> * <span class="number">3</span>;  <span class="comment">// 3 minutes in milliseconds</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="title function_">alert</span>(<span class="string">&#x27;Hello, world!&#x27;</span>);</span><br><span class="line">&#125;, timeout);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Chrome提供了另外的API，alarms：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">alarms</span>.<span class="title function_">create</span>(&#123;<span class="attr">delayInMinutes</span>: <span class="number">3.0</span>&#125;)</span><br><span class="line"></span><br><span class="line">chrome.<span class="property">alarms</span>.<span class="property">onAlarm</span>.<span class="title function_">addListener</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="title function_">alert</span>(<span class="string">&quot;Hello, world!&quot;</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="browserAction"><a href="#browserAction" class="headerlink" title="browserAction"></a>browserAction</h2><p>我们知道了browser_action字段用来配置popup的页面，在其他的一些文档中还给出了page_action字段的配置，不过page_action并不</p>
+<p>是所有的页面都能够使用；</p>
+<p>不过随着Chrome的版本更新，这两者的功能也越来越相近；在Chrome 48版本之后，page_action也从原来的地址栏中移出来，和插件</p>
+<p>放在一起；笔者在配置page_action的时候没有发现有什么比较大的区别，因此下面以browser_action为主。</p>
+<p>在browserAction的配置中，我们可以提供多种尺寸的图标，Chrome会选择最接近的图标并将其缩放到适当的大小来填充；如果没有提</p>
+<p>供确切的大小，这种缩放会导致图标丢失细节或看起来模糊。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="attr">&quot;browser_action&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;default_icon&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span>                <span class="comment">// optional</span></span><br><span class="line">      <span class="attr">&quot;16&quot;</span><span class="punctuation">:</span> <span class="string">&quot;images/icon16.png&quot;</span><span class="punctuation">,</span>     <span class="comment">// optional</span></span><br><span class="line">      <span class="attr">&quot;24&quot;</span><span class="punctuation">:</span> <span class="string">&quot;images/icon24.png&quot;</span><span class="punctuation">,</span>     <span class="comment">// optional</span></span><br><span class="line">      <span class="attr">&quot;32&quot;</span><span class="punctuation">:</span> <span class="string">&quot;images/icon32.png&quot;</span>      <span class="comment">// optional</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;default_title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;hello popup&quot;</span><span class="punctuation">,</span>  <span class="comment">// optional</span></span><br><span class="line">    <span class="attr">&quot;default_popup&quot;</span><span class="punctuation">:</span> <span class="string">&quot;popup.html&quot;</span>    <span class="comment">// optional</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>也可以通过调用<code>browserAction.setPopup</code>动态设置弹出窗口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">browserAction</span>.<span class="title function_">setPopup</span>(&#123;<span class="attr">popup</span>: <span class="string">&#x27;popup_new.html&#x27;</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Tooltip"><a href="#Tooltip" class="headerlink" title="Tooltip"></a>Tooltip</h3><p>要设置提示文案，使用default_title字段，或者在<code>background.js</code>中调用<code>browserAction.setTitle</code>函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">browserAction</span>.<span class="title function_">setTitle</span>(&#123; <span class="attr">title</span>: <span class="string">&quot;New Tooltip&quot;</span> &#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果两者都设置了，以函数设置的显示为准。</p>
+<h3 id="Badge"><a href="#Badge" class="headerlink" title="Badge"></a>Badge</h3><p>Badge（徽章）就是在图标上显示的一些文本内容，用来详细显示插件的提示信息；</p>
+<p>由于Bage的空间有限，因此最多显示4个英文字符或者2个函数；</p>
+<p>badge无法通过配置文件来指定，必须通过代码实现，设置badge文字和颜色可以分别使用<code>browserAction.setBadgeText()</code>和</p>
+<p><code>browserAction.setBadgeBackgroundColor()</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">browserAction</span>.<span class="title function_">setBadgeText</span>(&#123; <span class="attr">text</span>: <span class="string">&quot;new&quot;</span> &#125;);</span><br><span class="line">chrome.<span class="property">browserAction</span>.<span class="title function_">setBadgeBackgroundColor</span>(&#123; <span class="attr">color</span>: [<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>] &#125;);</span><br><span class="line"><span class="comment">// or 颜色字符串</span></span><br><span class="line"><span class="comment">// chrome.action.setBadgeBackgroundColor(&#123;color: &#x27;#4688F1&#x27;&#125;);</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321154246814.png" alt="image-20220321154246814"></p>
+<h2 id="content-scripts"><a href="#content-scripts" class="headerlink" title="content-scripts"></a>content-scripts</h2><p>content-scripts（内容脚本）是在网页上下文中运行的文件。通过使用标准的文档对象模型(DOM)，它能够读取浏览器访问的网页的详细</p>
+<p>信息，对其进行更改，并将信息传递给其父级插件。内容脚本相对于background还是有一些访问API上的限制，它可以直接访问以下</p>
+<p>chrome的API：</p>
+<ul>
+<li>i18n</li>
+<li>storage</li>
+<li>runtime:<ul>
+<li>connect</li>
+<li>getManifest</li>
+<li>getURL</li>
+<li>id</li>
+<li>onConnect</li>
+<li>onMessage</li>
+<li>sendMessage</li>
+</ul>
+</li>
+</ul>
+<p>内容脚本运行于一个独立、隔离的环境，它不会和<code>主页面的脚本</code>或者<code>其他插件的内容脚本</code>发生冲突，当然也不能调用其上下文和变量。假</p>
+<p>设我们在主页面中定义了变量和函数：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> a = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="string">&quot;2&quot;</span> &#125;;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> b = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="string">&quot;2&quot;</span>, <span class="attr">c</span>: [] &#125;;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">a, b</span>)&#123; <span class="keyword">return</span> a + b &#125;;</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>由于隔离的机制，在内容脚本中调用add函数会报错：<code>Uncaught ReferenceError: add is not defined</code>。</p>
+<p>内容脚本分为以代码方式或声明方式注入。</p>
+<h3 id="代码方式注入"><a href="#代码方式注入" class="headerlink" title="代码方式注入"></a>代码方式注入</h3><p>对于需要在特定情况下运行的代码，我们需要使用代码注入的方式；</p>
+<p>在上面的popup页面中，我们就是将内容脚本以代码的方式进行注入到页面中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">tabs</span>.<span class="title function_">executeScript</span>(tabs[<span class="number">0</span>].<span class="property">id</span>, &#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="string">&#x27;document.body.style.backgroundColor = &quot;red&quot;;&#x27;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>或者可以注入整个文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">tabs</span>.<span class="title function_">executeScript</span>(tabs[<span class="number">0</span>].<span class="property">id</span>, &#123;</span><br><span class="line">  <span class="attr">file</span>: <span class="string">&quot;contentScript.js&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="声明式注入"><a href="#声明式注入" class="headerlink" title="声明式注入"></a>声明式注入</h3><p>在指定页面上自动运行的内容脚本，我们可使用声明式注入的方式；</p>
+<p>以声明方式注入的脚本需注册在manifest文件的content_scripts属性下。它们可以包括JS文件或CSS文件。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;content_scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="comment">// 必需。指定此内容脚本将被注入到哪些页面。</span></span><br><span class="line">      <span class="attr">&quot;matches&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;https://*.baidu.com/*&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;css&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;myStyles.css&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;js&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;contentScript.js&quot;</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>声明式注入除了matches必须外，还可以包含以下字段，来自定义指定页面匹配：</p>
+<table>
+<thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>exclude_matches</td>
+<td>字符串数组</td>
+<td>可选。排除此内容脚本将被注入的页面。</td>
+</tr>
+<tr>
+<td>include_globs</td>
+<td>字符串数组</td>
+<td>可选。 在 matches 后应用，以匹配与此 glob 匹配的URL。旨在模拟 @exclude 油猴关键字。</td>
+</tr>
+<tr>
+<td>exclude_globs</td>
+<td>字符串数组</td>
+<td>可选。 在 matches 后应用，以排除与此 glob 匹配的URL。旨在模拟 @exclude 油猴关键字。</td>
+</tr>
+</tbody></table>
+<p>声明匹配URL可以使用Glob属性，Glob属性遵循更灵活的语法。</p>
+<p>可接受的Glob字符串可能包含“通配符”星号和问号的URL。星号*匹配任意长度的字符串，包括空字符串，而问号？匹配任何单个字符。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;content_scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;matches&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;https://*.xieyufei.com/*&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;exclude_matches&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;*://*/*business*&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;include_globs&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;*xieyufei.com/???s/*&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;exclude_globs&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;*science*&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;js&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;contentScript.js&quot;</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>将JS文件注入网页时，还需要控制文件注入的时机，由<code>run_at</code>字段控制；</p>
+<p>首选的默认字段是<code>document_idle</code>，但如果需要，也可以指定为 “document_start” 或“document_end”。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;content_scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;matches&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;https://*.xieyufei.com/*&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;run_at&quot;</span><span class="punctuation">:</span> <span class="string">&quot;document_idle&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;js&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;contentScript.js&quot;</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>三个字段注入的时机区别如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>document_idle</td>
+<td>string</td>
+<td>首选。 尽可能使用 “document_idle”。浏览器选择一个时间在 “document_end” 和window.onload 事件触发后立即注入脚本。 注入的确切时间取决于文档的复杂程度以及加载所需的时间，并且已针对页面加载速度进行了优化。在 “document_idle” 上运行的内容脚本不需要监听 window.onload 事件，因此可以确保它们在 DOM 完成之后运行。如果确实需要在window.onload 之后运行脚本，则扩展可以使用 document.readyState 属性检查 onload 是否已触发。</td>
+</tr>
+<tr>
+<td>document_start</td>
+<td>string</td>
+<td>在 css 文件之后，但在构造其他 DOM 或运行其他脚本前注入。</td>
+</tr>
+<tr>
+<td>document_end</td>
+<td>string</td>
+<td>在 DOM 创建完成后，但在加载子资源（例如 images 和 frames ）之前，立即注入脚本。</td>
+</tr>
+</tbody></table>
+<h3 id="消息通信"><a href="#消息通信" class="headerlink" title="消息通信"></a>消息通信</h3><p>尽管内容脚本的执行环境和托管它们的页面是相互隔离的，但是它们共享对页面DOM的访问；如果内容脚本想要和插件通信，可以通过</p>
+<p><code>onMessage</code>和<code>sendMessage</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// contentScript.js</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onMessage</span>.<span class="title function_">addListener</span>(<span class="keyword">function</span> (<span class="params">message, sender, sendResponse</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;content-script收到的消息&quot;</span>, message);</span><br><span class="line">  <span class="title function_">sendResponse</span>(<span class="string">&quot;我收到了你的消息！&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="title function_">sendMessage</span>(</span><br><span class="line">  &#123; <span class="attr">greeting</span>: <span class="string">&quot;我是content-script呀，我主动发消息给后台！&quot;</span> &#125;,</span><br><span class="line">  <span class="keyword">function</span> (<span class="params">response</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;收到来自后台的回复：&quot;</span> + response);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>更多消息通信的在后面我们会进行详细的总结。</p>
+<h2 id="contextMenus"><a href="#contextMenus" class="headerlink" title="contextMenus"></a>contextMenus</h2><p><code>contextMenus</code>可以自定义浏览器的右键菜单（也有叫上下文菜单的），主要是通过<code>chrome.contextMenusAPI</code>实现；在manifest中添加权限来开启菜单权限：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;contextMenus&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;icons&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;16&quot;</span><span class="punctuation">:</span> <span class="string">&quot;contextMenus16.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;48&quot;</span><span class="punctuation">:</span> <span class="string">&quot;contextMenus48.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;128&quot;</span><span class="punctuation">:</span> <span class="string">&quot;contextMenus128.png&quot;</span></span><br><span class="line">   <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>通过icons字段配置<code>contextMenus</code>菜单旁边的图标</p>
+<p>我们可以在background中调用<code>contextMenus.create</code>来创建菜单，这个操作应该在<code>runtime.onInstalled</code>监听回调执行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">contextMenus</span>.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">id</span>: <span class="string">&quot;1&quot;</span>,</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&quot;Test Context Menu&quot;</span>,</span><br><span class="line">  <span class="attr">contexts</span>: [<span class="string">&quot;all&quot;</span>],</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//分割线</span></span><br><span class="line">chrome.<span class="property">contextMenus</span>.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="string">&quot;separator&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 父级菜单</span></span><br><span class="line">chrome.<span class="property">contextMenus</span>.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">id</span>: <span class="string">&quot;2&quot;</span>,</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&quot;Parent Context Menu&quot;</span>,</span><br><span class="line">  <span class="attr">contexts</span>: [<span class="string">&quot;all&quot;</span>],</span><br><span class="line">&#125;);</span><br><span class="line">chrome.<span class="property">contextMenus</span>.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">id</span>: <span class="string">&quot;21&quot;</span>,</span><br><span class="line">  <span class="attr">parentId</span>: <span class="string">&quot;2&quot;</span>,</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&quot;Child Context Menu1&quot;</span>,</span><br><span class="line">  <span class="attr">contexts</span>: [<span class="string">&quot;all&quot;</span>],</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321162849861.png" alt="image-20220321162849861"></p>
+<p>如果我们的插件创建多个右键菜单，则Chrome会自动将其折叠为一个父菜单。</p>
+<p><code>contextMenus</code>创建对象的属性可以在附录里面找到；</p>
+<p>我们看到在title属性中有一个<code>%s</code>的标识符，当<code>contexts</code>为<code>selection</code>，使用<code>%s</code>来表示选中的文字；我们通过这个功能可以实现一个</p>
+<p>选中文字调用百度搜索的小功能，效果如下：</p>
+<p>（没出来效果，暂时跳过）</p>
+<p><code>contextMenus</code>还有一些API可以调用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除某一个菜单项</span></span><br><span class="line">chrome.<span class="property">contextMenus</span>.<span class="title function_">remove</span>(menuItemId)；</span><br><span class="line"><span class="comment">// 删除所有自定义右键菜单</span></span><br><span class="line">chrome.<span class="property">contextMenus</span>.<span class="title function_">removeAll</span>();</span><br><span class="line"><span class="comment">// 更新某一个菜单项</span></span><br><span class="line">chrome.<span class="property">contextMenus</span>.<span class="title function_">update</span>(menuItemId, updateProperties);</span><br><span class="line"><span class="comment">// 监听菜单项点击事件</span></span><br><span class="line">chrome.<span class="property">contextMenus</span>.<span class="property">onClicked</span>.<span class="title function_">addListener</span>(<span class="keyword">function</span>(<span class="params">OnClickData info, tabs.Tab tab</span>) &#123;...&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="override"><a href="#override" class="headerlink" title="override"></a>override</h2><p>覆盖页面（override）是一种将Chrome默认的特定页面替换为插件程序中的HTML文件。</p>
+<p>除了HTML之外，覆盖页面通常还有CSS和JS代码。</p>
+<p>插件可以替换以下Chrome的页面。</p>
+<ul>
+<li><p>书签管理器</p>
+<ul>
+<li><p>当用户从 Chrome 菜单中选择书签管理器菜单项或在 Mac 上从书签菜单中选择书签管理器项时出现的页面。您也可以通过输入 </p>
+<p>URL chrome:&#x2F;&#x2F;bookmarks来访问此页面。</p>
+</li>
+</ul>
+</li>
+<li><p>历史记录</p>
+<ul>
+<li><p>当用户从 Chrome 菜单中选择历史记录菜单项或在 Mac 上从历史记录菜单中选择显示完整历史记录项时出现的页面。您也可以</p>
+<p>通过输入URL chrome:&#x2F;&#x2F;history来访问此页面。</p>
+</li>
+</ul>
+</li>
+<li><p>新标签</p>
+<ul>
+<li>当用户创建新标签或窗口时出现的页面。您也可以通过输入 URL chrome:&#x2F;&#x2F;newtab来访问此页面。</li>
+</ul>
+</li>
+</ul>
+<p>需要注意的是：单个插件只能覆盖某一个页面。例如，插件程序不能同时覆盖书签管理器和历史记录页面。</p>
+<p>在manifest进行如下配置：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;chrome_url_overrides&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;newtab&quot;</span><span class="punctuation">:</span> <span class="string">&quot;newtab.html&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="comment">// &quot;history&quot;: &quot;history.html&quot;,</span></span><br><span class="line">    <span class="comment">// &quot;bookmarks&quot;: &quot;bookmarks.html&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果我们覆盖多个特定页面，Chrome加载插件时会直接报错：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/0623e705d94e4cd3bcdd5b5b3274cfc5tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp" alt="覆盖多个页面报错"></p>
+<h2 id="storage"><a href="#storage" class="headerlink" title="storage"></a>storage</h2><p>用户在操作时，会产生一些用户数据，插件需要在本地存储这些数据，在需要调用的时候再拿出来；</p>
+<p>Chrome推荐使用<code>chrome.storage</code>的API，该API经过优化，提供和localStorage相同的存储功能；不推荐直接存在<code>localStorage</code>中，两者主要有以下区别：</p>
+<ul>
+<li>用户数据使用<code>chrome.storage</code>存储可以和Chrome的同步功能自动同步。</li>
+<li>插件的内容脚本可以直接访问用户数据，而无需background。</li>
+<li>chrome.storage可以直接存储对象，而localStorage是存储字符串，需要再次转换</li>
+</ul>
+<p>如果要使用storage的自动同步，我们可以使用<code>storage.sync</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">storage</span>.<span class="property">sync</span>.<span class="title function_">set</span>(&#123;<span class="attr">key</span>: value&#125;, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Value is set to &#x27;</span> + value);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">chrome.<span class="property">storage</span>.<span class="property">sync</span>.<span class="title function_">get</span>([<span class="string">&#x27;key&#x27;</span>], <span class="keyword">function</span>(<span class="params">result</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Value currently is &#x27;</span> + result.<span class="property">key</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>当Chrome离线时，Chrome会将数据存储在本地。</p>
+<p>下次浏览器在线时，Chrome会同步数据。即使用户禁用同步，storage.sync仍将工作。</p>
+<p>不需要同步的数据可以用<code>storage.local</code>进行存储：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">storage</span>.<span class="property">local</span>.<span class="title function_">set</span>(&#123;<span class="attr">key</span>: value&#125;, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Value is set to &#x27;</span> + value);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">chrome.<span class="property">storage</span>.<span class="property">local</span>.<span class="title function_">get</span>([<span class="string">&#x27;key&#x27;</span>], <span class="keyword">function</span>(<span class="params">result</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Value currently is &#x27;</span> + result.<span class="property">key</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果我们想要监听<code>storage</code>中的数据变化，可以用<code>onChanged</code>添加监听事件；</p>
+<p>每当存储中的数据发生变化时，就会触发该事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// background.js</span></span><br><span class="line"></span><br><span class="line">chrome.<span class="property">storage</span>.<span class="property">onChanged</span>.<span class="title function_">addListener</span>(<span class="keyword">function</span> (<span class="params">changes, namespace</span>) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> [key, &#123; oldValue, newValue &#125;] <span class="keyword">of</span> <span class="title class_">Object</span>.<span class="title function_">entries</span>(changes)) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">      <span class="string">`Storage key &quot;<span class="subst">$&#123;key&#125;</span>&quot; in namespace &quot;<span class="subst">$&#123;namespace&#125;</span>&quot; changed.`</span>,</span><br><span class="line">      <span class="string">`Old value was &quot;<span class="subst">$&#123;oldValue&#125;</span>&quot;, new value is &quot;<span class="subst">$&#123;newValue&#125;</span>&quot;.`</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="devtools"><a href="#devtools" class="headerlink" title="devtools"></a>devtools</h2><p>用过<code>Vue</code>或者<code>React</code>的<code>devtools</code>的童鞋应该见过这样新增的扩展面板：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/797d03728824441fba4ad45b3befca8atplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp" alt="Vue Panel"></p>
+<p><code>DevTools</code>可以为Chrome的<code>DevTools</code>添加功能，它可以添加新的UI面板和侧边栏，与检查的页面交互，获取有关网络请求的信息等等；</p>
+<p>它可以访问以下特定的API：</p>
+<ul>
+<li>devtools.inspectedWindow</li>
+<li>devtools.network</li>
+<li>devtools.panels</li>
+</ul>
+<p>DevTools扩展的结构与任何其他扩展一样：它可以有一个背景页面、内容脚本和其他项目。</p>
+<p>此外，每个DevTools扩展都有一个DevTools页面，可以访问DevTools的API。</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/d67bddfe82b44f4cbbab0a642eb5d4catplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp" alt="DevTools扩展"></p>
+<p>配置devtools不需要权限，只要在manifest中配置一个<code>devtools.html</code>：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;devtools_page&quot;</span><span class="punctuation">:</span> <span class="string">&quot;devtools.html&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>devtools.html中只引用了devtools.js，如果写了其他内容也不会展示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span> <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;./devtools.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>新建devtools.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// devtools.js</span></span><br><span class="line"><span class="comment">// 创建扩展面板</span></span><br><span class="line">chrome.<span class="property">devtools</span>.<span class="property">panels</span>.<span class="title function_">create</span>(</span><br><span class="line">  <span class="comment">// 扩展面板显示名称</span></span><br><span class="line">  <span class="string">&quot;DevPanel&quot;</span>,</span><br><span class="line">  <span class="comment">// 扩展面板icon，并不展示</span></span><br><span class="line">  <span class="string">&quot;panel.png&quot;</span>,</span><br><span class="line">  <span class="comment">// 扩展面板页面</span></span><br><span class="line">  <span class="string">&quot;Panel.html&quot;</span>,</span><br><span class="line">  <span class="keyword">function</span> (<span class="params">panel</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;自定义面板创建成功！&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建自定义侧边栏</span></span><br><span class="line">chrome.<span class="property">devtools</span>.<span class="property">panels</span>.<span class="property">elements</span>.<span class="title function_">createSidebarPane</span>(</span><br><span class="line">  <span class="string">&quot;Sidebar&quot;</span>,</span><br><span class="line">  <span class="keyword">function</span> (<span class="params">sidebar</span>) &#123;</span><br><span class="line">    sidebar.<span class="title function_">setPage</span>(<span class="string">&quot;sidebar.html&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里调用create创建扩展面板，<code>createSidebarPane</code>创建侧边栏，每个扩展面板和侧边栏都是一个单独的HTML页面，其中可以包含其他资源（JavaScript、CSS、图像等）。</p>
+<h3 id="DevPanel"><a href="#DevPanel" class="headerlink" title="DevPanel"></a>DevPanel</h3><p>DevPanel面板是一个顶级标签，和Element、Source、Network等是同一级，在一个devtools.js可以创建多个；在<code>Panel.html</code>中我们先</p>
+<p>设置2个按钮：</p>
+<p>Panel.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>dev panel<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;check_jquery&quot;</span>&gt;</span>检查jquery<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;get_all_resources&quot;</span>&gt;</span>获取所有资源<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;panel.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>panel.js</code>中我们使用<code>devtools.inspectedWindow</code>的<code>API</code>来和被检查窗口进行交互：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// panel.js</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;check_jquery&quot;</span>).<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  chrome.<span class="property">devtools</span>.<span class="property">inspectedWindow</span>.<span class="built_in">eval</span>(</span><br><span class="line">    <span class="string">&quot;jQuery.fn.jquery&quot;</span>,</span><br><span class="line">    <span class="keyword">function</span> (<span class="params">result, isException</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (isException) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;the page is not using jQuery&quot;</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;The page is using jQuery v&quot;</span> + result);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">document</span></span><br><span class="line">  .<span class="title function_">getElementById</span>(<span class="string">&quot;get_all_resources&quot;</span>)</span><br><span class="line">  .<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    chrome.<span class="property">devtools</span>.<span class="property">inspectedWindow</span>.<span class="title function_">getResources</span>(<span class="keyword">function</span> (<span class="params">resources</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(resources);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>eval</code>函数为插件提供了在被检查页面的上下文中执行JS代码的能力，而<code>getResources</code>获取页面上所有加载的资源；</p>
+<p>我们找到一个页面，然后右击检查打开调试工具，发现在最右侧多了一个<code>DevPanel</code>的tab页，</p>
+<p>效果如下：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220321170541211.png" alt="image-20220321170541211"></p>
+<p>点击我们的调试按钮，那么日志在哪里能看到呢？</p>
+<p>我们在调试工具上右击检查，再开一个调试工具，这个就是调试工具的调试工具。</p>
+<p>最终两个调试工具的效果如下：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/00117c3fff474e0194622a144ce52d15tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp" alt="DevTools面板"></p>
+<p>（实操中，在panel面板中，右击时并没有出来检查菜单栏）</p>
+<h3 id="Sidebar"><a href="#Sidebar" class="headerlink" title="Sidebar"></a>Sidebar</h3><p>回到<code>devtools.js</code>，我们使用<code>createSidebarPane</code>创建了侧边栏面板，并且设置为<code>sidebar.html</code>，最终呈现在<code>Element</code>面板的最右侧：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220322095952631.png" alt="image-20220322095952631"></p>
+<p>有几种方法可以在侧边栏中显示内容：</p>
+<ul>
+<li>HTML内容。调用setPage以指定要在窗格中显示的 HTML 页面。</li>
+<li>JSON数据。将JSON对象传递给setObject.</li>
+<li>JavaScript表达式。将表达式传递给setExpression</li>
+</ul>
+<p>通过JS表达式，我们可以很方便进行页面查询，比如，查询页面上所有的img元素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">devtools</span>.<span class="property">panels</span>.<span class="property">elements</span>.<span class="title function_">createSidebarPane</span>(</span><br><span class="line">  <span class="string">&quot;All Images&quot;</span>,</span><br><span class="line">  <span class="keyword">function</span> (<span class="params">sidebar</span>) &#123;</span><br><span class="line">    sidebar.<span class="title function_">setExpression</span>(<span class="string">&#x27;document.querySelectorAll(&quot;img&quot;)&#x27;</span>, <span class="string">&quot;All Images&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/image-20220322100736954.png" alt="image-20220322100736954"></p>
+<p>另外，我们可以通过<code>elements.onSelectionChanged</code>监听事件，在Element面板选中元素更改后，更新侧边栏面板的状态；</p>
+<p>例如，可以将我们关心的一些元素的样式进行实时展示在侧边面板，方便查看：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> page_getProperties = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> ($<span class="number">0</span> <span class="keyword">instanceof</span> <span class="title class_">HTMLElement</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">tag</span>: $<span class="number">0.</span>tagName.<span class="title function_">toLocaleLowerCase</span>(),</span><br><span class="line">      <span class="attr">class</span>: $<span class="number">0.</span>classList,</span><br><span class="line">      <span class="attr">width</span>: <span class="variable language_">window</span>.<span class="title function_">getComputedStyle</span>($<span class="number">0</span>)[<span class="string">&quot;width&quot;</span>],</span><br><span class="line">      <span class="attr">height</span>: <span class="variable language_">window</span>.<span class="title function_">getComputedStyle</span>($<span class="number">0</span>)[<span class="string">&quot;height&quot;</span>],</span><br><span class="line">      <span class="attr">margin</span>: <span class="variable language_">window</span>.<span class="title function_">getComputedStyle</span>($<span class="number">0</span>)[<span class="string">&quot;margin&quot;</span>],</span><br><span class="line">      <span class="attr">padding</span>: <span class="variable language_">window</span>.<span class="title function_">getComputedStyle</span>($<span class="number">0</span>)[<span class="string">&quot;padding&quot;</span>],</span><br><span class="line">      <span class="attr">color</span>: <span class="variable language_">window</span>.<span class="title function_">getComputedStyle</span>($<span class="number">0</span>)[<span class="string">&quot;color&quot;</span>],</span><br><span class="line">      <span class="attr">fontSize</span>: <span class="variable language_">window</span>.<span class="title function_">getComputedStyle</span>($<span class="number">0</span>)[<span class="string">&quot;fontSize&quot;</span>],</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">chrome.<span class="property">devtools</span>.<span class="property">panels</span>.<span class="property">elements</span>.<span class="title function_">createSidebarPane</span>(</span><br><span class="line">  <span class="string">&quot;Select Element&quot;</span>,</span><br><span class="line">  <span class="keyword">function</span> (<span class="params">sidebar</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">updateElementProperties</span>(<span class="params"></span>) &#123;</span><br><span class="line">      sidebar.<span class="title function_">setExpression</span>(</span><br><span class="line">        <span class="string">&quot;(&quot;</span> + page_getProperties.<span class="title function_">toString</span>() + <span class="string">&quot;)()&quot;</span>,</span><br><span class="line">        <span class="string">&quot;select element&quot;</span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">updateElementProperties</span>();</span><br><span class="line">    chrome.<span class="property">devtools</span>.<span class="property">panels</span>.<span class="property">elements</span>.<span class="property">onSelectionChanged</span>.<span class="title function_">addListener</span>(</span><br><span class="line">      updateElementProperties</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/crx%E5%AE%9E%E6%93%8D.assets/1334aad0f2914a4dab90a982f9d28db9tplv-k3u1fbpfcp-zoom-in-crop-mark1304000.awebp" alt="元素样式实时展示"></p>
+<p>备注：浏览器自带的devtools已经有这样的功能了</p>
+<h2 id="notifications"><a href="#notifications" class="headerlink" title="notifications"></a>notifications</h2><p>Chrome提供<code>chrome.notifications</code>的API来推送桌面通知；同样也需要现在<code>manifest</code>中注册权限：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;notifications&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在background调用创建即可</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// background.js</span></span><br><span class="line">chrome.<span class="property">notifications</span>.<span class="title function_">create</span>(<span class="literal">null</span>, &#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="string">&quot;basic&quot;</span>,</span><br><span class="line">  <span class="attr">iconUrl</span>: <span class="string">&quot;drink.png&quot;</span>,</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&quot;喝水小助手&quot;</span>,</span><br><span class="line">  <span class="attr">message</span>: <span class="string">&quot;看到此消息的人可以和我一起来喝一杯水&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="webRequest"><a href="#webRequest" class="headerlink" title="webRequest"></a>webRequest</h2><p>通过<code>webRequest</code>的<code>API</code>可以对浏览器发出的任何HTTP请求进行拦截、组织或者修改；</p>
+<p>可以拦截的请求还包括脚本、样式的GET请求以及图片的链接；</p>
+<p>我们也需要在manifest中配置权限才能使用API：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">  <span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;webRequest&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;webRequestBlocking&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;*://*.xieyufei.com/&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>权限中还需要声明拦截请求的URL，如果你想拦截所有的URL，可以使用<code>*://*/*</code>（不过不推荐这么做，数据会非常多），如果我们想以</p>
+<p>阻塞方式使用Web请求API，则需要用到<code>webRequestBlocking</code>权限。</p>
+<p>比如我们可以对拦截的请求进行取消：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">webRequest</span>.<span class="property">onBeforeRequest</span>.<span class="title function_">addListener</span>(</span><br><span class="line">  <span class="keyword">function</span> (<span class="params">detail</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="attr">cancel</span>: details.<span class="property">url</span>.<span class="title function_">indexOf</span>(<span class="string">&quot;example.com&quot;</span>) != -<span class="number">1</span>&#125;;;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; <span class="attr">urls</span>: [<span class="string">&quot;&lt;all_urls&gt;&quot;</span>] &#125;,</span><br><span class="line">  [<span class="string">&quot;blocking&quot;</span>]</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="组件消息通信"><a href="#组件消息通信" class="headerlink" title="组件消息通信"></a>组件消息通信</h1><p>不同组件之间经常需要进行消息通信来进行数据的传递，我们来看下他们之间是如何进行通信的：</p>
+<h2 id="background和popup通信"><a href="#background和popup通信" class="headerlink" title="background和popup通信"></a>background和popup通信</h2><p><code>background</code>和<code>popup</code>之间的通信比较简单，在<code>popup</code>中，我们可以通过<code>extension.getBackgroundPage</code>直接获取到<code>background</code>对</p>
+<p>象，直接调用对象上的方法即可：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// popup.js</span></span><br><span class="line"><span class="keyword">var</span> bg = chrome.<span class="property">extension</span>.<span class="title function_">getBackgroundPage</span>();</span><br><span class="line">bg.<span class="title function_">someMethods</span>()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>而<code>background</code>访问<code>popup</code>上则通过<code>extension.getViews</code>来访问，不过前提是<code>popup</code>弹框已经展示，否则获取到的<code>views</code>是空数组：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//background.js</span></span><br><span class="line"><span class="keyword">var</span> views = chrome.<span class="property">extension</span>.<span class="title function_">getViews</span>(&#123;<span class="attr">type</span>:<span class="string">&#x27;popup&#x27;</span>&#125;);</span><br><span class="line"><span class="keyword">if</span>(views.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">  <span class="comment">// 相当于popup的windows对象</span></span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(views[<span class="number">0</span>].<span class="property">location</span>.<span class="property">href</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="background和内容脚本通信"><a href="#background和内容脚本通信" class="headerlink" title="background和内容脚本通信"></a>background和内容脚本通信</h2><p>在<code>background</code>和<code>内容脚本</code>通信，我们可以使用简单直接的<code>runtime.sendMessage</code>或者<code>tabs.sendMessage</code>发送消息，消息内容可以是</p>
+<p>JSON数据</p>
+<p>从内容脚本发送消息如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// content-script.js</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="title function_">sendMessage</span>(</span><br><span class="line">  &#123; <span class="attr">greeting</span>: <span class="string">&quot;hello，我是content-script，主动发消息给后台！&quot;</span> &#125;,</span><br><span class="line">  <span class="keyword">function</span> (<span class="params">response</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;收到来自后台的回复：&quot;</span> + response);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>而从后台发送消息到内容脚本时，由于有多个标签页，我们需要指定发送到某个标签页：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// background.js</span></span><br><span class="line">chrome.<span class="property">tabs</span>.<span class="title function_">query</span>(&#123; <span class="attr">active</span>: <span class="literal">true</span>, <span class="attr">currentWindow</span>: <span class="literal">true</span> &#125;, <span class="keyword">function</span> (<span class="params">tabs</span>) &#123;</span><br><span class="line">  chrome.<span class="property">tabs</span>.<span class="title function_">sendMessage</span>(</span><br><span class="line">    tabs[<span class="number">0</span>].<span class="property">id</span>,</span><br><span class="line">    &#123; <span class="attr">greeting</span>: <span class="string">&quot;hello，我是后台，主动发消息给content-script&quot;</span> &#125;,</span><br><span class="line">    <span class="keyword">function</span> (<span class="params">response</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(response.<span class="property">farewell</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>而不管是在后台，还是在内容脚本中，我们都使用<code>runtime.onMessage</code>监听消息的接收事件，不同的是回调函数中的<code>sender</code>，标识不同的发送方：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onMessage</span>.<span class="title function_">addListener</span>(</span><br><span class="line">  <span class="keyword">function</span>(<span class="params">request, sender, sendResponse</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(sender.<span class="property">tab</span> ?</span><br><span class="line">      <span class="string">&quot;from a content script:&quot;</span> + sender.<span class="property">tab</span>.<span class="property">url</span> :</span><br><span class="line">      <span class="string">&quot;from the extension&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (request.<span class="property">greeting</span>.<span class="title function_">indexOf</span>(<span class="string">&quot;hello&quot;</span>) !== -<span class="number">1</span>)&#123;</span><br><span class="line">      <span class="title function_">sendResponse</span>(&#123;<span class="attr">farewell</span>: <span class="string">&quot;goodbye&quot;</span>&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="长链接"><a href="#长链接" class="headerlink" title="长链接"></a>长链接</h2><p>上面的<code>runtime.sendMessage</code>和<code>tabs.sendMessage</code>都属于短链接，所谓的短连接，就是类似于<code>HTTP</code>请求，如果接收方不在线，就会</p>
+<p>出现请求失败的情况；但有些情况下，需要持续对话，这时候就需要用到长链接，类似于<code>websocket</code>，可以在通信双方之间进行持久链</p>
+<p>接。</p>
+<p>长链接使用<code>runtime.connect</code>或<code>tabs.connect</code>来打开长生命周期通道，通道可以有一个名称，以便区分不同类型的连接。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// content-script.js</span></span><br><span class="line"><span class="comment">// 设置通道名称</span></span><br><span class="line"><span class="keyword">var</span> port = chrome.<span class="property">runtime</span>.<span class="title function_">connect</span>(&#123;<span class="attr">name</span>: <span class="string">&quot;knockknock&quot;</span>&#125;);</span><br><span class="line">port.<span class="title function_">postMessage</span>(&#123;<span class="attr">joke</span>: <span class="string">&quot;Knock knock&quot;</span>&#125;);</span><br><span class="line">port.<span class="property">onMessage</span>.<span class="title function_">addListener</span>(<span class="keyword">function</span>(<span class="params">msg</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (msg.<span class="property">question</span> == <span class="string">&quot;Who&#x27;s there?&quot;</span>)</span><br><span class="line">    port.<span class="title function_">postMessage</span>(&#123;<span class="attr">answer</span>: <span class="string">&quot;Madame&quot;</span>&#125;);</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (msg.<span class="property">question</span> == <span class="string">&quot;Madame who?&quot;</span>)</span><br><span class="line">    port.<span class="title function_">postMessage</span>(&#123;<span class="attr">answer</span>: <span class="string">&quot;Madame... Bovary&quot;</span>&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>从background向内容脚本发送消息也类似，不同之处在于需要指定连接的tab页，将<code>runtime.connect</code>改为<code>tabs.connect</code>。</p>
+<p>　　在接收端，我们需要设置<code>onConnect</code>的事件监听器，当发送端调用<code>connect</code>进行连接时触发该事件，以及通过连接发送和接收消息的<code>port</code>对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//background.js</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onConnect</span>.<span class="title function_">addListener</span>(<span class="keyword">function</span>(<span class="params">port</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">assert</span>(port.<span class="property">name</span> == <span class="string">&quot;knockknock&quot;</span>);</span><br><span class="line">  port.<span class="property">onMessage</span>.<span class="title function_">addListener</span>(<span class="keyword">function</span>(<span class="params">msg</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (msg.<span class="property">joke</span> == <span class="string">&quot;Knock knock&quot;</span>)</span><br><span class="line">      port.<span class="title function_">postMessage</span>(&#123;<span class="attr">question</span>: <span class="string">&quot;Who&#x27;s there?&quot;</span>&#125;);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (msg.<span class="property">answer</span> == <span class="string">&quot;Madame&quot;</span>)</span><br><span class="line">      port.<span class="title function_">postMessage</span>(&#123;<span class="attr">question</span>: <span class="string">&quot;Madame who?&quot;</span>&#125;);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (msg.<span class="property">answer</span> == <span class="string">&quot;Madame... Bovary&quot;</span>)</span><br><span class="line">      port.<span class="title function_">postMessage</span>(&#123;<span class="attr">question</span>: <span class="string">&quot;I don&#x27;t get it.&quot;</span>&#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/Saiable">Sai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mindcons.cn/2022/07/19/md/web/%E4%B8%93%E6%A0%8F/Chrome%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/crx%E5%AE%9E%E6%93%8D/">https://mindcons.cn/2022/07/19/md/web/专栏/Chrome插件开发/crx实操/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mindcons.cn" target="_blank">吕小布の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/02/10/63e583843360e.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://bu.dusays.com/2023/02/10/63e580229ee01.webp" target="_blank"><img class="post-qr-code-img" src="https://bu.dusays.com/2023/02/10/63e580229ee01.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://bu.dusays.com/2023/02/09/63e48775d4f42.webp" target="_blank"><img class="post-qr-code-img" src="https://bu.dusays.com/2023/02/09/63e48775d4f42.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/07/19/md/web/%E4%B8%93%E6%A0%8F/Chrome%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/crx%E5%AD%A6%E4%B9%A0/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">crx学习</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/19/md/web/%E4%B8%93%E6%A0%8F/Chrome%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/crx%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">crx问题记录</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://bu.dusays.com/2023/02/10/63e583843360e.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sai</div><div class="author-info__description">天可补,海可填,南山可移。日月既往,不可复追。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">175</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">36</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Saiable"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://bu.dusays.com/2023/02/10/63e57e822f198.webp" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://bu.dusays.com/2023/02/10/63e57f8ac9fae.webp" target="_blank" title="WeChat"><i class="fa-brands fa-weixin"></i></a><a class="social-icon" href="https://github.com/Saiable" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:mindcons@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">日月既往,不可复追。</div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople1.js"></script><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/zdog.dist.js"></script><script id="rendered-js" src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="card-widget tzy-right-widget" id="card-wechat"><div id="flip-wrapper"><div id="flip-content"><div class="face"></div><div class="back face"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%B0%8F%E6%8F%92%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">简单小插件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E5%8F%B0background"><span class="toc-number">1.1.</span> <span class="toc-text">后台background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#storage%E5%AD%98%E5%82%A8"><span class="toc-number">1.2.</span> <span class="toc-text">storage存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%B5%8F%E8%A7%88%E5%99%A8tabs"><span class="toc-number">1.3.</span> <span class="toc-text">获取浏览器tabs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2%E9%80%89%E9%A1%B9%E9%A1%B5%E9%9D%A2"><span class="toc-number">1.4.</span> <span class="toc-text">颜色选项页面</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E5%8A%9F%E8%83%BD%E8%BF%9B%E9%98%B6"><span class="toc-number">2.</span> <span class="toc-text">插件功能进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8background%E7%AE%A1%E7%90%86%E4%BA%8B%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text">使用background管理事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#alarms"><span class="toc-number">2.1.1.</span> <span class="toc-text">alarms</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#browserAction"><span class="toc-number">2.2.</span> <span class="toc-text">browserAction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Tooltip"><span class="toc-number">2.2.1.</span> <span class="toc-text">Tooltip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Badge"><span class="toc-number">2.2.2.</span> <span class="toc-text">Badge</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#content-scripts"><span class="toc-number">2.3.</span> <span class="toc-text">content-scripts</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%96%B9%E5%BC%8F%E6%B3%A8%E5%85%A5"><span class="toc-number">2.3.1.</span> <span class="toc-text">代码方式注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E5%BC%8F%E6%B3%A8%E5%85%A5"><span class="toc-number">2.3.2.</span> <span class="toc-text">声明式注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1"><span class="toc-number">2.3.3.</span> <span class="toc-text">消息通信</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#contextMenus"><span class="toc-number">2.4.</span> <span class="toc-text">contextMenus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#override"><span class="toc-number">2.5.</span> <span class="toc-text">override</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#storage"><span class="toc-number">2.6.</span> <span class="toc-text">storage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#devtools"><span class="toc-number">2.7.</span> <span class="toc-text">devtools</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DevPanel"><span class="toc-number">2.7.1.</span> <span class="toc-text">DevPanel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sidebar"><span class="toc-number">2.7.2.</span> <span class="toc-text">Sidebar</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#notifications"><span class="toc-number">2.8.</span> <span class="toc-text">notifications</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webRequest"><span class="toc-number">2.9.</span> <span class="toc-text">webRequest</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1"><span class="toc-number">3.</span> <span class="toc-text">组件消息通信</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#background%E5%92%8Cpopup%E9%80%9A%E4%BF%A1"><span class="toc-number">3.1.</span> <span class="toc-text">background和popup通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background%E5%92%8C%E5%86%85%E5%AE%B9%E8%84%9A%E6%9C%AC%E9%80%9A%E4%BF%A1"><span class="toc-number">3.2.</span> <span class="toc-text">background和内容脚本通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%95%BF%E9%93%BE%E6%8E%A5"><span class="toc-number">3.3.</span> <span class="toc-text">长链接</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/13/md/linux/%E8%BF%90%E7%BB%B4/Neovim/neovim%E5%AE%9E%E6%93%8D/" title="Neovim 实操">Neovim 实操</a><time datetime="2023-11-12T23:58:07.758Z" title="发表于 2023-11-13 07:58:07">2023-11-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/13/md/linux/%E8%BF%90%E7%BB%B4/Neovim/Neovim%20IDE%20%E6%90%AD%E5%BB%BA%E7%B3%BB%E5%88%97/" title="Neovim IDE 搭建系列">Neovim IDE 搭建系列</a><time datetime="2023-11-12T23:58:07.755Z" title="发表于 2023-11-13 07:58:07">2023-11-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/13/md/tools/git/git%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%8D%8F%E5%90%8C%E5%BC%80%E5%8F%91/" title="无题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/11/13/md/tools/git/git%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%8D%8F%E5%90%8C%E5%BC%80%E5%8F%91/" title="无题">无题</a><time datetime="2023-11-12T23:58:06.892Z" title="发表于 2023-11-13 07:58:06">2023-11-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/13/md/data/%E6%A0%87%E6%B3%A8/ppocrlabel/" title="ppocrlabel安装及使用">ppocrlabel安装及使用</a><time datetime="2023-11-12T23:58:03.543Z" title="发表于 2023-11-13 07:58:03">2023-11-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/13/md/data/%E6%A0%87%E6%B3%A8/labelStudio%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/" title="labelStudio安装及使用">labelStudio安装及使用</a><time datetime="2023-11-12T23:58:03.540Z" title="发表于 2023-11-13 07:58:03">2023-11-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://bu.dusays.com/2023/02/10/63e57cef87293.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 <i id="heartbeat" class="fa fas fa-heartbeat"></i> Sai</div><a href="https://icp.gov.moe/?keyword=20230203" target="_blank">萌ICP备20230203号</a><div class="footer_custom_text"><p><a target="_blank" href="https://hexo.io/"><img src="https://bu.dusays.com/2023/02/09/63e488a78b827.webp" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="https://bu.dusays.com/2023/02/10/63e57f321880a.webp" title="主题采用butterfly"></a></p></div></div><link rel="stylesheet" href="/custom/css/heartbeat.min.css" ></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换模式</span></div><div class="rightMenu-item" id="menu-print"><i class="fa-solid fa-print fa-fw"></i><span>打印页面</span></div></div></div><div id="rightmenu-mask"></div><div id="myscoll"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.mindcons.cn/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.mindcons.cn/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><canvas id="universe"></canvas><script defer src="/custom/js/universe.js"></script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer data-pjax src="/custom/js/rightMenu.js"></script><script defer data-pjax src="/custom/js/cat.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "717070d8-e449-4d60-b9b6-c1421478f42c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

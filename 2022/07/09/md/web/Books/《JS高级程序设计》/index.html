@@ -1,0 +1,399 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>《JavaScript高级程序设计（第4版）》 | 吕小布の博客</title><meta name="keywords" content="书籍"><meta name="author" content="Sai"><meta name="copyright" content="Sai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="JavaScript高级程序设计（第4版）  关于第四版出版的若干问题：https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;20825869 正如权威指南作者所说，最新的参考现在在网上可以轻易查到，还实时更新，不存在时效问题。他推荐的是 Mozilla 的 MDN Web Docs 和 Node 的 Node.js参考文档。  语言基础语法 区分大小写 标识符 注释 严格模式 语句  关">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《JavaScript高级程序设计（第4版）》">
+<meta property="og:url" content="https://mindcons.cn/2022/07/09/md/web/Books/%E3%80%8AJS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B/index.html">
+<meta property="og:site_name" content="吕小布の博客">
+<meta property="og:description" content="JavaScript高级程序设计（第4版）  关于第四版出版的若干问题：https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;20825869 正如权威指南作者所说，最新的参考现在在网上可以轻易查到，还实时更新，不存在时效问题。他推荐的是 Mozilla 的 MDN Web Docs 和 Node 的 Node.js参考文档。  语言基础语法 区分大小写 标识符 注释 严格模式 语句  关">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bu.dusays.com/2023/02/10/63e583843360e.webp">
+<meta property="article:published_time" content="2022-07-08T23:31:58.000Z">
+<meta property="article:modified_time" content="2023-11-14T23:27:26.528Z">
+<meta property="article:author" content="Sai">
+<meta property="article:tag" content="书籍">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bu.dusays.com/2023/02/10/63e583843360e.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mindcons.cn/2022/07/09/md/web/Books/%E3%80%8AJS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"61301LMFP2","apiKey":"a7627d15f4af23df7fbc3e2922471858","indexName":"mindcons","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":350},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Sai","link":"链接: ","source":"来源: 吕小布の博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '《JavaScript高级程序设计（第4版）》',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-15 07:27:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/custom/css/custom.min.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://bu.dusays.com/2023/02/10/63e583843360e.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">175</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">36</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fa-sharp fa-solid fa-photo-film"></i><span> 相册</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/booklist/"><i class="fa-fw fa-solid fa-book"></i><span> 书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">吕小布の博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fa-sharp fa-solid fa-photo-film"></i><span> 相册</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/booklist/"><i class="fa-fw fa-solid fa-book"></i><span> 书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">《JavaScript高级程序设计（第4版）》</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-08T23:31:58.000Z" title="发表于 2022-07-09 07:31:58">2022-07-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-14T23:27:26.528Z" title="更新于 2023-11-15 07:27:26">2023-11-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="《JavaScript高级程序设计（第4版）》"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><code>JavaScript高级程序设计（第4版）</code></strong></p>
+<blockquote>
+<p>关于第四版出版的若干问题：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20825869">https://www.zhihu.com/question/20825869</a></p>
+<p>正如权威指南作者所说，最新的参考现在在网上可以轻易查到，还实时更新，不存在时效问题。他推荐的是 Mozilla 的 <a href="https://link.zhihu.com/?target=https://wiki.developer.mozilla.org/zh-CN/">MDN Web Docs</a> 和 Node 的 <a href="https://link.zhihu.com/?target=http://nodejs.org/api">Node.js参考文档</a>。</p>
+</blockquote>
+<h1 id="语言基础"><a href="#语言基础" class="headerlink" title="语言基础"></a>语言基础</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
+<li>区分大小写</li>
+<li>标识符</li>
+<li>注释</li>
+<li>严格模式</li>
+<li>语句</li>
+</ul>
+<h2 id="关键字、保留字"><a href="#关键字、保留字" class="headerlink" title="关键字、保留字"></a>关键字、保留字</h2><p>这些词汇不能用作标识符，但现在还可以用作对象的属性名。一般来说，最好还是不要使用关键字和保留字作为标识符和属性名，以确保兼容过去和未来的 <code>ECMAScript</code> 版本。</p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ul>
+<li><p><code>var</code></p>
+<ul>
+<li><p><code>var</code>声明作用域</p>
+<ul>
+<li><p>局部变量</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>) &#123; </span><br><span class="line"> <span class="keyword">var</span> message = <span class="string">&quot;hi&quot;</span>; <span class="comment">// 局部变量</span></span><br><span class="line">&#125; </span><br><span class="line"><span class="title function_">test</span>(); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message); <span class="comment">// 出错！</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全局变量</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>) &#123; </span><br><span class="line"> message = <span class="string">&quot;hi&quot;</span>; <span class="comment">// 全局变量</span></span><br><span class="line">&#125; </span><br><span class="line"><span class="title function_">test</span>(); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message); <span class="comment">// &quot;hi&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>虽然可以通过省略 <code>var</code> 操作符定义全局变量，但不推荐这么做。</p>
+</li>
+</ul>
+</li>
+<li><p><code>var</code>声明提升</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123; </span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(age); </span><br><span class="line"> <span class="keyword">var</span> age = <span class="number">26</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="title function_">foo</span>(); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>使用这个关键字声明的变量会自动提升到函数作用域顶部，等价于</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123; </span><br><span class="line"> <span class="keyword">var</span> age; </span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(age); </span><br><span class="line"> age = <span class="number">26</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="title function_">foo</span>(); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>这就是所谓的“提升”（<code>hoist</code>），也就是把所有变量声明都拉到函数作用域的顶部。</p>
+<p>此外，反复多次使用<code> var</code> 声明同一个变量也没有问题：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123; </span><br><span class="line"> <span class="keyword">var</span> age = <span class="number">16</span>; </span><br><span class="line"> <span class="keyword">var</span> age = <span class="number">26</span>; </span><br><span class="line"> <span class="keyword">var</span> age = <span class="number">36</span>; </span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(age); </span><br><span class="line">&#125; </span><br><span class="line"><span class="title function_">foo</span>(); <span class="comment">// 36</span></span><br></pre></td></tr></table></figure>
+
+<p>拓展阅读：<a target="_blank" rel="noopener" href="https://blog.csdn.net/brokenkay/article/details/107243640">js变量声明底层原理分析</a></p>
+<blockquote>
+<p>等把数据结构和计算机组成原理肝完后，会整理成一个专题</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><h2 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h2><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h1 id="变量、作用域与内存"><a href="#变量、作用域与内存" class="headerlink" title="变量、作用域与内存"></a>变量、作用域与内存</h1><h1 id="基本引用类型"><a href="#基本引用类型" class="headerlink" title="基本引用类型"></a>基本引用类型</h1><h1 id="集合引用类型"><a href="#集合引用类型" class="headerlink" title="集合引用类型"></a>集合引用类型</h1><h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a><code>Object</code></h2><h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a><code>Array</code></h2><h3 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h3><h4 id="concact-：合并数组"><a href="#concact-：合并数组" class="headerlink" title="concact()：合并数组"></a><code>concact()</code>：合并数组</h4><ul>
+<li><p>可以在现有数组全部元素基础上创建一个新数组。</p>
+</li>
+<li><p>它首先会创建一个当前数组的副本，然后再把它的参数添加到副本末尾，最后返回这个新构建的数组。</p>
+<ul>
+<li>如果传入一个或多个数组，则 <code>concat()</code>会把这些数组的每一项都添加到结果数组。</li>
+<li>如果参数不是数组，则直接把它们添加到结果数组末尾。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>]; </span><br><span class="line"><span class="keyword">let</span> colors2 = colors.<span class="title function_">concat</span>(<span class="string">&quot;yellow&quot;</span>, [<span class="string">&quot;black&quot;</span>, <span class="string">&quot;brown&quot;</span>]); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors); <span class="comment">// [&quot;red&quot;, &quot;green&quot;,&quot;blue&quot;] </span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors2); <span class="comment">// [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;yellow&quot;, &quot;black&quot;, &quot;brown&quot;]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打平数组</p>
+</li>
+<li><p>操作不影响原始数组</p>
+</li>
+</ul>
+<h4 id="slice-：截取数组"><a href="#slice-：截取数组" class="headerlink" title="slice()：截取数组"></a><code>slice()</code>：截取数组</h4><ul>
+<li><p>创建一个包含原有数组中一个或多个元素的新数组</p>
+</li>
+<li><p>可以接收一个或两个参数：返回元素的开始索引和结束索引。</p>
+<ul>
+<li>如果只有一个参数，则 <code>slice()</code>会返回该索引到数组末尾的所有元素。</li>
+<li>如果有两个参数，则 <code>slice()</code>返回从开始索引到结束索引对应的所有元素，其中不包含结束索引对应的元素（左闭右开）。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>, <span class="string">&quot;yellow&quot;</span>, <span class="string">&quot;purple&quot;</span>]; </span><br><span class="line"><span class="keyword">let</span> colors2 = colors.<span class="title function_">slice</span>(<span class="number">1</span>); </span><br><span class="line"><span class="keyword">let</span> colors3 = colors.<span class="title function_">slice</span>(<span class="number">1</span>, <span class="number">4</span>); </span><br><span class="line"><span class="title function_">alert</span>(colors2); <span class="comment">// green,blue,yellow,purple </span></span><br><span class="line"><span class="title function_">alert</span>(colors3); <span class="comment">// green,blue,yellow</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果 <code>slice()</code>的参数有负值，那么就以数值长度加上这个负值的结果确定位置。</p>
+<ul>
+<li>比如，在包含 5 个元素的数组上调用 <code>slice(-2,-1</code>)，就相当于调用 slice(3,4)。</li>
+<li>如果结束位置小于开始位置，则返回空数组。</li>
+</ul>
+</li>
+<li><p>操作不影响原始数组</p>
+</li>
+</ul>
+<h4 id="splice-：删除、插入或替换数组元素"><a href="#splice-：删除、插入或替换数组元素" class="headerlink" title="splice()：删除、插入或替换数组元素"></a><code>splice()</code>：删除、插入或替换数组元素</h4><ul>
+<li><p>删除：</p>
+<ul>
+<li>需要给 <code>splice()</code><strong>传 2 个参数</strong>：要删除的第一个元素的位置和要删除的元素数量。</li>
+<li>可以从数组中删除任意多个元素，比如 <code>splice(0, 2)</code>会删除前两个元素。</li>
+</ul>
+</li>
+<li><p>插入</p>
+<ul>
+<li>需要给 <code>splice()</code>传 3 个参数：开始位置、0（要删除的元素数量）和要插入的元素，可以在数组中指定的位置插入元素。第三个参数之后还可以传第四个、第五个参数，乃至任意多个要插入的元素。</li>
+<li>比如，<code>splice(2, 0, &quot;red&quot;, &quot;green&quot;)</code>会从数组位置 2 开始插入字符串”<code>red</code>“和”<code>green</code>“。</li>
+</ul>
+</li>
+<li><p>替换（先删除，再替换）</p>
+<ul>
+<li><code>splice()</code>在删除元素的同时可以在指定位置插入新元素，同样要传入 3 个参数：开始位置、要删除元素的数量和要插入的任意多个元素。要插入的元素数量不一定跟删除的元素数量一致。</li>
+<li>比如，<code>splice(2, 1, &quot;red&quot;, &quot;green&quot;)</code>会在位置 2 删除一个元素，然后从该位置开始向数组中插入”red”和”green”。</li>
+</ul>
+</li>
+<li><p>我的思考：</p>
+<ul>
+<li>只要第二个参数不为0，就是删除元素了</li>
+<li>只要有两个以上的参数，就是插入元素了</li>
+<li>具体删了谁，插入了谁，在哪个位置插入的，看具体参数的值即可</li>
+</ul>
+</li>
+<li><p><code>splice()</code>方法始终返回这样一个数组，它包含从数组中被删除的元素（如果没有删除元素，则返回空数组）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>]; </span><br><span class="line"><span class="keyword">let</span> removed = colors.<span class="title function_">splice</span>(<span class="number">0</span>,<span class="number">1</span>); <span class="comment">// 删除第一项</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors); <span class="comment">// green,blue </span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(removed); <span class="comment">// red，只有一个元素的数组</span></span><br><span class="line"></span><br><span class="line">removed = colors.<span class="title function_">splice</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="string">&quot;yellow&quot;</span>, <span class="string">&quot;orange&quot;</span>); <span class="comment">// 在位置 1 插入两个元素，原来在位置1的blue被挤后面去了</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors); <span class="comment">// green,yellow,orange,blue </span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(removed); <span class="comment">// 空数组</span></span><br><span class="line"></span><br><span class="line">removed = colors.<span class="title function_">splice</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="string">&quot;red&quot;</span>, <span class="string">&quot;purple&quot;</span>); <span class="comment">// 插入两个值，删除一个元素</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors); <span class="comment">// green,red,purple,orange,blue </span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(removed); <span class="comment">// yellow，只有一个元素的数组</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>操作会影响到原数组</p>
+</li>
+</ul>
+<h1 id="迭代器与生成器"><a href="#迭代器与生成器" class="headerlink" title="迭代器与生成器"></a>迭代器与生成器</h1><h1 id="对象、类与面向对象"><a href="#对象、类与面向对象" class="headerlink" title="对象、类与面向对象"></a>对象、类与面向对象</h1><h2 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h2><p>创建自定义对象的通常方式是创建 Object 的一个新实例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">dir</span>(person)</span><br></pre></td></tr></table></figure>
+
+<p>这是一个没有任何属性和方法得空对象（默认有一个<code>[[Protoype]]</code>属性，可以通过<code>person.__proto__</code>获取到，指向<code>Object</code>）</p>
+<p><img src="/2022/07/09/md/web/Books/%E3%80%8AJS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B/image-20220713162549927-16577007533111.png" alt="image-20220713162549927"></p>
+<ul>
+<li><p>问题：<code>person.__proto__</code>指向的<code>Object</code>，是始终指向<code>Object</code>，还是因为<code>Object</code>是构造函数呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span> () &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;sai&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Animal</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;animal&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="title class_">Animal</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> <span class="title class_">Person</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">dir</span>(p1)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/07/09/md/web/Books/%E3%80%8AJS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B/image-20220713163207273.png" alt="image-20220713163207273"></p>
+<p>上面提出问题角度就有问题，不能说<code>person</code>的<code>__proto__</code>属性，而是说成每个构造函数的实例，其默认的<code>__proto</code>属性值，是一个对象的引用，这个引用和构造函数的<code>prototype</code>属性值中保存的引用，是一致的。</p>
+<p>并且构造函数的<code>prototype</code>的引用，是可以被自定义修改的，以指向自定义对象</p>
+<p>而由于第一条的原则存在，即使<code>Person</code>的实例的隐式原型对象指向了<code>Animal</code>构造函数，在<code>Animal</code>函数对象中，也会有一个隐式原型对象指向<code>Object</code>构造函数</p>
+</li>
+</ul>
+<p>然后再给它添加属性和方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="title class_">Object</span>(); </span><br><span class="line">person.<span class="property">name</span> = <span class="string">&quot;Nicholas&quot;</span>; </span><br><span class="line">person.<span class="property">age</span> = <span class="number">29</span>; </span><br><span class="line">person.<span class="property">job</span> = <span class="string">&quot;Software Engineer&quot;</span>; </span><br><span class="line">person.<span class="property">sayName</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123; </span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>); </span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">dir</span>(person)</span><br></pre></td></tr></table></figure>
+
+<p>这个例子创建了一个名为 <code>person</code> 的对象，而且有三个属性（<code>name</code>、<code>age</code> 和 <code>job</code>）和一个方法（<code>sayName()</code>）。<code>sayName()</code>方法会显示 <code>this.name</code> 的值，这个属性会解析为 <code>person.name</code>。</p>
+<p><img src="/2022/07/09/md/web/Books/%E3%80%8AJS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B/image-20220713164729421.png" alt="image-20220713164729421"></p>
+<h3 id="属性的类型"><a href="#属性的类型" class="headerlink" title="属性的类型"></a>属性的类型</h3><h3 id="定义多个属性"><a href="#定义多个属性" class="headerlink" title="定义多个属性"></a>定义多个属性</h3><h3 id="读取属性的特征"><a href="#读取属性的特征" class="headerlink" title="读取属性的特征"></a>读取属性的特征</h3><h3 id="合并对象"><a href="#合并对象" class="headerlink" title="合并对象"></a>合并对象</h3><h3 id="对象标识及相等判断"><a href="#对象标识及相等判断" class="headerlink" title="对象标识及相等判断"></a>对象标识及相等判断</h3><h3 id="增强的对象语法"><a href="#增强的对象语法" class="headerlink" title="增强的对象语法"></a>增强的对象语法</h3><h3 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h3><h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/Saiable">Sai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mindcons.cn/2022/07/09/md/web/Books/%E3%80%8AJS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B/">https://mindcons.cn/2022/07/09/md/web/Books/《JS高级程序设计》/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mindcons.cn" target="_blank">吕小布の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%B9%A6%E7%B1%8D/">书籍</a></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/02/10/63e583843360e.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://bu.dusays.com/2023/02/10/63e580229ee01.webp" target="_blank"><img class="post-qr-code-img" src="https://bu.dusays.com/2023/02/10/63e580229ee01.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://bu.dusays.com/2023/02/09/63e48775d4f42.webp" target="_blank"><img class="post-qr-code-img" src="https://bu.dusays.com/2023/02/09/63e48775d4f42.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/07/10/md/web/%E6%A1%88%E4%BE%8B%E5%AE%9E%E6%88%98/%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2H5C3JS%E5%AE%9E%E6%88%98/%E9%A1%B5%E9%9D%A2%E6%A1%88%E4%BE%8B%E7%89%A9%E6%96%99%E5%87%86%E5%A4%87/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">页面案例物料准备</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/09/md/web/CSS/CSS%E9%80%89%E6%8B%A9%E5%99%A8%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CSS选择器深度剖析</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/11/14/md/web/Books/%E3%80%8A%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E3%80%8B(%E4%B8%89%E5%8D%B7)/" title="《你不知道的JavaScript》(三卷)"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-14</div><div class="title">《你不知道的JavaScript》(三卷)</div></div></a></div><div><a href="/2022/10/14/md/web/CSS/Books/CSS%E4%B9%A6%E7%B1%8D/" title="CSS书籍"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-14</div><div class="title">CSS书籍</div></div></a></div><div><a href="/2022/10/14/md/web/HTML/Books/HTML5%E4%B9%A6%E7%B1%8D/" title="HTML书籍"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-14</div><div class="title">HTML书籍</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://bu.dusays.com/2023/02/10/63e583843360e.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sai</div><div class="author-info__description">天可补,海可填,南山可移。日月既往,不可复追。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">175</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">36</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Saiable"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://bu.dusays.com/2023/02/10/63e57e822f198.webp" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://bu.dusays.com/2023/02/10/63e57f8ac9fae.webp" target="_blank" title="WeChat"><i class="fa-brands fa-weixin"></i></a><a class="social-icon" href="https://github.com/Saiable" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:mindcons@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">日月既往,不可复追。</div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople1.js"></script><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/zdog.dist.js"></script><script id="rendered-js" src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="card-widget tzy-right-widget" id="card-wechat"><div id="flip-wrapper"><div id="flip-content"><div class="face"></div><div class="back face"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">语言基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97%E3%80%81%E4%BF%9D%E7%95%99%E5%AD%97"><span class="toc-number">1.2.</span> <span class="toc-text">关键字、保留字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-number">1.3.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.</span> <span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">1.5.</span> <span class="toc-text">操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.6.</span> <span class="toc-text">语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">1.7.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">1.8.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98"><span class="toc-number">2.</span> <span class="toc-text">变量、作用域与内存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">基本引用类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">集合引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object"><span class="toc-number">4.1.</span> <span class="toc-text">Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Array"><span class="toc-number">4.2.</span> <span class="toc-text">Array</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95"><span class="toc-number">4.2.1.</span> <span class="toc-text">操作方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#concact-%EF%BC%9A%E5%90%88%E5%B9%B6%E6%95%B0%E7%BB%84"><span class="toc-number">4.2.1.1.</span> <span class="toc-text">concact()：合并数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#slice-%EF%BC%9A%E6%88%AA%E5%8F%96%E6%95%B0%E7%BB%84"><span class="toc-number">4.2.1.2.</span> <span class="toc-text">slice()：截取数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#splice-%EF%BC%9A%E5%88%A0%E9%99%A4%E3%80%81%E6%8F%92%E5%85%A5%E6%88%96%E6%9B%BF%E6%8D%A2%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0"><span class="toc-number">4.2.1.3.</span> <span class="toc-text">splice()：删除、插入或替换数组元素</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">迭代器与生成器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E3%80%81%E7%B1%BB%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="toc-number">6.</span> <span class="toc-text">对象、类与面向对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1"><span class="toc-number">6.1.</span> <span class="toc-text">理解对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">6.1.1.</span> <span class="toc-text">属性的类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%A4%9A%E4%B8%AA%E5%B1%9E%E6%80%A7"><span class="toc-number">6.1.2.</span> <span class="toc-text">定义多个属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E5%B1%9E%E6%80%A7%E7%9A%84%E7%89%B9%E5%BE%81"><span class="toc-number">6.1.3.</span> <span class="toc-text">读取属性的特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">6.1.4.</span> <span class="toc-text">合并对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%A0%87%E8%AF%86%E5%8F%8A%E7%9B%B8%E7%AD%89%E5%88%A4%E6%96%AD"><span class="toc-number">6.1.5.</span> <span class="toc-text">对象标识及相等判断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%BC%BA%E7%9A%84%E5%AF%B9%E8%B1%A1%E8%AF%AD%E6%B3%95"><span class="toc-number">6.1.6.</span> <span class="toc-text">增强的对象语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84"><span class="toc-number">6.1.7.</span> <span class="toc-text">对象解构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="toc-number">6.2.</span> <span class="toc-text">创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">6.2.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-number">6.2.2.</span> <span class="toc-text">工厂模式</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/13/md/linux/%E8%BF%90%E7%BB%B4/Neovim/neovim%E5%AE%9E%E6%93%8D/" title="Neovim 实操">Neovim 实操</a><time datetime="2023-11-12T23:58:07.758Z" title="发表于 2023-11-13 07:58:07">2023-11-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/13/md/linux/%E8%BF%90%E7%BB%B4/Neovim/Neovim%20IDE%20%E6%90%AD%E5%BB%BA%E7%B3%BB%E5%88%97/" title="Neovim IDE 搭建系列">Neovim IDE 搭建系列</a><time datetime="2023-11-12T23:58:07.755Z" title="发表于 2023-11-13 07:58:07">2023-11-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/13/md/tools/git/git%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%8D%8F%E5%90%8C%E5%BC%80%E5%8F%91/" title="无题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/11/13/md/tools/git/git%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%8D%8F%E5%90%8C%E5%BC%80%E5%8F%91/" title="无题">无题</a><time datetime="2023-11-12T23:58:06.892Z" title="发表于 2023-11-13 07:58:06">2023-11-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/13/md/data/%E6%A0%87%E6%B3%A8/ppocrlabel/" title="ppocrlabel安装及使用">ppocrlabel安装及使用</a><time datetime="2023-11-12T23:58:03.543Z" title="发表于 2023-11-13 07:58:03">2023-11-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/13/md/data/%E6%A0%87%E6%B3%A8/labelStudio%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/" title="labelStudio安装及使用">labelStudio安装及使用</a><time datetime="2023-11-12T23:58:03.540Z" title="发表于 2023-11-13 07:58:03">2023-11-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://bu.dusays.com/2023/02/10/63e57cef87293.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 <i id="heartbeat" class="fa fas fa-heartbeat"></i> Sai</div><a href="https://icp.gov.moe/?keyword=20230203" target="_blank">萌ICP备20230203号</a><div class="footer_custom_text"><p><a target="_blank" href="https://hexo.io/"><img src="https://bu.dusays.com/2023/02/09/63e488a78b827.webp" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="https://bu.dusays.com/2023/02/10/63e57f321880a.webp" title="主题采用butterfly"></a></p></div></div><link rel="stylesheet" href="/custom/css/heartbeat.min.css" ></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换模式</span></div><div class="rightMenu-item" id="menu-print"><i class="fa-solid fa-print fa-fw"></i><span>打印页面</span></div></div></div><div id="rightmenu-mask"></div><div id="myscoll"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.mindcons.cn/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.mindcons.cn/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><canvas id="universe"></canvas><script defer src="/custom/js/universe.js"></script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer data-pjax src="/custom/js/rightMenu.js"></script><script defer data-pjax src="/custom/js/cat.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "717070d8-e449-4d60-b9b6-c1421478f42c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
