@@ -1,0 +1,427 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>brat安装步骤及注意事项 | 吕小布の博客</title><meta name="keywords" content="吕小布;博客;生活记录"><meta name="author" content="Sai"><meta name="copyright" content="Sai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC] Centos7下Apache安装Brat标注工具一、Brat简介BRAT是一个基于web的文本标注工具，主要用于对文本的结构化标注，用BRAT生成的标注结果能够把无结构化的原始文本结构化，供计算机处理。利用该工具可以标注实体，事件、关系、属性等，只支持在linux下安装，其使用需要webserver，官方给出的教程使用的是Apache2。 so,安装Brat之前需要先安装Apache。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="brat安装步骤及注意事项">
+<meta property="og:url" content="https://mindcons.cn/2023/12/01/md/data/%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8/brat%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4/index.html">
+<meta property="og:site_name" content="吕小布の博客">
+<meta property="og:description" content="[TOC] Centos7下Apache安装Brat标注工具一、Brat简介BRAT是一个基于web的文本标注工具，主要用于对文本的结构化标注，用BRAT生成的标注结果能够把无结构化的原始文本结构化，供计算机处理。利用该工具可以标注实体，事件、关系、属性等，只支持在linux下安装，其使用需要webserver，官方给出的教程使用的是Apache2。 so,安装Brat之前需要先安装Apache。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bu.dusays.com/2023/02/10/63e583843360e.webp">
+<meta property="article:published_time" content="2023-11-30T22:12:44.726Z">
+<meta property="article:modified_time" content="2023-12-05T23:38:18.327Z">
+<meta property="article:author" content="Sai">
+<meta property="article:tag" content="吕小布;博客;生活记录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bu.dusays.com/2023/02/10/63e583843360e.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mindcons.cn/2023/12/01/md/data/%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8/brat%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"61301LMFP2","apiKey":"a7627d15f4af23df7fbc3e2922471858","indexName":"mindcons","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":350},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Sai","link":"链接: ","source":"来源: 吕小布の博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'brat安装步骤及注意事项',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-06 07:38:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/custom/css/custom.min.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://bu.dusays.com/2023/02/10/63e583843360e.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">178</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">36</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fa-sharp fa-solid fa-photo-film"></i><span> 相册</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/booklist/"><i class="fa-fw fa-solid fa-book"></i><span> 书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">吕小布の博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fa-sharp fa-solid fa-photo-film"></i><span> 相册</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> 番剧</span></a></li><li><a class="site-page child" href="/booklist/"><i class="fa-fw fa-solid fa-book"></i><span> 书单</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/sponsorWall/"><i class="fa-fw fas fa-money-check-alt"></i><span> 赞助墙</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">brat安装步骤及注意事项</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-30T22:12:44.726Z" title="发表于 2023-12-01 06:12:44">2023-12-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-05T23:38:18.327Z" title="更新于 2023-12-06 07:38:18">2023-12-06</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="brat安装步骤及注意事项"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[TOC]</p>
+<h1 id="Centos7下Apache安装Brat标注工具"><a href="#Centos7下Apache安装Brat标注工具" class="headerlink" title="Centos7下Apache安装Brat标注工具"></a>Centos7下Apache安装Brat标注工具</h1><h1 id="一、Brat简介"><a href="#一、Brat简介" class="headerlink" title="一、Brat简介"></a>一、Brat简介</h1><p>BRAT是一个基于web的文本标注工具，主要用于对文本的结构化标注，用BRAT生成的标注结果能够把无结构化的原始文本结构化，供计算机处理。利用该工具可以标注实体，事件、关系、属性等，只支持在linux下安装，其使用需要webserver，官方给出的教程使用的是Apache2。</p>
+<p><em>so,安装Brat之前需要先安装Apache。<br>如果你使用的windows系统，那么在这之前你需要先安装一个linux系统的虚拟机，我安装的虚拟机是Centos7系统的。</em></p>
+<h1 id="二、-配置Apache"><a href="#二、-配置Apache" class="headerlink" title="二、 配置Apache"></a>二、 配置Apache</h1><h2 id="1-安装Apache"><a href="#1-安装Apache" class="headerlink" title="1.安装Apache"></a>1.安装Apache</h2><p>Centos7下Apache的安装包叫httpd，执行以下命令进行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install httpd -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-修改主配置文件httpd-conf"><a href="#2-修改主配置文件httpd-conf" class="headerlink" title="2.修改主配置文件httpd.conf"></a>2.修改主配置文件httpd.conf</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/httpd/conf/httpd.conf</span><br></pre></td></tr></table></figure>
+
+<p>添加如下内容：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Directory</span> /<span class="attr">var</span>/<span class="attr">www</span>/<span class="attr">html</span>/<span class="attr">brat</span>&gt;</span></span><br><span class="line">    AllowOverride Options Indexes FileInfo Limit</span><br><span class="line">    Require all granted</span><br><span class="line">    AddType application/xhtml+xml .xhtml</span><br><span class="line">    AddType font/ttf .ttf</span><br><span class="line">    # For CGI support</span><br><span class="line">    AddHandler cgi-script .cgi</span><br><span class="line">    # Comment out the line above and uncomment the line below for FastCGI</span><br><span class="line">    AddHandler fastcgi-script fcgi</span><br><span class="line"><span class="tag">&lt;/<span class="name">Directory</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><em>&#x2F;var&#x2F;www&#x2F;html&#x2F;brat路径是与后面要安装brat的路径对应！</em></p>
+<h2 id="3-配置userdir模块"><a href="#3-配置userdir模块" class="headerlink" title="3.配置userdir模块"></a>3.配置userdir模块</h2><p>使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/httpd/conf.d/userdir.conf</span><br></pre></td></tr></table></figure>
+
+<p>找到文件中代码：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">IfModule</span> <span class="attr">mod_userdir.c</span>&gt;</span></span><br><span class="line">    #</span><br><span class="line">    # UserDir is disabled by default since it can confirm the presence</span><br><span class="line">    # of a username on the system (depending on home directory</span><br><span class="line">    # permissions).</span><br><span class="line">    #</span><br><span class="line">    UserDir disabled</span><br><span class="line"></span><br><span class="line">    #</span><br><span class="line">    # To enable requests to /~user/ to serve the user&#x27;s public_html</span><br><span class="line">    # directory, remove the &quot;UserDir disabled&quot; line above, and uncomment</span><br><span class="line">    # the following line instead:</span><br><span class="line">    #</span><br><span class="line">    #UserDir public_html</span><br><span class="line"><span class="tag">&lt;/<span class="name">IfModule</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>修改为：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">IfModule</span> <span class="attr">mod_userdir.c</span>&gt;</span></span><br><span class="line">    #</span><br><span class="line">    # UserDir is disabled by default since it can confirm the presence</span><br><span class="line">    # of a username on the system (depending on home directory</span><br><span class="line">    # permissions).</span><br><span class="line">    #</span><br><span class="line">    #UserDir disabled</span><br><span class="line"></span><br><span class="line">    #</span><br><span class="line">    # To enable requests to /~user/ to serve the user&#x27;s public_html</span><br><span class="line">    # directory, remove the &quot;UserDir disabled&quot; line above, and uncomment</span><br><span class="line">    # the following line instead:</span><br><span class="line">    #</span><br><span class="line">    #UserDir public_html</span><br><span class="line">    UserDir brat</span><br><span class="line"><span class="tag">&lt;/<span class="name">IfModule</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-开启Apache服务"><a href="#4-开启Apache服务" class="headerlink" title="4.开启Apache服务"></a>4.开启Apache服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start httpd</span><br></pre></td></tr></table></figure>
+
+<h3 id="a-设置开机自启Apache服务"><a href="#a-设置开机自启Apache服务" class="headerlink" title="a.设置开机自启Apache服务"></a>a.设置开机自启Apache服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> httpd</span><br></pre></td></tr></table></figure>
+
+<h3 id="b-顺便记录一下Apache命令大全"><a href="#b-顺便记录一下Apache命令大全" class="headerlink" title="b.顺便记录一下Apache命令大全"></a>b.顺便记录一下Apache命令大全</h3><p><em>后面每次更改配置文件后，都需要重启apache服务</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#重新启动Apache</span></span><br><span class="line">systemctl restart httpd</span><br><span class="line"><span class="comment">#停止Apache</span></span><br><span class="line">systemctl stop httpd</span><br><span class="line"><span class="comment">#查看Apache状态</span></span><br><span class="line">systemctl status httpd</span><br><span class="line"><span class="comment">#设置开机不启动Apache</span></span><br><span class="line">systemctl <span class="built_in">disable</span> httpd</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-测试Apache"><a href="#5-测试Apache" class="headerlink" title="5.测试Apache"></a>5.测试Apache</h2><p>Apache的存放路径：&#x2F;var&#x2F;www&#x2F;html<br>进入apache网页的存放路径，进行网页测试:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> var/www/html</span><br></pre></td></tr></table></figure>
+
+<p>新建一个测试网页：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim index.html</span><br></pre></td></tr></table></figure>
+
+<p>在文件中添加以下内容：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>保存后退出，在浏览器能看到<code>Hello World</code>界面，表示Apache配置成功！</p>
+<h1 id="三、安装Brat"><a href="#三、安装Brat" class="headerlink" title="三、安装Brat"></a>三、安装Brat</h1><h2 id="1-下载Brat"><a href="#1-下载Brat" class="headerlink" title="1.下载Brat"></a>1.下载Brat</h2><p>安装v1.3p1版本，下载地址：<br><a target="_blank" rel="noopener" href="https://github.com/nlplab/brat/archive/v1.3_Crunchy_Frog.tar.gz">https://github.com/nlplab/brat/archive/v1.3_Crunchy_Frog.tar.gz</a><br>别用wget直接下载，wget下载下来的压缩包不完整，有错误。老老实实下载下来，传到linux系统中吧。<br>下载的压缩文件放在Apache文件夹中：&#x2F;var&#x2F;www&#x2F;html&#x2F;</p>
+<h2 id="2-解压文件"><a href="#2-解压文件" class="headerlink" title="2.解压文件"></a>2.解压文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf v1.3_Crunchy_Frog.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-文件夹重命名"><a href="#3-文件夹重命名" class="headerlink" title="3.文件夹重命名"></a>3.文件夹重命名</h2><p>重命名一个文件夹，上面配置Apache的时候已经配置到了brat文件夹下了，所以改名为brat：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> brat-1.3_Crunchy_Frog brat</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-对brat目录授权"><a href="#4-对brat目录授权" class="headerlink" title="4.对brat目录授权"></a>4.对brat目录授权</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 777 -R /var/www/html/brat</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-安装Brat"><a href="#5-安装Brat" class="headerlink" title="5.安装Brat"></a>5.安装Brat</h2><h3 id="a-进入brat"><a href="#a-进入brat" class="headerlink" title="a.进入brat"></a>a.进入brat</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> brat</span><br></pre></td></tr></table></figure>
+
+<h3 id="b-执行命令进行brat安装"><a href="#b-执行命令进行brat安装" class="headerlink" title="b.执行命令进行brat安装"></a>b.执行命令进行brat安装</h3><p>中途需要根据提示输入用户名、密码、管理员邮箱</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh install.sh</span><br></pre></td></tr></table></figure>
+
+<p>出现以下提示，即安装成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">Assigning owner of the following directories to apache (apache):</span><br><span class="line">    &quot;/var/www/html/brat/work/&quot;</span><br><span class="line">and</span><br><span class="line">    &quot;/var/www/html/brat/data/&quot;</span><br><span class="line">(this requires sudo; please enter your password if prompted)</span><br><span class="line">The installation has finished, you are almost done.</span><br><span class="line"></span><br><span class="line">1.) If you are installing brat on a webserver, make sure you have</span><br><span class="line">    followed the steps described in the brat manual to enable CGI:</span><br><span class="line"></span><br><span class="line">    http://brat.nlplab.org/installation.html</span><br><span class="line"></span><br><span class="line">2.) Please verify that brat is running by accessing your installation</span><br><span class="line">    using a web browser.</span><br><span class="line"></span><br><span class="line">You can automatically diagnose some common installation issues using:</span><br><span class="line"></span><br><span class="line">    tools/troubleshooting.sh URL_TO_BRAT_INSTALLATION</span><br><span class="line"></span><br><span class="line">If there are issues not detected by the above script, please contact the</span><br><span class="line">brat developers and/or file a bug to the brat bug tracker:</span><br><span class="line"></span><br><span class="line">    https://github.com/nlplab/brat/issues</span><br><span class="line"></span><br><span class="line">3.) Once brat is running, put your data in the data directory. Or use</span><br><span class="line">    the example data placed there by the installation:</span><br><span class="line"></span><br><span class="line">    /var/www/html/brat/data</span><br><span class="line"></span><br><span class="line">4.) You can find configuration files to place in your data directory in</span><br><span class="line">    the configurations directory, see the manual for further details:</span><br><span class="line"></span><br><span class="line">    /var/www/html/brat/configurations</span><br><span class="line"></span><br><span class="line">5.) Then, you (and your team?) are ready to start annotating!</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-安装完成后，更改data和work目录的用户组和权限"><a href="#6-安装完成后，更改data和work目录的用户组和权限" class="headerlink" title="6. 安装完成后，更改data和work目录的用户组和权限"></a>6. 安装完成后，更改data和work目录的用户组和权限</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chgrp</span> -R apache data work</span><br><span class="line"><span class="built_in">chmod</span> -R g+rwx data work</span><br></pre></td></tr></table></figure>
+
+<p>至此，就可以在浏览器进行测试一下了，默认的url是IP&#x2F;brat&#x2F;,example:127.0.0.1&#x2F;brat&#x2F;。</p>
+<h2 id="7-添加用户"><a href="#7-添加用户" class="headerlink" title="7.添加用户"></a>7.添加用户</h2><p>实现标注时，可以多个用户登录进行标注。<br>编辑文档：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /var/www/html/brat/config.py </span><br></pre></td></tr></table></figure>
+
+<p>修改对应的行，增加用户名和密码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">USER_PASSWORD = &#123;</span><br><span class="line"><span class="string">&#x27;admn&#x27;</span>: <span class="string">&#x27;admin&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;test&#x27;</span>: <span class="string">&#x27;test&#x27;</span>,</span><br><span class="line"><span class="comment"># (add USERNAME:PASSWORD pairs below this line.)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-设置支持中文"><a href="#8-设置支持中文" class="headerlink" title="8.设置支持中文"></a>8.设置支持中文</h2><p>编辑配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /var/www/html/brat/server/src/projectconfig.py</span><br></pre></td></tr></table></figure>
+
+<p>找到n &#x3D; re.sub(r’[^a-zA-Z0-9_-]’, ‘<em>’, n)这一行，大概在162行，修改为：<br>re.sub(u’[^a-zA-Z\u4e00-\u9fa5&lt;&gt;,0-9</em>-]’, ‘_’, n)<br>如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">normalize_to_storage_form</span>(<span class="params">t</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Given a label, returns a form of the term that can be used for</span></span><br><span class="line"><span class="string">    disk storage. For example, space can be replaced with underscores</span></span><br><span class="line"><span class="string">    to allow use with space-separated formats.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> t <span class="keyword">not</span> <span class="keyword">in</span> normalize_to_storage_form.__cache:</span><br><span class="line">        <span class="comment"># conservative implementation: replace any space with</span></span><br><span class="line">        <span class="comment"># underscore, replace unicode accented characters with</span></span><br><span class="line">        <span class="comment"># non-accented equivalents, remove others, and finally replace</span></span><br><span class="line">        <span class="comment"># all characters not in [a-zA-Z0-9_-] with underscores.</span></span><br><span class="line"> </span><br><span class="line">        <span class="keyword">import</span> re</span><br><span class="line">        <span class="keyword">import</span> unicodedata</span><br><span class="line"> </span><br><span class="line">        n = t.replace(<span class="string">&quot; &quot;</span>, <span class="string">&quot;_&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(n, unicode):</span><br><span class="line">            <span class="built_in">ascii</span> = unicodedata.normalize(<span class="string">&#x27;NFKD&#x27;</span>, n).encode(<span class="string">&#x27;ascii&#x27;</span>, <span class="string">&#x27;ignore&#x27;</span>)</span><br><span class="line">        <span class="comment">#n  = re.sub(r&#x27;[^a-zA-Z0-9_-]&#x27;, &#x27;_&#x27;, n)</span></span><br><span class="line">        n  = re.sub(<span class="string">u&#x27;[^a-zA-Z\u4e00-\u9fa5&lt;&gt;,0-9_-]&#x27;</span>, <span class="string">&#x27;_&#x27;</span>, n)</span><br><span class="line"> </span><br><span class="line">        normalize_to_storage_form.__cache[t] = n</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> normalize_to_storage_form.__cache[t]</span><br><span class="line">normalize_to_storage_form.__cache = &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，修改的时候加<code>tab</code>键，不要敲空格</p>
+<p>用下面的正则规则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n = re.sub(u&#x27;[^a-zA-Z\u4e00-\u9fa5&lt; &gt;\u2014-\uff1b&lt; &gt;\x00-\xff&lt; &gt;,0-9_-]&#x27;, &#x27;_&#x27;, n)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="四、标注工具使用示例"><a href="#四、标注工具使用示例" class="headerlink" title="四、标注工具使用示例"></a>四、标注工具使用示例</h1><p>现在就可以真正的使用Brat进行标注了。</p>
+<h2 id="1-新建项目文件夹并进入此文件夹"><a href="#1-新建项目文件夹并进入此文件夹" class="headerlink" title="1.新建项目文件夹并进入此文件夹"></a>1.新建项目文件夹并进入此文件夹</h2><p>首先进入brat文件夹的data目录中新建project文件夹：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/www/html/brat/data</span><br><span class="line"><span class="built_in">mkdir</span> project</span><br><span class="line"><span class="built_in">cd</span> project</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-设置项目目录权限"><a href="#2-设置项目目录权限" class="headerlink" title="2.设置项目目录权限"></a>2.设置项目目录权限</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 777 -R /var/www/html/brat/data/project/</span><br><span class="line"></span><br><span class="line">sudo <span class="built_in">chmod</span> 777 -R ./</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-新建文件"><a href="#3-新建文件" class="headerlink" title="3.新建文件"></a>3.新建文件</h2><p>新建一个配置文件annotation.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim annotation.conf</span><br></pre></td></tr></table></figure>
+
+<p>在文件中插入以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[entities]</span><br><span class="line"># Definition of entities.</span><br><span class="line">#Format is a simple list with one type per line.</span><br><span class="line">时间</span><br><span class="line">地点</span><br><span class="line">人名</span><br><span class="line">组织名</span><br><span class="line">公司名</span><br><span class="line">产品名</span><br><span class="line">[attributes]</span><br><span class="line">Category Arg:Disease, Value:SpecificDisease|Modifier|DiseaseClass|CompositeMention</span><br><span class="line">[relations]</span><br><span class="line">[events]</span><br></pre></td></tr></table></figure>
+
+<p>再新建一个配置文件visual.conf，以配置不同的类别用不同的颜色显示。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim visual.conf</span><br></pre></td></tr></table></figure>
+
+<p>在文件中插入以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[labels]</span><br><span class="line">时间 | 时间</span><br><span class="line">地点 | 地点</span><br><span class="line">人名 | 人名</span><br><span class="line">组织名 | 组织名</span><br><span class="line">公司名 | 公司名</span><br><span class="line">产品名 | 产品名</span><br><span class="line">[drawing]</span><br><span class="line">时间 bgColor:yellow</span><br><span class="line">地点 bgColor:blue, fgColor:white</span><br><span class="line">人名 bgColor:deepskyblue</span><br><span class="line">组织名 bgColor:green, fgColor:white</span><br><span class="line">公司名 bgColor:purple, fgColor:white</span><br><span class="line">产品名 bgColor:pink</span><br><span class="line">Category glyph:[spec]|[mod]|[cls]|[comp]</span><br></pre></td></tr></table></figure>
+
+<p>新建一个配置文件visual.conf，以配置不同的类别用不同的颜色显示。</p>
+<p>接下来，新建一个待标注的文本文件example.txt:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim example.txt</span><br></pre></td></tr></table></figure>
+
+<p>新建一个kb_shortcuts.conf，以配置快捷键</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># -*- Mode: Text; tab-width: 2; indent-tabs-mode: nil; coding: utf-8; -*-</span><br><span class="line"># vim:set ft=conf ts=2 sw=2 sts=2 autoindent:</span><br><span class="line"></span><br><span class="line"># Keyboard shortcuts for quick type selection in annotation.</span><br><span class="line"></span><br><span class="line">A	机构名</span><br><span class="line">S	产品名</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在文件中放入你想标注的文字，标注文本建议控制在500字符内：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">今年海钓比赛在厦门市与金门之间的海域举行。</span><br></pre></td></tr></table></figure>
+
+<p>新建一个标注的空文件example.ann，对example.txt标注的结果存储在example.ann中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim example.ann</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-开始标注"><a href="#4-开始标注" class="headerlink" title="4.开始标注"></a>4.开始标注</h2><p>在浏览器输入：<a target="_blank" rel="noopener" href="http://127.0.0.1/brat/">http://127.0.0.1/brat/</a><br>首先登录，例如登录我们添加的test用户</p>
+<p>打开example.ann可以看到文件中新增了标注的内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">T1      地点 7 10       厦门市</span><br><span class="line">T2      地点 11 13      金门</span><br></pre></td></tr></table></figure>
+
+<p>到此就标注完成了。<br>若要进行NER命名实体识别等模型训练时，再写个程序把ann文件转化为BIO标注的文件即可。</p>
+<h1 id="五、错误处理"><a href="#五、错误处理" class="headerlink" title="五、错误处理"></a>五、错误处理</h1><h2 id="1-安装Brat出现以下错误"><a href="#1-安装Brat出现以下错误" class="headerlink" title="1.安装Brat出现以下错误"></a>1.安装Brat出现以下错误</h2><p>进入界面后，右上角登录admin&#x2F;admin，最下方报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Error: ActiongetCollectionInformation failed on error Internal Server Error</span><br><span class="line">Error: Actionwhoami failed on error Internal Server Error</span><br><span class="line">Error: ActionloadConf failed on error Internal Server Error</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-出现此错误的原因"><a href="#2-出现此错误的原因" class="headerlink" title="2.出现此错误的原因"></a>2.出现此错误的原因</h2><p>出现以上问题的原因是由于SELinux的权限的限制。<br>安全增强型 Linux（Security-Enhanced Linux）简称 SELinux，它是一个 Linux 内核模块，也是 Linux 的一个安全子系统。<br>brat将可执行脚本(CGI脚本)、静态文件以及注释的数据都保存在同一个目录中，即brat目录中。SELinux的html目录默认配置为防止从非CGI目录执行CGI脚本。所以，只更改Apache配置是不够的，还需要设置brat目录中相应配置文件的权限。<br>参看以下方法解决即可。</p>
+<h2 id="3-解决方法："><a href="#3-解决方法：" class="headerlink" title="3.解决方法："></a>3.解决方法：</h2><p>1.进入brat文件夹：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /var/www/html/brat</span><br></pre></td></tr></table></figure>
+
+<p>2.对文件和目录进行授权：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chcon -h system_u:object_r:httpd_sys_content_t:s0 .</span><br><span class="line"></span><br><span class="line">chcon -t httpd_sys_content_t .</span><br><span class="line">chcon -t httpd_sys_script_exec_t *.cgi</span><br><span class="line">sudo chcon -R -t httpd_sys_script_rw_t work data</span><br></pre></td></tr></table></figure>
+
+<p>第一个命令对brat目录下的所有文件进行读操作授权<br>第二个命令对brat目录下的CGI脚本进行运行操作授权<br>第三个命令对brat目录下work和data目录进行读写操作授权</p>
+<h2 id="4-本地启动"><a href="#4-本地启动" class="headerlink" title="4.本地启动"></a>4.本地启动</h2><p>如果仍报错，那放弃web服务的方式启动</p>
+<p>进入brat目录，以本地运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 standalone.py</span><br></pre></td></tr></table></figure>
+
+<p>然后根据提示的端口，访问：ip:port&#x2F;index.xhtml</p>
+<h2 id="5-前端标注页面，报文件夹没有权限"><a href="#5-前端标注页面，报文件夹没有权限" class="headerlink" title="5.前端标注页面，报文件夹没有权限"></a>5.前端标注页面，报文件夹没有权限</h2><p>即使已经授权了，还是会有权限错误的提示，可以在后台新建一个标注文件夹，重新赋予权限</p>
+<p>但是要注意不同任务之间的区分</p>
+<h1 id="六、常见配置项"><a href="#六、常见配置项" class="headerlink" title="六、常见配置项"></a>六、常见配置项</h1><p><strong>快捷键</strong></p>
+<p><strong>批量生成ann</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.uoften.com/article/140945.html">https://www.uoften.com/article/140945.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/61a683fa2b0c">Linux xargs 命令解析 </a></p>
+<ul>
+<li><p>xargs</p>
+<p>在txt对应的目录下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name &quot;*.txt&quot; | awk -F &quot;.&quot; &#x27;&#123;print $2&#125;&#x27; | xargs -i -t touch ./&#123;&#125;.ann</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/12/01/md/data/%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8/brat%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4/image-20221219161724311.png" alt="image-20221219161724311"></p>
+<p>如果文件名有多个点，需要适当的改动下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name <span class="string">&quot;*.txt&quot;</span> | awk -F <span class="string">&quot;.txt&quot;</span> <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>| xargs -i -t <span class="built_in">touch</span> ./&#123;&#125;.ann</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>查阅修改时间</strong></p>
+<p><strong>ann标注结果会出现换行情况</strong></p>
+<p>先找到不是以T开头的</p>
+<p><a target="_blank" rel="noopener" href="https://www.codenong.com/26804586/">https://www.codenong.com/26804586/</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -P <span class="string">&#x27;^(?!T)&#x27;</span> 1.ann</span><br></pre></td></tr></table></figure>
+
+<p>删除指定行，<a target="_blank" rel="noopener" href="https://m.qy.cn/jszx/detail/27918.html">https://m.qy.cn/jszx/detail/27918.html</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;/System\|Linux/d&#x27;</span> sed-demo.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">常用选项（options）：</span><br><span class="line">-n∶使用安静(silent)模式。默认sed会输出读取文档的全部内容。但如果加上 -n 参数后，则只有经过sed特殊处理的那一行(或者动作)才会被列出来。</span><br><span class="line">-e∶多点编辑 让一条sed可以执行多条指令</span><br><span class="line">-f∶直接将 sed 的动作写在一个脚本文件内， -f filename 则可以执行 filename 内的sed动作；</span><br><span class="line">-r∶让sed支持扩展正则 若与其它选项一起使用,应放作为首选项</span><br><span class="line">-i∶直接修改读取的档案内容，而不是由屏幕输出。</span><br></pre></td></tr></table></figure>
+
+<p>替换字符串，<a target="_blank" rel="noopener" href="https://blog.csdn.net/ab0902cd/article/details/126833936">https://blog.csdn.net/ab0902cd/article/details/126833936</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 替换指定文件的字符串</span><br><span class="line"></span><br><span class="line">sed -i <span class="string">&quot;s/oldstring/newstring/g&quot;</span> filename</span><br><span class="line">sed -i <span class="string">&quot;s/6/sk/g&quot;</span> ./test01.txt</span><br></pre></td></tr></table></figure>
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/Saiable">Sai</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mindcons.cn/2023/12/01/md/data/%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8/brat%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4/">https://mindcons.cn/2023/12/01/md/data/数据标注/brat安装步骤/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mindcons.cn" target="_blank">吕小布の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/02/10/63e583843360e.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://bu.dusays.com/2023/02/10/63e580229ee01.webp" target="_blank"><img class="post-qr-code-img" src="https://bu.dusays.com/2023/02/10/63e580229ee01.webp" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://bu.dusays.com/2023/02/09/63e48775d4f42.webp" target="_blank"><img class="post-qr-code-img" src="https://bu.dusays.com/2023/02/09/63e48775d4f42.webp" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/12/01/md/data/%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8/labelStudio%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">labelStudio安装及使用</div></div></a></div><div class="next-post pull-right"><a href="/2023/11/13/md/linux/%E8%BF%90%E7%BB%B4/Neovim/neovim%E5%AE%9E%E6%93%8D/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Neovim 实操</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://bu.dusays.com/2023/02/10/63e583843360e.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sai</div><div class="author-info__description">天可补,海可填,南山可移。日月既往,不可复追。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">178</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">36</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Saiable"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://bu.dusays.com/2023/02/10/63e57e822f198.webp" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://bu.dusays.com/2023/02/10/63e57f8ac9fae.webp" target="_blank" title="WeChat"><i class="fa-brands fa-weixin"></i></a><a class="social-icon" href="https://github.com/Saiable" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:mindcons@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">日月既往,不可复追。</div></div><div class="xpand" style="height:200px;"><canvas class="illo" width="800" height="800" style="max-width: 200px; max-height: 200px; touch-action: none; width: 640px; height: 640px;"></canvas></div><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople1.js"></script><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/zdog.dist.js"></script><script id="rendered-js" src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/twopeople.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="card-widget tzy-right-widget" id="card-wechat"><div id="flip-wrapper"><div id="flip-content"><div class="face"></div><div class="back face"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Centos7%E4%B8%8BApache%E5%AE%89%E8%A3%85Brat%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7"><span class="toc-number">1.</span> <span class="toc-text">Centos7下Apache安装Brat标注工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81Brat%E7%AE%80%E4%BB%8B"><span class="toc-number">2.</span> <span class="toc-text">一、Brat简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-%E9%85%8D%E7%BD%AEApache"><span class="toc-number">3.</span> <span class="toc-text">二、 配置Apache</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85Apache"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装Apache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6httpd-conf"><span class="toc-number">3.2.</span> <span class="toc-text">2.修改主配置文件httpd.conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AEuserdir%E6%A8%A1%E5%9D%97"><span class="toc-number">3.3.</span> <span class="toc-text">3.配置userdir模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%BC%80%E5%90%AFApache%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.4.</span> <span class="toc-text">4.开启Apache服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a-%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AFApache%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.4.1.</span> <span class="toc-text">a.设置开机自启Apache服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-%E9%A1%BA%E4%BE%BF%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8BApache%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8"><span class="toc-number">3.4.2.</span> <span class="toc-text">b.顺便记录一下Apache命令大全</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%B5%8B%E8%AF%95Apache"><span class="toc-number">3.5.</span> <span class="toc-text">5.测试Apache</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85Brat"><span class="toc-number">4.</span> <span class="toc-text">三、安装Brat</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%B8%8B%E8%BD%BDBrat"><span class="toc-number">4.1.</span> <span class="toc-text">1.下载Brat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">2.解压文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8D%E5%91%BD%E5%90%8D"><span class="toc-number">4.3.</span> <span class="toc-text">3.文件夹重命名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%AF%B9brat%E7%9B%AE%E5%BD%95%E6%8E%88%E6%9D%83"><span class="toc-number">4.4.</span> <span class="toc-text">4.对brat目录授权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AE%89%E8%A3%85Brat"><span class="toc-number">4.5.</span> <span class="toc-text">5.安装Brat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a-%E8%BF%9B%E5%85%A5brat"><span class="toc-number">4.5.1.</span> <span class="toc-text">a.进入brat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E8%BF%9B%E8%A1%8Cbrat%E5%AE%89%E8%A3%85"><span class="toc-number">4.5.2.</span> <span class="toc-text">b.执行命令进行brat安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8C%E6%9B%B4%E6%94%B9data%E5%92%8Cwork%E7%9B%AE%E5%BD%95%E7%9A%84%E7%94%A8%E6%88%B7%E7%BB%84%E5%92%8C%E6%9D%83%E9%99%90"><span class="toc-number">4.6.</span> <span class="toc-text">6. 安装完成后，更改data和work目录的用户组和权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7"><span class="toc-number">4.7.</span> <span class="toc-text">7.添加用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E8%AE%BE%E7%BD%AE%E6%94%AF%E6%8C%81%E4%B8%AD%E6%96%87"><span class="toc-number">4.8.</span> <span class="toc-text">8.设置支持中文</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">5.</span> <span class="toc-text">四、标注工具使用示例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9%E5%B9%B6%E8%BF%9B%E5%85%A5%E6%AD%A4%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">5.1.</span> <span class="toc-text">1.新建项目文件夹并进入此文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AE%BE%E7%BD%AE%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E6%9D%83%E9%99%90"><span class="toc-number">5.2.</span> <span class="toc-text">2.设置项目目录权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="toc-number">5.3.</span> <span class="toc-text">3.新建文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%BC%80%E5%A7%8B%E6%A0%87%E6%B3%A8"><span class="toc-number">5.4.</span> <span class="toc-text">4.开始标注</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">五、错误处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85Brat%E5%87%BA%E7%8E%B0%E4%BB%A5%E4%B8%8B%E9%94%99%E8%AF%AF"><span class="toc-number">6.1.</span> <span class="toc-text">1.安装Brat出现以下错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%87%BA%E7%8E%B0%E6%AD%A4%E9%94%99%E8%AF%AF%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">6.2.</span> <span class="toc-text">2.出现此错误的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">6.3.</span> <span class="toc-text">3.解决方法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9C%AC%E5%9C%B0%E5%90%AF%E5%8A%A8"><span class="toc-number">6.4.</span> <span class="toc-text">4.本地启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%89%8D%E7%AB%AF%E6%A0%87%E6%B3%A8%E9%A1%B5%E9%9D%A2%EF%BC%8C%E6%8A%A5%E6%96%87%E4%BB%B6%E5%A4%B9%E6%B2%A1%E6%9C%89%E6%9D%83%E9%99%90"><span class="toc-number">6.5.</span> <span class="toc-text">5.前端标注页面，报文件夹没有权限</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%B8%B8%E8%A7%81%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="toc-number">7.</span> <span class="toc-text">六、常见配置项</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/12/06/md/data/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E4%B8%8E%E8%BF%9B%E9%98%B6/" title="无题"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/12/06/md/data/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80%E4%B8%8E%E8%BF%9B%E9%98%B6/" title="无题">无题</a><time datetime="2023-12-05T23:08:14.736Z" title="发表于 2023-12-06 07:08:14">2023-12-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/01/md/data/%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8/ppocrlabel/" title="ppocrlabel安装及使用">ppocrlabel安装及使用</a><time datetime="2023-11-30T22:12:44.754Z" title="发表于 2023-12-01 06:12:44">2023-12-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/01/md/data/%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8/labelStudio%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/" title="labelStudio安装及使用">labelStudio安装及使用</a><time datetime="2023-11-30T22:12:44.739Z" title="发表于 2023-12-01 06:12:44">2023-12-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/01/md/data/%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8/brat%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4/" title="brat安装步骤及注意事项">brat安装步骤及注意事项</a><time datetime="2023-11-30T22:12:44.726Z" title="发表于 2023-12-01 06:12:44">2023-12-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/13/md/linux/%E8%BF%90%E7%BB%B4/Neovim/neovim%E5%AE%9E%E6%93%8D/" title="Neovim 实操">Neovim 实操</a><time datetime="2023-11-12T23:58:07.758Z" title="发表于 2023-11-13 07:58:07">2023-11-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://bu.dusays.com/2023/02/10/63e57cef87293.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 <i id="heartbeat" class="fa fas fa-heartbeat"></i> Sai</div><a href="https://icp.gov.moe/?keyword=20230203" target="_blank">萌ICP备20230203号</a><div class="footer_custom_text"><p><a target="_blank" href="https://hexo.io/"><img src="https://bu.dusays.com/2023/02/09/63e488a78b827.webp" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="https://bu.dusays.com/2023/02/10/63e57f321880a.webp" title="主题采用butterfly"></a></p></div></div><link rel="stylesheet" href="/custom/css/heartbeat.min.css" ></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章归档</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换模式</span></div><div class="rightMenu-item" id="menu-print"><i class="fa-solid fa-print fa-fw"></i><span>打印页面</span></div></div></div><div id="rightmenu-mask"></div><div id="myscoll"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.mindcons.cn/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.mindcons.cn/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><canvas id="universe"></canvas><script defer src="/custom/js/universe.js"></script><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script defer data-pjax src="/custom/js/rightMenu.js"></script><script defer data-pjax src="/custom/js/cat.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "717070d8-e449-4d60-b9b6-c1421478f42c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
